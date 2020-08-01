@@ -1,18 +1,10 @@
-import { prop } from '@typegoose/typegoose';
-
+import { prop, ModelOptions, pre, post } from '@typegoose/typegoose';
 //وضعیت های کاربران
 const USER_STATUS = ['active', 'inactive', 'block'];
 
+
 // نقش های کاربران
 const USER_ROLE = ['admin', 'user'];
-
-//نوع های برداشت
-const WITHDRAWS_TYPE = [
-  // کارت به کارت
-  'cart',
-  // شبا
-  'sheba',
-];
 
 class UserKey {
   //کلید اعتبار سنجی کاربر
@@ -24,7 +16,10 @@ class UserKey {
   activateExpire: Date;
 }
 
+@ModelOptions({ schemaOptions: { timestamps: true } })
 export class User {
+  readonly _id: string;
+
   @prop()
   name?: string;
 
@@ -32,7 +27,7 @@ export class User {
   family?: string;
 
   @prop()
-  addres?: string;
+  address?: string;
 
   @prop()
   avatar?: string;
@@ -65,16 +60,12 @@ export class User {
   role?: string;
 
   // نوع برداشت شبا یا شماره حساب
-  @prop({ enum: WITHDRAWS_TYPE })
+  @prop()
   withdrawsType?: string;
 
-  //شماره حساب
+  //آدرس حساب
   @prop()
-  acountNumber?: string;
-
-  //شماره شبا
-  @prop()
-  shebaNumber?: string;
+  accountAddress?: string;
 
   @prop()
   keys?: UserKey;

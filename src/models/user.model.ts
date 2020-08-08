@@ -3,6 +3,7 @@ import { prop, ModelOptions, pre, post } from '@typegoose/typegoose';
 const USER_STATUS = ['active', 'inactive', 'block'];
 
 
+
 // نقش های کاربران
 const USER_ROLE = ['admin', 'user'];
 

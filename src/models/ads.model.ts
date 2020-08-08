@@ -1,39 +1,29 @@
 import { prop, ModelOptions } from '@typegoose/typegoose';
+
 // انواع تبلیغات شامل پاپ آپ و بنری
 const ADS_TYPE = ['popup', 'banner'];
 @ModelOptions({ schemaOptions: { timestamps: true } })
 export class Ads {
-  @prop({ required: true })
-  image: string;
+  @prop()
+  image?: string;
 
   //آدرس تبلیغ
   @prop({ required: true })
-  link: string;
+  link?: string;
 
   //نوع تبلیغ
-  @prop({ enum: ADS_TYPE })
+  @prop({ enum: ADS_TYPE,required:true })
   type?: string;
 
-  @prop()
-  description?: string;
-
   // مکان قرارگیری تبلیغات بر اساس عدد
-  @prop({ type: Number })
+  @prop({ type: Number,unique:true })
   place?: number;
 
-  // تاریخ شروع نمایش تبلیغ
-  @prop()
-  startAt?: Date;
-
-  // تاریخ اتمام نمایش تبلیغ
-  @prop()
-  expireAt?: Date;
-
   // نمایش یا عدم نمایش تبلیغ
-  @prop()
-  active?: Boolean;
+  @prop({required:true,default:true})
+  active?: boolean;
 
   //داخلی یا خارجی بودن تبلیغ
-  @prop()
-  foreign?:boolean;
+  @prop({required:true,default:true})
+  iran?:boolean;
 }

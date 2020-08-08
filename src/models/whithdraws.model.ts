@@ -13,6 +13,8 @@ export class Withdraws {
   @prop({enum:WITHDRAWS_STATUS,default:'waiting'})
   status?:string;
 
+  @prop({required:true})
+  type:string
   // مقدار برداشت
   @prop({required:true})
   amount?:number;

@@ -7,6 +7,6 @@ import { Setting } from '../../models/setting.model';
 @Module({
   imports:[TypegooseModule.forFeature([Setting])],
   providers: [SettingService],
-  controllers: [SettingController]
+  controllers: [SettingController],
 })
 export class SettingModule {}

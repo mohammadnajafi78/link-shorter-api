@@ -11,7 +11,7 @@ export class LinkController {
 
   @Post()
   async createLink(
-    @Body('') link:Link,
+    @Body() link:Link,
   ): Promise<{ link: Link }> {
     return await this.linkService.create(link);
   }
@@ -28,14 +28,24 @@ export class LinkController {
   }
 
   @Get(':shortLink')
-  async getLinkByShortLink(@Param('shortLink')shortLink: string, @Ip()ip: string): Promise<{ link: Link }> {
+  async getLinkByShortLink(
+    @Param('shortLink')shortLink: string,
+  ): Promise<{ link: Link }> {
     return await this.linkService.getLinkByShortLink(shortLink);
+  }
+
+  @Post('visit')
+  async createVisit(
+    @Body('link') link:string
+    ,@Ip()ip: string
+  ):Promise<{status:boolean}>{
+    return await this.linkService.createVisit(link,ip)
   }
 
   @Auth()
   @Get('visits/:id')
-  async getLinkById(@Param('id')id: string): Promise<{ visits: Visit[] }> {
-    return await this.linkService.getLinkById(id);
+  async getVisit(@Param('id')id: string): Promise<any> {
+    return await this.linkService.getVisit(id);
   }
 
   @Auth()
@@ -48,12 +58,6 @@ export class LinkController {
     @Query('status') status: string = 'active'
   ): Promise<{ links: Link[]; count: number }> {
     return await this.linkService.getUserLink(search, request.user._id, skip, limit, status);
-  }
-
-  @Auth('admin')
-  @Delete(':id')
-  async delete(@Param('id') id:string):Promise<{link:Link}>{
-    return  await this.linkService.delete(id);
   }
 
   @Auth()

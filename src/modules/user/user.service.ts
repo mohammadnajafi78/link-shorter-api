@@ -5,11 +5,47 @@ import { ReturnModelType } from '@typegoose/typegoose';
 import * as randomstring from 'randomstring';
 import * as jwt from 'jsonwebtoken';
 import { TOKEN_SECRET_KEY } from 'config';
+import { Link } from '../../models/link.model';
+import { Setting } from '../../models/setting.model';
+import { Visit } from '../../models/visit.model';
+import { SmsService } from '../../services/sms-service/sms-service';
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel(User) private readonly userModel: ReturnModelType<typeof User>,
-  ) {}
+    @InjectModel(Link) private readonly linkModel:ReturnModelType<typeof Link>,
+    @InjectModel(Setting) private readonly settingModel:ReturnModelType<typeof Setting>,
+    @InjectModel(Visit) private readonly visitModel:ReturnModelType<typeof Visit>,
+    private readonly smsService:SmsService
+    ) {}
+
+    async updateUserSalary(user:User):Promise<{user:User}>{
+      try {
+        const setting = await this.settingModel.find();
+        const links = await this.linkModel.find({user:user._id});
+        for(const link of links){
+          const visits = await this.visitModel.find({link:link._id,isPay:false})
+          if(visits.length > 0){
+            for(const visit of visits){
+              if(visit.country === "IR"){
+                user.salary = user.salary + setting[0].iranCPC;
+                visit.isPay = true;
+              }else{
+                user.salary = user.salary + setting[0].foreignCPC;
+                visit.isPay = true;
+              }
+              await visit.save();
+            }
+          }
+        }
+        const newUser = await this.userModel.findByIdAndUpdate(user._id,{
+          salary:user.salary
+        })
+        return {user:newUser}
+      }catch (error) {
+        throw new HttpException(error, HttpStatus.BAD_REQUEST);
+      }
+    }
 
   // ثبت نام کاربر
   async signin(phone: string): Promise<{ status: boolean }> {
@@ -38,6 +74,7 @@ export class UserService {
 
       // اسال SMS
       // TODO: Send SMS
+      this.smsService.send(phone,keys.activateKey);
       return { status: true };
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);

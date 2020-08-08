@@ -11,12 +11,13 @@ import {
 import { UserService } from './user.service';
 import { User } from 'src/models/user.model';
 import { Auth } from 'src/guards/auth.guard';
-import { UserData } from 'src/core/decorators';
-import { request } from 'express';
+import { InjectModel } from 'nestjs-typegoose';
 
 @Controller('api/users')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+    ) {}
 
   @Post('signin')
   async signin(@Body('phone') phone: string) {
@@ -40,7 +41,11 @@ export class UserController {
   @Auth()
   @Get('profile')
   async profile(@Req() request: any): Promise<{ user:User }> {
-    return {user:request.user};
+    if(Date.now() - request.user.updatedAt > 7200000){
+      return this.userService.updateUserSalary(request.user);
+    }else{
+      return {user:request.user};
+    }
   }
 
   @Auth()

@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
-import { Setting } from '../../models/setting.model';
+import { Setting, WithdrawsMethod } from '../../models/setting.model';
 import { ReturnModelType } from '@typegoose/typegoose';
 
 @Injectable()
@@ -40,5 +40,12 @@ export class SettingService {
     }
   }
 
+  // گرفتن روش پرداخت
+  async findMethod(id:string):Promise<{withdrawsMethod:WithdrawsMethod}>{
+     const methods = await this.settingModel.find();
+     const method = methods[0];
+   const withdrawsMethod = method.withdrawsMethods.find(el=> el._id == id )
+  return { withdrawsMethod }
+  }
 
 }

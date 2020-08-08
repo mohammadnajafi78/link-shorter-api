@@ -1,12 +1,15 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param, Res } from '@nestjs/common';
 import { AppService } from './app.service';
-
+import { Response } from 'express';
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @Get('files/images/:fileId')
+  async serveAvatars(
+    @Param('fileId') fileId: string,
+    @Res() res: Response,
+  ): Promise<any> {
+    res.sendFile(fileId, { root: 'files/images' });
   }
 }

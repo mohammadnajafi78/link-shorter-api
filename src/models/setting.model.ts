@@ -1,6 +1,8 @@
 import {prop} from '@typegoose/typegoose'
 
-class WithdrawsMethod{
+export class WithdrawsMethod{
+ readonly _id?:string;
+
   @prop({required:true})
   title:string;
 
@@ -15,6 +17,8 @@ class WithdrawsMethod{
 }
 
 export class Setting{
+  readonly _id?:string;
+
   @prop({required:true})
   // تعرفه کلیک داخلی
   iranCPC:number;

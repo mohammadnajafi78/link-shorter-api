@@ -11,7 +11,11 @@ import { LinkModule } from './modules/link/link.module';
 import { TicketModule } from './modules/ticket/ticket.module';
 import { WithdrawsModule } from './modules/withdraws/withdraws.module';
 import { SettingModule } from './modules/setting/setting.module';
-import { MethodsModule } from './modules/methods/methods.module';
+import { SmsService } from './services/sms-service/sms-service';
+import { AdsModule } from './modules/ads/ads.module';
+import { UploadModule } from './modules/upload/upload.module';
+import { ServeStaticModule,ServeStaticModuleOptions } from '@nestjs/serve-static';
+import {join} from 'path'
 const TypegooseConnection = TypegooseModule.forRoot(MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -22,15 +26,19 @@ const TypegooseConnection = TypegooseModule.forRoot(MONGO_URI, {
 @Module({
   imports: [
     TypegooseConnection,
+    // ServeStaticModuleOptions.forRoot({
+    //   serveStaticOptions:join(__dirname,'..','files')
+    // }),
     TypegooseModule.forFeature([User]),
     UserModule,
     LinkModule,
     TicketModule,
     WithdrawsModule,
     SettingModule,
-    MethodsModule,
+    AdsModule,
+    UploadModule,
   ],
   controllers: [AppController],
-  providers: [{ provide: APP_GUARD, useClass: AuthGaurd }, AppService],
+  providers: [{ provide: APP_GUARD, useClass: AuthGaurd }, AppService, SmsService],
 })
 export class AppModule {}

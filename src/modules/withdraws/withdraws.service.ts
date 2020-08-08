@@ -3,18 +3,36 @@ import { InjectModel } from 'nestjs-typegoose';
 import { Withdraws } from '../../models/whithdraws.model';
 import { ReturnModelType } from '@typegoose/typegoose';
 import { User } from '../../models/user.model';
+import { Setting } from '../../models/setting.model';
+import { log } from 'util';
 
 @Injectable()
 export class WithdrawsService {
   constructor(
     @InjectModel(Withdraws) private readonly withdrawsModel:ReturnModelType<typeof Withdraws>,
-    @InjectModel(User) private readonly userModel:ReturnModelType<typeof User>
+    @InjectModel(User) private readonly userModel:ReturnModelType<typeof User>,
+    @InjectModel(Setting) private readonly settingModel:ReturnModelType<typeof Setting>
   ) {}
 
   // برداشت مبلغ جدید
   async create(id:string,amount:number):Promise<{ withdraws:Withdraws }>{
     try{
+      // گرفتن کاربر
       const user = await this.userModel.findById(id);
+
+      if(!user.name && !user.family && !user.address && !user.accountAddress && !user.withdrawsType){
+        throw {message: 'ابتدا فرم را تکمیل کنید'}
+      }
+
+      // گرفتن روش پرداخت
+      const methods:Setting[] = await this.settingModel.find();
+
+      // روش برداشت
+      const method = methods[0].withdrawsMethods.find(el=> el._id == user.withdrawsType);
+      // // آیا حداقل درامد را دارد
+      if(method.min > user.salary){
+        throw {message:'شما حداقل درامد را ندارید'}
+      }
       if(typeof amount === 'undefined'){
         amount = user.salary;
       }
@@ -26,10 +44,7 @@ export class WithdrawsService {
       user.salary = user.salary - amount;
       await  user.save();
 
-      if(!user.name && !user.family && !user.address && !user.accountAddress && !user.withdrawsType){
-        throw {message: 'ابتدا فرم را تکمیل کنید'}
-      }
-      const withdraws = new this.withdrawsModel({amount,user:id});
+      const withdraws = new this.withdrawsModel({amount,type:method.title,user:id});
       await withdraws.save();
       return { withdraws };
     }catch (error) {
@@ -53,7 +68,7 @@ export class WithdrawsService {
       const withdraws = await this.withdrawsModel.find(query)
         .skip(Number(skip))
         .limit(Number(limit))
-        .populate({path:'user',select:'-key'})
+        .populate({path:'user',select:'-key'}).sort({ 'createdAt': -1 })
       const count = await this.withdrawsModel.countDocuments(query);
       return {withdraws,count}
     }catch (error) {
@@ -66,7 +81,8 @@ export class WithdrawsService {
     try {
       const withdraws = await this.withdrawsModel.find({user:id})
         .skip(Number(skip)).limit(Number(limit))
-        .populate({path:'user',select:'withdrawsType accountAddress'});
+        .populate({path:'user',select:'withdrawsType accountAddress'})
+        .sort({ 'createdAt': -1 });
       const count = await  this.withdrawsModel.countDocuments({user:id});
       return {withdraws,count}
     }catch (error) {

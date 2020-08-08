@@ -5,9 +5,8 @@ import { ReturnModelType } from '@typegoose/typegoose';
 import * as randomstring from 'randomstring';
 import * as geoip from 'geoip-lite';
 import { Visit } from '../../models/visit.model';
-import { skip } from 'rxjs/operators';
-import { User } from '../../models/user.model';
-import { log } from 'util';
+import { Types } from 'mongoose';
+
 @Injectable()
 export class LinkService {
   constructor(
@@ -35,6 +34,10 @@ export class LinkService {
 
       // لینک کوتاه جدید
       link.shortLink = shortLink;
+
+        if(!link.user){
+          link.showAds = false;
+        }
 
       // ثبت لینک در پایگاه داده
         const newLink = new this.linkModel(link);
@@ -71,44 +74,80 @@ export class LinkService {
        // پیدا کردن لینک بر اساس لینک کوتاه
        const link = await this.linkModel.findOne({ shortLink });
 
-       if(!link.showAds){
-         return {link}
-       }
        // آیا لینک مشکلی ندارد؟
        if(link.status !== 'active'){
          throw {message:'لینک دارای تخلف است'};
        }
-       //پیدا کردن کشور بر اساس ip
-       //TODO:
-       const country = geoip.lookup('86.57.40.38').country;
 
-       // تعداد بازدیدهای لینک
-       const visits = await this.visitModel.find({link:link._id});
-
-       // بررسی وجود کشور در بازدید ها
-       const visitedCountry = visits.find(el=>el.country === country)
-
-       // اگر وجود نداشت جدید ایجاد شود
-       if(visitedCountry === undefined ){
-        const newVisit = new this.visitModel({country,count:1,link:link._id});
-        await newVisit.save();
-       }else{
-         // اگر وجود داشت یک عدد به تعداد بازدیدهای آن اضافه کند
-        await this.visitModel.findByIdAndUpdate(visitedCountry._id,
-          {count:visitedCountry.count+1},
-          {new:true})
-       }
        return { link };
      }catch (error) {
        throw new HttpException(error, HttpStatus.BAD_REQUEST);
      }
   }
 
+  // بازدید یک لینک
+  async createVisit(id:string,ip:string):Promise<{status:boolean}>{
+    try {
+      //پیدا کردن کشور بر اساس ip
+      //TODO:
+      const country = geoip.lookup('86.57.40.38').country;
+
+      // آیا ip در بازدید ها وجود دارد؟
+      const visit = await this.visitModel.find({ip,link:id});
+
+
+      // اگر وجود داشت بازدید جدیدی ثبت نشود
+      if(visit.length > 0){
+        return {status:true}
+      }
+
+      const newVisit = new this.visitModel({ip,country,link:id});
+      await newVisit.save();
+      return  {status:true}
+    }catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
+  }
+
   // گرفتن لینک با آیدی
-  async getLinkById(id:string):Promise<{ visits:Visit[] }>{
+  async getVisit(id:string):Promise<any>{
     try{
-      const visits = await this.visitModel.find({link:id});
-      return {visits}
+      const linkId = Types.ObjectId(id);
+      const visits = await this.visitModel.find({link:id})
+      const visitChart = await this.visitModel.aggregate([
+        {
+          '$match': {
+            // لینک ها با آیدی داده شده
+            'link': linkId
+          }
+        }, {
+          '$group': {
+            '_id': {
+              '$dateToString': {
+                // از آیدی تاریخ روز را به این فرمت استخراج میکند
+                'format': '%Y/%m/%d',
+                'date': '$createdAt'
+              }
+            },
+            'count': {
+              // تعداد بازدید های دیده شده در این روز
+              '$sum': 1
+            }
+          }
+        }, {
+          '$project': {
+            '_id': 0,
+            // برای نمودار بازدید ها باید name و value داشته باشیم
+            'name': '$_id',
+            'value': '$count'
+          }
+        }, {
+          '$sort': {
+            'date': 1
+          }
+        }
+      ]).limit(30);
+      return {visitChart,visits}
     }catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
     }
@@ -140,7 +179,9 @@ export class LinkService {
   // بروز رسانی یک لینک
   async update(id:string,link:Link):Promise<{status:boolean}>{
       try {
+        // حذف برای امنیت
         delete link.shortLink;
+        delete link.mainLink;
         await this.linkModel.findByIdAndUpdate(id,link,{new:true});
         return {status:true}
       }catch (error) {
@@ -148,14 +189,4 @@ export class LinkService {
       }
   }
 
-  // حذف یک لینک
-  async delete(id:string):Promise<{link:Link}>{
-     try {
-       const link = await this.linkModel.findByIdAndRemove(id);
-       await this.visitModel.remove({link:link._id});
-       return {link}
-     }catch (error) {
-       throw new HttpException(error, HttpStatus.BAD_REQUEST);
-     }
-  }
 }

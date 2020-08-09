@@ -8,6 +8,6 @@ async function bootstrap() {
   app.enableCors();
   app.use(express.static(join(__dirname, '..','public')));
 
-  await app.listen(3000);
+  await app.listen(process.env.PORT||3000);
 }
 bootstrap();

@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { KAVENEGAR_API_KEY, KAVENEGAR_SMS_TEMPLATE } from "../../../config";
+import { KAVENEGAR_API_KEY, KAVENEGAR_SMS_TEMPLATE } from "../../config";
 import * as kavenegar from "kavenegar";
 
 @Injectable()

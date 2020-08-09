@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypegooseModule } from 'nestjs-typegoose';
-import { MONGO_URI } from 'config';
+import { MONGO_URI } from 'src/config';
 import { UserModule } from './modules/user/user.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGaurd } from './guards/auth.guard';

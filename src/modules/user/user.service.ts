@@ -4,7 +4,7 @@ import { InjectModel } from 'nestjs-typegoose';
 import { ReturnModelType } from '@typegoose/typegoose';
 import * as randomstring from 'randomstring';
 import * as jwt from 'jsonwebtoken';
-import { TOKEN_SECRET_KEY } from 'config';
+import { TOKEN_SECRET_KEY } from 'src/config';
 import { Link } from '../../models/link.model';
 import { Setting } from '../../models/setting.model';
 import { Visit } from '../../models/visit.model';

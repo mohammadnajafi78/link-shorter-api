@@ -4,7 +4,6 @@ import { Withdraws } from '../../models/whithdraws.model';
 import { ReturnModelType } from '@typegoose/typegoose';
 import { User } from '../../models/user.model';
 import { Setting } from '../../models/setting.model';
-import { log } from 'util';
 
 @Injectable()
 export class WithdrawsService {
@@ -64,7 +63,6 @@ export class WithdrawsService {
       if(!!search){
         Object.assign(query,{accountAddress:new RegExp(search,'ig')});
       }
-
       const withdraws = await this.withdrawsModel.find(query)
         .skip(Number(skip))
         .limit(Number(limit))
@@ -77,14 +75,12 @@ export class WithdrawsService {
   }
 
   // گرفتن برداشت های یک کاربر
-  async getUserWithdrawsList(skip:number,limit:number,id:string):Promise<{ withdraws:Withdraws[];count:number }>{
+  async getUserWithdrawsList(id:string):Promise<{ withdraws:Withdraws[]}>{
     try {
       const withdraws = await this.withdrawsModel.find({user:id})
-        .skip(Number(skip)).limit(Number(limit))
         .populate({path:'user',select:'withdrawsType accountAddress'})
         .sort({ 'createdAt': -1 });
-      const count = await  this.withdrawsModel.countDocuments({user:id});
-      return {withdraws,count}
+      return {withdraws}
     }catch (error) {
       throw new HttpException(error,HttpStatus.BAD_REQUEST);
     }

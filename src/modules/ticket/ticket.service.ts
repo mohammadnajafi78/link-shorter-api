@@ -34,7 +34,8 @@ export class TicketService {
       }
       const tickets = await this.ticketModel.find(query)
         .skip(Number(skip))
-        .limit(Number(limit));
+        .limit(Number(limit))
+        .sort({ 'createdAt': -1 });
       const count = await this.ticketModel.countDocuments(query);
       return { tickets, count };
     } catch (error) {

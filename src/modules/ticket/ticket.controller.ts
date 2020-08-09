@@ -36,6 +36,7 @@ export class TicketController {
     return await this.ticketService.readTicket(id);
   }
 
+  @Auth('admin')
   @Post('email')
   sendResponse(
     @Body('email') email: string,

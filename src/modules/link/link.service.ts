@@ -113,7 +113,9 @@ export class LinkService {
   async getVisit(id:string):Promise<any>{
     try{
       const linkId = Types.ObjectId(id);
+      // لیست بازدید ها برای جدول
       const visits = await this.visitModel.find({link:id})
+      // آمار روزانه برای نمودار
       const visitChart = await this.visitModel.aggregate([
         {
           '$match': {

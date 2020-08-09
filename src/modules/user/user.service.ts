@@ -9,48 +9,59 @@ import { Link } from '../../models/link.model';
 import { Setting } from '../../models/setting.model';
 import { Visit } from '../../models/visit.model';
 import { SmsService } from '../../services/sms-service/sms-service';
+
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel(User) private readonly userModel: ReturnModelType<typeof User>,
-    @InjectModel(Link) private readonly linkModel:ReturnModelType<typeof Link>,
-    @InjectModel(Setting) private readonly settingModel:ReturnModelType<typeof Setting>,
-    @InjectModel(Visit) private readonly visitModel:ReturnModelType<typeof Visit>,
-    private readonly smsService:SmsService
-    ) {}
+    @InjectModel(Link) private readonly linkModel: ReturnModelType<typeof Link>,
+    @InjectModel(Setting) private readonly settingModel: ReturnModelType<typeof Setting>,
+    @InjectModel(Visit) private readonly visitModel: ReturnModelType<typeof Visit>,
+    private readonly smsService: SmsService,
+  ) {
+  }
 
-    async updateUserSalary(user:User):Promise<{user:User}>{
-      try {
-        const setting = await this.settingModel.find();
-        const links = await this.linkModel.find({user:user._id});
-        for(const link of links){
-          const visits = await this.visitModel.find({link:link._id,isPay:false})
-          if(visits.length > 0){
-            for(const visit of visits){
-              if(visit.country === "IR"){
-                user.salary = user.salary + setting[0].iranCPC;
-                visit.isPay = true;
-              }else{
-                user.salary = user.salary + setting[0].foreignCPC;
-                visit.isPay = true;
-              }
-              await visit.save();
+  // محاسبه درامد کاربر در صورت گذشتن دو ساعت
+  async updateUserSalary(user: User): Promise<{ user: User }> {
+    try {
+     // گرفتن تنظیمت برای چک کردن تعرفه کلیک ها
+      const setting = await this.settingModel.find();
+      // گرفتن لینک های کاربر
+      const links = await this.linkModel.find({ user: user._id });
+      // پیدا کردن بازدیدهای لینک
+      for (const link of links) {
+        // گرفتن بازدید هایی که مبلغ آنها محاسبه نشده
+        const visits = await this.visitModel.find({ link: link._id, isPay: false });
+        if (visits.length > 0) {
+          for (const visit of visits) {
+            // کلیک های ایرانی
+            if (visit.country === 'IR') {
+              user.salary = user.salary + setting[0].iranCPC;
+              visit.isPay = true;
+            } else {
+              // کلیک های خارجی
+              user.salary = user.salary + setting[0].foreignCPC;
+              visit.isPay = true;
             }
+            await visit.save();
           }
         }
-        const newUser = await this.userModel.findByIdAndUpdate(user._id,{
-          salary:user.salary
-        })
-        return {user:newUser}
-      }catch (error) {
-        throw new HttpException(error, HttpStatus.BAD_REQUEST);
       }
+      // بروزرسانی درامد
+      const newUser = await this.userModel.findByIdAndUpdate(user._id, {
+        salary: user.salary,
+      });
+      return { user: newUser };
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
     }
+  }
 
   // ثبت نام کاربر
   async signin(phone: string): Promise<{ status: boolean }> {
     try {
-      if (phone.startsWith("0")) {
+      // حذف صفر ابتدای شماره
+      if (phone.startsWith('0')) {
         phone = phone.substr(1);
       }
       const userExist = await this.userModel.exists({ phone });
@@ -61,6 +72,7 @@ export class UserService {
         }),
         activateExpire: new Date(Date.now() + 60 * 60 * 1000),
       };
+      // اگر کاربر وجود دارد فقط کلید جدید تولید شود
       if (userExist) {
         await this.userModel.findOneAndUpdate(
           { phone },
@@ -73,8 +85,8 @@ export class UserService {
       }
 
       // اسال SMS
-      // TODO: Send SMS
-      this.smsService.send(phone,keys.activateKey);
+      this.smsService.send(phone, keys.activateKey);
+
       return { status: true };
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
@@ -127,7 +139,8 @@ export class UserService {
         .find(query)
         .skip(Number(skip))
         .limit(Number(limit))
-        .select('-keys');
+        .select('-keys')
+        .sort({ 'createdAt': -1 });
 
       const count = await this.userModel.countDocuments(query);
 
@@ -138,7 +151,7 @@ export class UserService {
   }
 
   // بروزرسانی پروفایل کاربر
-  async updateProfile(id: string, data: User): Promise<{ status:boolean }> {
+  async updateProfile(id: string, data: User): Promise<{ status: boolean }> {
     try {
       // حذف برای امنیت بروزرسانی
       delete data.role;
@@ -147,7 +160,7 @@ export class UserService {
       delete data.salary;
       delete data.phone;
       await this.userModel.findByIdAndUpdate(id, data, { new: true });
-      return {status:true}
+      return { status: true };
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
     }

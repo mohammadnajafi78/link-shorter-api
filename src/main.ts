@@ -12,7 +12,7 @@ async function bootstrap() {
     // Use res.sendfile, as it streams instead of reading the file into memory.
     res.sendfile(join(__dirname, '..', '/public/index.html'));
   });
-  await app.listen(3000);
+  await app.listen(process.env.PORT || 3000);
 }
 
 bootstrap();

@@ -8,7 +8,7 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.enableCors();
   app.use(express.static(join(__dirname, '..', 'public')));
-  app.use('^(?!\\/?api).+$', (req, res) => {
+  app.use(/^(?!\/?api).+$/g, (req, res) => {
     // Use res.sendfile, as it streams instead of reading the file into memory.
     res.sendfile(join(__dirname, '..', '/public/index.html'));
   });

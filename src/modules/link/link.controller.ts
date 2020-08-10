@@ -1,4 +1,4 @@
-import { Controller, Body, Post, Req, Get, Query, Param, Ip, Put, Delete } from '@nestjs/common';
+import { Controller, Body, Post, Req, Get, Query, Param, Ip, Put } from '@nestjs/common';
 import { LinkService } from './link.service';
 import { Link } from '../../models/link.model';
 import { Auth } from '../../guards/auth.guard';
@@ -36,8 +36,8 @@ export class LinkController {
 
   @Post('visit')
   async createVisit(
-    @Body('link') link:string
-    ,@Ip()ip: string
+    @Body('link') link:string,
+    @Ip()ip: string
   ):Promise<{status:boolean}>{
     return await this.linkService.createVisit(link,ip)
   }

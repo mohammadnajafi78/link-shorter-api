@@ -569,7 +569,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, SettingService);
 
         this.http = http;
-        this.base = "/api/setting";
+        this.base = '/api/setting';
         this.drawer$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](false);
       }
 
@@ -1418,15 +1418,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(MyHttpInterceptor, [{
         key: "intercept",
         value: function intercept(req, next) {
-          if (!req.url.startsWith("http")) {
-            var token = localStorage.getItem("token");
+          if (!req.url.startsWith('http')) {
+            var token = localStorage.getItem('token');
             var request = req.clone({
               url: this.BASE_URL + req.url
             });
 
             if (token) {
               request = request.clone({
-                headers: req.headers.append("authorization", "Bearer ".concat(token))
+                headers: req.headers.append('authorization', "Bearer ".concat(token))
               });
             }
 
@@ -1447,7 +1447,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     MyHttpInterceptor.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
       token: MyHttpInterceptor,
       factory: MyHttpInterceptor.ɵfac,
-      providedIn: "root"
+      providedIn: 'root'
     });
     /*@__PURE__*/
 
@@ -1455,7 +1455,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](MyHttpInterceptor, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
-          providedIn: "root"
+          providedIn: 'root'
         }]
       }], null, null);
     })();

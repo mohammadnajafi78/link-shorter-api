@@ -42,7 +42,7 @@ export class User {
   @prop()
   country?: string;
 
-  @prop({ required: true, unique: true, type: String })
+  @prop({ required: true, unique: true, type: String,trim:true })
   phone: string;
 
   //درامد کاربر

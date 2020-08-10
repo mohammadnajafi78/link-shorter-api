@@ -145,7 +145,7 @@ export class LinkService {
           }
         }, {
           '$sort': {
-            'date': 1
+            'date': -1
           }
         }
       ]).limit(30);

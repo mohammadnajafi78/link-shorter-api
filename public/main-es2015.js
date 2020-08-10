@@ -302,7 +302,7 @@ __webpack_require__.r(__webpack_exports__);
 class SettingService {
     constructor(http) {
         this.http = http;
-        this.base = "/api/setting";
+        this.base = '/api/setting';
         this.drawer$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](false);
     }
     get() {
@@ -713,12 +713,12 @@ class MyHttpInterceptor {
         this.BASE_URL = _environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].url;
     }
     intercept(req, next) {
-        if (!req.url.startsWith("http")) {
-            const token = localStorage.getItem("token");
+        if (!req.url.startsWith('http')) {
+            const token = localStorage.getItem('token');
             let request = req.clone({ url: this.BASE_URL + req.url });
             if (token) {
                 request = request.clone({
-                    headers: req.headers.append("authorization", `Bearer ${token}`),
+                    headers: req.headers.append('authorization', `Bearer ${token}`),
                 });
             }
             return next.handle(request);
@@ -729,11 +729,11 @@ class MyHttpInterceptor {
     }
 }
 MyHttpInterceptor.ɵfac = function MyHttpInterceptor_Factory(t) { return new (t || MyHttpInterceptor)(); };
-MyHttpInterceptor.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: MyHttpInterceptor, factory: MyHttpInterceptor.ɵfac, providedIn: "root" });
+MyHttpInterceptor.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: MyHttpInterceptor, factory: MyHttpInterceptor.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](MyHttpInterceptor, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
-                providedIn: "root",
+                providedIn: 'root',
             }]
     }], null, null); })();
 

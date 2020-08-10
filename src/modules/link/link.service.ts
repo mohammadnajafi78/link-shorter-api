@@ -90,7 +90,7 @@ export class LinkService {
     try {
       //پیدا کردن کشور بر اساس ip
       //TODO:
-      const country = geoip.lookup('86.57.40.38').country;
+      const country = geoip.lookup(ip).country;
 
       // آیا ip در بازدید ها وجود دارد؟
       const visit = await this.visitModel.find({ip,link:id});

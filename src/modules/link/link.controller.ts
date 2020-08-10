@@ -11,7 +11,7 @@ export class LinkController {
 
   @Post()
   async createLink(
-    @Body() link:Link,
+    @Body() link: Link,
   ): Promise<{ link: Link }> {
     return await this.linkService.create(link);
   }
@@ -22,7 +22,7 @@ export class LinkController {
     @Query('search') search: string,
     @Query('skip') skip: number = 0,
     @Query('limit') limit: number = 10,
-    @Query('status') status: string = 'active'
+    @Query('status') status: string = 'active',
   ): Promise<{ links: Link[]; count: number }> {
     return await this.linkService.getLinkList(search, skip, limit, status);
   }
@@ -36,10 +36,11 @@ export class LinkController {
 
   @Post('visit')
   async createVisit(
-    @Body('link') link:string,
-    @Ip()ip: string
-  ):Promise<{status:boolean}>{
-    return await this.linkService.createVisit(link,ip)
+    @Body('link') link: string,
+    @Req()req: any,
+  ): Promise<{ status: boolean }> {
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    return await this.linkService.createVisit(link, ip);
   }
 
   @Auth()
@@ -55,15 +56,15 @@ export class LinkController {
     @Query('limit') limit: number = 10,
     @Query('skip') skip: number = 0,
     @Query('search') search: string,
-    @Query('status') status: string = 'active'
+    @Query('status') status: string = 'active',
   ): Promise<{ links: Link[]; count: number }> {
     return await this.linkService.getUserLink(search, request.user._id, skip, limit, status);
   }
 
   @Auth()
   @Put(':id')
-  async update(@Param('id') id:string,@Body() link:Link ):Promise<{status:boolean}>{
-    return await this.linkService.update(id,link)
+  async update(@Param('id') id: string, @Body() link: Link): Promise<{ status: boolean }> {
+    return await this.linkService.update(id, link);
   }
 
 }

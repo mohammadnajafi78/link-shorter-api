@@ -6,6 +6,7 @@ import * as express from 'express';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  app.enable('trust proxy')
   app.enableCors();
   app.use(express.static(join(__dirname, '..', 'public')));
   app.use(/^(?!\/?api).+$/g, (req, res) => {

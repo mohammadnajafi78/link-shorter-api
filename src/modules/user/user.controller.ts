@@ -17,12 +17,17 @@ import { InjectModel } from 'nestjs-typegoose';
 export class UserController {
   constructor(
     private readonly userService: UserService,
-    ) {}
+  ) {
+  }
 
   @Post('signin')
-  async signin(@Body('phone') phone: string) {
-    return await this.userService.signin(phone);
+  async signin(
+    @Body('phone') phone: string,
+    @Body('identifier') identifier?: string,
+  ) {
+    return await this.userService.signin(phone, identifier);
   }
+
   @Post('verify')
   async verify(@Body('phone') phone: string, @Body('key') key: string) {
     return await this.userService.verify(phone, key);
@@ -40,17 +45,17 @@ export class UserController {
 
   @Auth()
   @Get('profile')
-  async profile(@Req() request: any): Promise<{ user:User }> {
-    if(Date.now() - request.user.updatedAt > 7200000){
+  async profile(@Req() request: any): Promise<{ user: User }> {
+    if (Date.now() - request.user.updatedAt > 120000) {
       return this.userService.updateUserSalary(request.user);
-    }else{
-      return {user:request.user};
+    } else {
+      return { user: request.user };
     }
   }
 
   @Auth()
   @Put('profile')
-  async updateProfile(@Req() request: any, @Body() data: User): Promise<{ status:boolean }> {
+  async updateProfile(@Req() request: any, @Body() data: User): Promise<{ status: boolean }> {
     return await this.userService.updateProfile(request.user._id, data);
   }
 

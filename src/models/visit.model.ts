@@ -1,18 +1,26 @@
-import { prop, ModelOptions, Ref} from '@typegoose/typegoose';
+import { prop, ModelOptions, Ref } from '@typegoose/typegoose';
 import { Link } from './link.model';
+
+export class CountVisit {
+  @prop({ default: false })
+  isPay: boolean;
+}
 
 @ModelOptions({ schemaOptions: { timestamps: true } })
 export class Visit {
-  readonly  _id?:string;
-  @prop({required:true})
+  readonly _id?: string;
+  @prop({ required: true })
   ip?: string;
 
-  @prop({required:true})
+  @prop({ required: true })
   country?: string;
 
-  @prop({required:true,default:false})
-  isPay:boolean;
+  @prop({ default: 1, max: 3 })
+  count?: number;
 
-  @prop({ref:Link})
-  link?:Ref<Link>
+  @prop({ default: 0 })
+  isPay?: number;
+
+  @prop({ ref: Link })
+  link?: Ref<Link>;
 }

@@ -9,6 +9,7 @@ import { Link } from '../../models/link.model';
 import { Setting } from '../../models/setting.model';
 import { Visit } from '../../models/visit.model';
 import { SmsService } from '../../services/sms-service/sms-service';
+import { identity } from 'rxjs';
 
 @Injectable()
 export class UserService {
@@ -21,36 +22,91 @@ export class UserService {
   ) {
   }
 
+  async createUniqueString() {
+    const identifierCode = randomstring.generate({
+      length: 5,
+      charset: 'alphanumeric',
+    });
+    while (await this.userModel.exists({ identifierCode })) {
+      await this.createUniqueString();
+    }
+    return identifierCode;
+  }
+
+
   // محاسبه درامد کاربر در صورت گذشتن دو ساعت
   async updateUserSalary(user: User): Promise<{ user: User }> {
     try {
-     // گرفتن تنظیمت برای چک کردن تعرفه کلیک ها
+      // گرفتن تنظیمت برای چک کردن تعرفه کلیک ها
       const setting = await this.settingModel.find();
       // گرفتن لینک های کاربر
       const links = await this.linkModel.find({ user: user._id });
-      // پیدا کردن بازدیدهای لینک
+
       for (const link of links) {
-        // گرفتن بازدید هایی که مبلغ آنها محاسبه نشده
-        const visits = await this.visitModel.find({ link: link._id, isPay: false });
-        if (visits.length > 0) {
-          for (const visit of visits) {
-            // کلیک های ایرانی
-            if (visit.country === 'IR') {
-              user.salary = user.salary + setting[0].iranCPC;
-              visit.isPay = true;
-            } else {
-              // کلیک های خارجی
-              user.salary = user.salary + setting[0].foreignCPC;
-              visit.isPay = true;
+        // گرفتن بازدید های هر لینک
+        const visits = await this.visitModel.find({ link: link._id });
+        for (const visit of visits) {
+          // اگر بازدید لینک بین 0 تا 3 باشد
+          if (visit.count > 0 && visit.count !== visit.isPay && visit.isPay <= 3) {
+            // بازدید اول بدون دریافت مبلغ
+            if (visit.isPay === 0 && visit.count === 1) {
+              console.log('first visit without pay salary');
+              if (visit.country === 'IR') {
+                user.salary = user.salary + setting[0].iranCPC.first;
+              } else {
+                user.salary = user.salary + setting[0].foreignCPC.first;
+              }
+              // بازدید دوم بدون دریافت مبلغ
+            } else if (visit.isPay === 0 && visit.count === 2) {
+              console.log('second visit without pay salary');
+              if (visit.country === 'IR') {
+                user.salary = user.salary + setting[0].iranCPC.first + setting[0].iranCPC.second;
+              } else {
+                user.salary = user.salary + setting[0].foreignCPC.first + setting[0].foreignCPC.second;
+              }
+              // بازدید سوم دریافت مبلغ
+            } else if (visit.isPay === 0 && visit.count === 3) {
+              console.log('third visit without pay salary');
+              if (visit.country === 'IR') {
+                user.salary = user.salary + setting[0].iranCPC.first + setting[0].iranCPC.second + setting[0].iranCPC.third;
+              } else {
+                user.salary = user.salary + setting[0].foreignCPC.first + setting[0].foreignCPC.second + setting[0].foreignCPC.third;
+              }
+              // بازدید دوم با محاسبه بازدید اول
+            } else if (visit.isPay === 1 && visit.count === 2) {
+              console.log('second visit with first salary');
+              if (visit.country === 'IR') {
+                user.salary = user.salary + setting[0].iranCPC.second;
+              } else {
+                user.salary = user.salary + setting[0].foreignCPC.second;
+              }
+              // بازدید سوم با محاسبه بازدید اول
+            } else if (visit.isPay === 1 && visit.count === 3) {
+              console.log('third visit with first salary');
+              if (visit.country === 'IR') {
+                user.salary = user.salary + setting[0].iranCPC.second + setting[0].iranCPC.third;
+              } else {
+                user.salary = user.salary + setting[0].foreignCPC.second + setting[0].foreignCPC.third;
+              }
+              // بازدید سوم با محسابه بازدید اول
+            } else if (visit.isPay === 2 && visit.count === 3) {
+              console.log('third visit with second salary');
+              if (visit.country === 'IR') {
+                user.salary = user.salary + setting[0].iranCPC.third;
+              } else {
+                user.salary = user.salary + setting[0].foreignCPC.third;
+              }
             }
+            visit.isPay = visit.count;
             await visit.save();
           }
         }
       }
+
       // بروزرسانی درامد
       const newUser = await this.userModel.findByIdAndUpdate(user._id, {
         salary: user.salary,
-      });
+      }, { new: true });
       return { user: newUser };
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
@@ -58,7 +114,7 @@ export class UserService {
   }
 
   // ثبت نام کاربر
-  async signin(phone: string): Promise<{ status: boolean }> {
+  async signin(phone: string, identifier?: string): Promise<{ status: boolean }> {
     try {
       // حذف صفر ابتدای شماره
       if (phone.startsWith('0')) {
@@ -72,6 +128,7 @@ export class UserService {
         }),
         activateExpire: new Date(Date.now() + 60 * 60 * 1000),
       };
+
       // اگر کاربر وجود دارد فقط کلید جدید تولید شود
       if (userExist) {
         await this.userModel.findOneAndUpdate(
@@ -80,7 +137,21 @@ export class UserService {
           { new: true },
         );
       } else {
-        const user = new this.userModel({ phone, keys });
+        // ایجاد کد معرف برای کاربر
+        const identifierCode = await this.createUniqueString();
+        // افزودن اطلاعات مورد نیاز به آبجکت
+        const newUser: User = { phone, keys, identifierCode };
+        // آیا کد معرف وجود دارد؟
+        let identifierExist: boolean;
+        if (!!identifier) {
+          identifierExist = await this.userModel.exists({ identifierCode: identifier });
+        }
+        // اگر کد معرف وجود دارد در مدل کاربر ثبت شود
+        if (identifierExist) {
+          const identifierUser = await this.userModel.findOne({ identifierCode: identifier });
+          Object.assign(newUser, { parent: identifierUser._id });
+        }
+        const user = new this.userModel(newUser);
         await user.save();
       }
 

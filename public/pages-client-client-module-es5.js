@@ -1146,7 +1146,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](4, "div", 6);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "mat-form-field", 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "mat-form-field", 14);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](6, "mat-label");
 
@@ -1320,7 +1320,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       selectors: [["app-login"]],
       decls: 4,
       vars: 2,
-      consts: [[1, "main"], [1, "login-container"], ["class", "mat-elevation-z2 col-md-4 col-sm-8 col-xs-10", 4, "ngIf"], ["class", "col-md-4 col-sm-8 col-xs-10 mat-elevation-z2", 4, "ngIf"], [1, "mat-elevation-z2", "col-md-4", "col-sm-8", "col-xs-10"], [1, "title"], [1, "form-container"], ["appearance", "outline", 1, "col-10"], ["matInput", "", "type", "text", 3, "ngModel", "formControl", "ngModelChange"], ["matSuffix", ""], [4, "ngIf"], [1, "button-container"], ["mat-raised-button", "", "color", "primary", 3, "click"], [1, "col-md-4", "col-sm-8", "col-xs-10", "mat-elevation-z2"]],
+      consts: [[1, "main"], [1, "login-container"], ["class", "mat-elevation-z2 col-md-4 col-sm-8 col-11", 4, "ngIf"], ["class", "col-md-4 col-sm-8 col-11 mat-elevation-z2", 4, "ngIf"], [1, "mat-elevation-z2", "col-md-4", "col-sm-8", "col-11"], [1, "title"], [1, "form-container"], ["appearance", "outline", 1, "col-sm-10", "col-11"], ["matInput", "", "type", "text", 3, "ngModel", "formControl", "ngModelChange"], ["matSuffix", ""], [4, "ngIf"], [1, "button-container"], ["mat-raised-button", "", "color", "primary", 3, "click"], [1, "col-md-4", "col-sm-8", "col-11", "mat-elevation-z2"], ["appearance", "outline", 1, "col-md-10", "col-11"]],
       template: function LoginComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -2188,7 +2188,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       selectors: [["app-ticket"]],
       decls: 46,
       vars: 14,
-      consts: [[1, "main"], [1, "col-12"], [2, "margin-top", "20px"], [1, "row", "input-container"], [3, "formGroup"], ["appearance", "outline", 1, "col-md-4", "col-6"], ["formControlName", "name", "type", "text", "matInput", "", 3, "ngModel", "ngModelChange"], [4, "ngIf"], ["formControlName", "family", "type", "text", "matInput", "", 3, "ngModel", "ngModelChange"], ["formControlName", "phone", "type", "text", "matInput", "", 3, "ngModel", "ngModelChange"], ["formControlName", "subject", "type", "text", "matInput", "", 3, "ngModel", "ngModelChange"], ["appearance", "outline", 1, "col-md-4", "col-12"], ["formControlName", "email", "type", "text", "matInput", "", 3, "ngModel", "ngModelChange"], ["appearance", "outline", 1, "col-12"], ["formControlName", "content", "rows", "4", "type", "text", "matInput", "", 2, "line-height", "2", 3, "ngModel", "ngModelChange"], ["dir", "ltr"], [1, "save"], [3, "resolved"], ["mat-raised-button", "", "color", "primary", 3, "disabled", "click"]],
+      consts: [[1, "main"], [1, "col-12"], [2, "margin-top", "20px"], [1, "row", "input-container"], [3, "formGroup"], ["appearance", "outline", 1, "col-md-4", "col-12"], ["formControlName", "name", "type", "text", "matInput", "", 3, "ngModel", "ngModelChange"], [4, "ngIf"], ["formControlName", "family", "type", "text", "matInput", "", 3, "ngModel", "ngModelChange"], ["formControlName", "phone", "type", "text", "matInput", "", 3, "ngModel", "ngModelChange"], ["formControlName", "subject", "type", "text", "matInput", "", 3, "ngModel", "ngModelChange"], ["formControlName", "email", "type", "text", "matInput", "", 3, "ngModel", "ngModelChange"], ["appearance", "outline", 1, "col-12"], ["formControlName", "content", "rows", "4", "type", "text", "matInput", "", 2, "line-height", "2", 3, "ngModel", "ngModelChange"], ["dir", "ltr"], [1, "save"], [3, "resolved"], ["mat-raised-button", "", "color", "primary", 3, "disabled", "click"]],
       template: function TicketComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](0, "app-client-header");
@@ -2293,7 +2293,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](29, "mat-form-field", 11);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](29, "mat-form-field", 5);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](30, "mat-label");
 
@@ -2301,7 +2301,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](32, "input", 12);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](32, "input", 11);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngModelChange", function TicketComponent_Template_input_ngModelChange_32_listener($event) {
             return ctx.ticket.email = $event;
@@ -2313,7 +2313,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](34, "mat-form-field", 13);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](34, "mat-form-field", 12);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](35, "mat-label");
 
@@ -2321,7 +2321,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](37, "textarea", 14);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](37, "textarea", 13);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngModelChange", function TicketComponent_Template_textarea_ngModelChange_37_listener($event) {
             return ctx.ticket.content = $event;
@@ -2339,11 +2339,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](39, "mat-card-actions", 15);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](39, "mat-card-actions", 14);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](40, "div", 16);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](40, "div", 15);
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](41, "re-captcha", 17);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](41, "re-captcha", 16);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("resolved", function TicketComponent_Template_re_captcha_resolved_41_listener($event) {
             return ctx.resolved($event);
@@ -2351,7 +2351,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](42, "button", 18);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](42, "button", 17);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function TicketComponent_Template_button_click_42_listener() {
             return ctx.createTicket();

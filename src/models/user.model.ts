@@ -1,7 +1,6 @@
-import { prop, ModelOptions, pre, post } from '@typegoose/typegoose';
+import { prop, ModelOptions, pre, post, Ref } from '@typegoose/typegoose';
 //وضعیت های کاربران
 const USER_STATUS = ['active', 'inactive', 'block'];
-
 
 
 // نقش های کاربران
@@ -10,16 +9,16 @@ const USER_ROLE = ['admin', 'user'];
 class UserKey {
   //کلید اعتبار سنجی کاربر
   @prop()
-  activateKey: string;
+  activateKey?: string;
 
   // مدت زمان اعتبار کلید
   @prop()
-  activateExpire: Date;
+  activateExpire?: Date;
 }
 
 @ModelOptions({ schemaOptions: { timestamps: true } })
 export class User {
-  readonly _id: string;
+  readonly _id?: string;
 
   @prop()
   name?: string;
@@ -42,8 +41,8 @@ export class User {
   @prop()
   country?: string;
 
-  @prop({ required: true, unique: true, type: String,trim:true })
-  phone: string;
+  @prop({ required: true, unique: true, type: String, trim: true })
+  phone?: string;
 
   //درامد کاربر
   @prop({ default: 0 })
@@ -70,4 +69,13 @@ export class User {
 
   @prop()
   keys?: UserKey;
+
+  @prop({ unique: true, required: true })
+  identifierCode?: string;
+
+  @prop({ ref: User })
+  parent?: Ref<User>;
+
+  @prop({ default: 0 })
+  subsetSalary?: number;
 }

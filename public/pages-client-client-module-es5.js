@@ -387,6 +387,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     var _components_client_header_client_header_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! ../../components/client-header/client-header.component */
     "./src/app/components/client-header/client-header.component.ts");
+    /* harmony import */
+
+
+    var _ref_ref_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+    /*! ./ref/ref.component */
+    "./src/app/pages/client/ref/ref.component.ts");
 
     var routes = [{
       path: '',
@@ -407,6 +413,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     }, {
       path: 'page/not-found',
       component: _not_found_not_found_component__WEBPACK_IMPORTED_MODULE_9__["NotFoundComponent"]
+    }, {
+      path: 'ref/:identifier',
+      component: _ref_ref_component__WEBPACK_IMPORTED_MODULE_11__["RefComponent"]
     }];
 
     var ClientModule = function ClientModule() {
@@ -425,7 +434,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     (function () {
       (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](ClientModule, {
-        declarations: [src_app_templates_client_template_client_template_component__WEBPACK_IMPORTED_MODULE_6__["ClientTemplateComponent"], _login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"], _home_home_component__WEBPACK_IMPORTED_MODULE_5__["HomeComponent"], _ticket_ticket_component__WEBPACK_IMPORTED_MODULE_7__["TicketComponent"], _short_link_short_link_component__WEBPACK_IMPORTED_MODULE_8__["ShortLinkComponent"], _not_found_not_found_component__WEBPACK_IMPORTED_MODULE_9__["NotFoundComponent"], _components_client_header_client_header_component__WEBPACK_IMPORTED_MODULE_10__["ClientHeaderComponent"]],
+        declarations: [src_app_templates_client_template_client_template_component__WEBPACK_IMPORTED_MODULE_6__["ClientTemplateComponent"], _login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"], _home_home_component__WEBPACK_IMPORTED_MODULE_5__["HomeComponent"], _ticket_ticket_component__WEBPACK_IMPORTED_MODULE_7__["TicketComponent"], _short_link_short_link_component__WEBPACK_IMPORTED_MODULE_8__["ShortLinkComponent"], _not_found_not_found_component__WEBPACK_IMPORTED_MODULE_9__["NotFoundComponent"], _components_client_header_client_header_component__WEBPACK_IMPORTED_MODULE_10__["ClientHeaderComponent"], _ref_ref_component__WEBPACK_IMPORTED_MODULE_11__["RefComponent"]],
         imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"], _share_module__WEBPACK_IMPORTED_MODULE_4__["ShareModule"]]
       });
     })();
@@ -436,7 +445,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](ClientModule, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
         args: [{
-          declarations: [src_app_templates_client_template_client_template_component__WEBPACK_IMPORTED_MODULE_6__["ClientTemplateComponent"], _login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"], _home_home_component__WEBPACK_IMPORTED_MODULE_5__["HomeComponent"], _ticket_ticket_component__WEBPACK_IMPORTED_MODULE_7__["TicketComponent"], _short_link_short_link_component__WEBPACK_IMPORTED_MODULE_8__["ShortLinkComponent"], _not_found_not_found_component__WEBPACK_IMPORTED_MODULE_9__["NotFoundComponent"], _components_client_header_client_header_component__WEBPACK_IMPORTED_MODULE_10__["ClientHeaderComponent"]],
+          declarations: [src_app_templates_client_template_client_template_component__WEBPACK_IMPORTED_MODULE_6__["ClientTemplateComponent"], _login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"], _home_home_component__WEBPACK_IMPORTED_MODULE_5__["HomeComponent"], _ticket_ticket_component__WEBPACK_IMPORTED_MODULE_7__["TicketComponent"], _short_link_short_link_component__WEBPACK_IMPORTED_MODULE_8__["ShortLinkComponent"], _not_found_not_found_component__WEBPACK_IMPORTED_MODULE_9__["NotFoundComponent"], _components_client_header_client_header_component__WEBPACK_IMPORTED_MODULE_10__["ClientHeaderComponent"], _ref_ref_component__WEBPACK_IMPORTED_MODULE_11__["RefComponent"]],
           imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes), _share_module__WEBPACK_IMPORTED_MODULE_4__["ShareModule"]]
         }]
       }], null, null);
@@ -1259,7 +1268,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             this.phone = this.phone.substr(1);
           }
 
-          this.userService.signin(this.phone).subscribe(function (res) {
+          var identifier = localStorage.getItem('identifier');
+          this.userService.signin(this.phone, identifier).subscribe(function (res) {
             if (res.status) {
               _this5.state = 'key';
             }
@@ -1446,6 +1456,97 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }]
       }], function () {
         return [];
+      }, null);
+    })();
+    /***/
+
+  },
+
+  /***/
+  "./src/app/pages/client/ref/ref.component.ts":
+  /*!***************************************************!*\
+    !*** ./src/app/pages/client/ref/ref.component.ts ***!
+    \***************************************************/
+
+  /*! exports provided: RefComponent */
+
+  /***/
+  function srcAppPagesClientRefRefComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "RefComponent", function () {
+      return RefComponent;
+    });
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+
+    var RefComponent =
+    /*#__PURE__*/
+    function () {
+      function RefComponent(route, router) {
+        var _this8 = this;
+
+        _classCallCheck(this, RefComponent);
+
+        this.route = route;
+        this.router = router;
+        this.route.paramMap.subscribe(function (params) {
+          _this8.identifier = params.get('identifier');
+        });
+        localStorage.setItem('idetifer', this.identifier);
+        this.router.navigate(['/']);
+      }
+
+      _createClass(RefComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {}
+      }]);
+
+      return RefComponent;
+    }();
+
+    RefComponent.ɵfac = function RefComponent_Factory(t) {
+      return new (t || RefComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]));
+    };
+
+    RefComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
+      type: RefComponent,
+      selectors: [["app-ref"]],
+      decls: 0,
+      vars: 0,
+      template: function RefComponent_Template(rf, ctx) {},
+      styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2NsaWVudC9yZWYvcmVmLmNvbXBvbmVudC5zY3NzIn0= */"]
+    });
+    /*@__PURE__*/
+
+    (function () {
+      _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](RefComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+          selector: 'app-ref',
+          templateUrl: './ref.component.html',
+          styleUrls: ['./ref.component.scss']
+        }]
+      }], function () {
+        return [{
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]
+        }, {
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]
+        }];
       }, null);
     })();
     /***/
@@ -1774,7 +1875,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /*#__PURE__*/
     function () {
       function ShortLinkComponent(linkService, route, router) {
-        var _this8 = this;
+        var _this9 = this;
 
         _classCallCheck(this, ShortLinkComponent);
 
@@ -1788,9 +1889,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.showLink = false;
         this.format = '';
         this.route.paramMap.subscribe(function (params) {
-          _this8.shortLink = params.get('shortLink');
+          _this9.shortLink = params.get('shortLink');
 
-          _this8.getLinkByShortLink(_this8.shortLink);
+          _this9.getLinkByShortLink(_this9.shortLink);
         });
       }
 
@@ -1800,11 +1901,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "findLinkFormat",
         value: function findLinkFormat() {
-          var _this9 = this;
+          var _this10 = this;
 
           // آیا نوع لینک ویدیو است؟
           var type = this.videoFormat.some(function (el) {
-            return _this9.link.mainLink.includes(el);
+            return _this10.link.mainLink.includes(el);
           });
 
           if (type) {
@@ -1812,7 +1913,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           } else {
             // آیا نوع لینک فایل است؟
             type = this.fileFormat.some(function (el) {
-              return _this9.link.mainLink.includes(el);
+              return _this10.link.mainLink.includes(el);
             });
 
             if (type) {
@@ -1829,7 +1930,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0,
           /*#__PURE__*/
           regeneratorRuntime.mark(function _callee2() {
-            var _this10 = this;
+            var _this11 = this;
 
             return regeneratorRuntime.wrap(function _callee2$(_context2) {
               while (1) {
@@ -1837,13 +1938,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                   case 0:
                     _context2.next = 2;
                     return this.linkService.getLinkByShortLink(shortLink).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) {
-                      _this10.link = res.link;
+                      _this11.link = res.link;
 
-                      if (!_this10.link.showAds) {
-                        window.location.href = _this10.link.mainLink;
+                      if (!_this11.link.showAds) {
+                        window.location.href = _this11.link.mainLink;
                       }
 
-                      _this10.format = _this10.findLinkFormat();
+                      _this11.format = _this11.findLinkFormat();
                     })).toPromise();
 
                   case 2:
@@ -1862,11 +1963,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "resolved",
         value: function resolved(captchaResponse, id) {
-          var _this11 = this;
+          var _this12 = this;
 
           if (captchaResponse !== null) {
             this.linkService.createVisit(id).subscribe(function (res) {
-              _this11.showLink = res.status; // this.link.mainLink.some();
+              _this12.showLink = res.status; // this.link.mainLink.some();
             }, function (err) {
               console.log(err);
             });
@@ -2629,10 +2730,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(ClientTemplateComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this12 = this;
+          var _this13 = this;
 
           this.userService.user$.subscribe(function (user) {
-            _this12.user = user;
+            _this13.user = user;
           });
           this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 768px)');
         }

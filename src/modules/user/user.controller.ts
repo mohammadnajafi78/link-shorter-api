@@ -54,6 +54,12 @@ export class UserController {
   }
 
   @Auth()
+  @Get('subset')
+  async findSubset(@Req() req: any): Promise<{ users: User[] }> {
+    return this.userService.findSubset(req.user._id);
+  }
+
+  @Auth()
   @Put('profile')
   async updateProfile(@Req() request: any, @Body() data: User): Promise<{ status: boolean }> {
     return await this.userService.updateProfile(request.user._id, data);

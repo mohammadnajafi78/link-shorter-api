@@ -884,10 +884,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, UserService);
 
         this.http = http;
-        this.base = "/api/users";
+        this.base = '/api/users';
         this.user$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](null);
 
-        if (!!localStorage.getItem("token")) {
+        if (!!localStorage.getItem('token')) {
           this.profile().subscribe(function (res) {
             _this.user$.next(res.user);
           });
@@ -896,9 +896,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       _createClass(UserService, [{
         key: "signin",
-        value: function signin(phone) {
+        value: function signin(phone, identifier) {
           return this.http.post("".concat(this.base, "/signin"), {
-            phone: phone
+            phone: phone,
+            identifier: identifier
           });
         }
       }, {
@@ -908,6 +909,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             phone: phone,
             key: key
           });
+        }
+      }, {
+        key: "findSubset",
+        value: function findSubset() {
+          return this.http.get("".concat(this.base, "/subset"));
         }
       }, {
         key: "profile",
@@ -943,7 +949,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     UserService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
       token: UserService,
       factory: UserService.ɵfac,
-      providedIn: "root"
+      providedIn: 'root'
     });
     /*@__PURE__*/
 
@@ -951,7 +957,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](UserService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
-          providedIn: "root"
+          providedIn: 'root'
         }]
       }], function () {
         return [{
@@ -1489,7 +1495,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var environment = {
       production: false,
       base: '/',
-      url: 'https://1xad.net'
+      // url: 'https://1xad.net'
+      url: 'http://localhost:3000'
     };
     /*
      * For easier debugging in development mode, you can import the following file

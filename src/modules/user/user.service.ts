@@ -33,7 +33,6 @@ export class UserService {
     return identifierCode;
   }
 
-
   // محاسبه درامد کاربر در صورت گذشتن دو ساعت
   async updateUserSalary(user: User): Promise<{ user: User }> {
     try {
@@ -42,65 +41,84 @@ export class UserService {
       // گرفتن لینک های کاربر
       const links = await this.linkModel.find({ user: user._id });
 
+      // جمع کل درامد
+      let totalSalary = 0;
+
       for (const link of links) {
         // گرفتن بازدید های هر لینک
         const visits = await this.visitModel.find({ link: link._id });
-        for (const visit of visits) {
-          // اگر بازدید لینک بین 0 تا 3 باشد
-          if (visit.count > 0 && visit.count !== visit.isPay && visit.isPay <= 3) {
-            // بازدید اول بدون دریافت مبلغ
-            if (visit.isPay === 0 && visit.count === 1) {
-              console.log('first visit without pay salary');
-              if (visit.country === 'IR') {
-                user.salary = user.salary + setting[0].iranCPC.first;
-              } else {
-                user.salary = user.salary + setting[0].foreignCPC.first;
+        // اگر بازدید وجود داشت
+        if (visits.length > 0) {
+          for (const visit of visits) {
+            // اگر بازدید لینک بین 0 تا 3 باشد
+            if (visit.count > 0 && visit.count !== visit.isPay && visit.isPay <= 3) {
+              // بازدید اول بدون دریافت مبلغ
+              if (visit.isPay === 0 && visit.count === 1) {
+                if (visit.country === 'IR') {
+                  user.salary = user.salary + setting[0].iranCPC.first;
+                  totalSalary += setting[0].iranCPC.first;
+                } else {
+                  user.salary = user.salary + setting[0].foreignCPC.first;
+                  totalSalary += setting[0].foreignCPC.first;
+                }
+                // بازدید دوم بدون دریافت مبلغ
+              } else if (visit.isPay === 0 && visit.count === 2) {
+                if (visit.country === 'IR') {
+                  user.salary = user.salary + setting[0].iranCPC.first + setting[0].iranCPC.second;
+                  totalSalary += setting[0].iranCPC.first + setting[0].iranCPC.second;
+                } else {
+                  user.salary = user.salary + setting[0].foreignCPC.first + setting[0].foreignCPC.second;
+                  totalSalary += setting[0].foreignCPC.first + setting[0].foreignCPC.second;
+                }
+                // بازدید سوم دریافت مبلغ
+              } else if (visit.isPay === 0 && visit.count === 3) {
+                if (visit.country === 'IR') {
+                  user.salary = user.salary + setting[0].iranCPC.first + setting[0].iranCPC.second + setting[0].iranCPC.third;
+                  totalSalary += setting[0].iranCPC.first + setting[0].iranCPC.second + setting[0].iranCPC.third;
+                } else {
+                  user.salary = user.salary + setting[0].foreignCPC.first + setting[0].foreignCPC.second + setting[0].foreignCPC.third;
+                  totalSalary += setting[0].foreignCPC.first + setting[0].foreignCPC.second + setting[0].foreignCPC.third;
+                }
+                // بازدید دوم با محاسبه بازدید اول
+              } else if (visit.isPay === 1 && visit.count === 2) {
+                if (visit.country === 'IR') {
+                  user.salary = user.salary + setting[0].iranCPC.second;
+                  totalSalary += setting[0].iranCPC.second;
+                } else {
+                  user.salary = user.salary + setting[0].foreignCPC.second;
+                  totalSalary += setting[0].foreignCPC.second;
+                }
+                // بازدید سوم با محاسبه بازدید اول
+              } else if (visit.isPay === 1 && visit.count === 3) {
+                if (visit.country === 'IR') {
+                  user.salary = user.salary + setting[0].iranCPC.second + setting[0].iranCPC.third;
+                  totalSalary += setting[0].iranCPC.second + setting[0].iranCPC.third;
+                } else {
+                  user.salary = user.salary + setting[0].foreignCPC.second + setting[0].foreignCPC.third;
+                  totalSalary += setting[0].foreignCPC.second + setting[0].foreignCPC.third;
+                }
+                // بازدید سوم با محسابه بازدید اول
+              } else if (visit.isPay === 2 && visit.count === 3) {
+                if (visit.country === 'IR') {
+                  user.salary = user.salary + setting[0].iranCPC.third;
+                  totalSalary += setting[0].iranCPC.third;
+                } else {
+                  user.salary = user.salary + setting[0].foreignCPC.third;
+                  totalSalary += setting[0].foreignCPC.third;
+                }
               }
-              // بازدید دوم بدون دریافت مبلغ
-            } else if (visit.isPay === 0 && visit.count === 2) {
-              console.log('second visit without pay salary');
-              if (visit.country === 'IR') {
-                user.salary = user.salary + setting[0].iranCPC.first + setting[0].iranCPC.second;
-              } else {
-                user.salary = user.salary + setting[0].foreignCPC.first + setting[0].foreignCPC.second;
-              }
-              // بازدید سوم دریافت مبلغ
-            } else if (visit.isPay === 0 && visit.count === 3) {
-              console.log('third visit without pay salary');
-              if (visit.country === 'IR') {
-                user.salary = user.salary + setting[0].iranCPC.first + setting[0].iranCPC.second + setting[0].iranCPC.third;
-              } else {
-                user.salary = user.salary + setting[0].foreignCPC.first + setting[0].foreignCPC.second + setting[0].foreignCPC.third;
-              }
-              // بازدید دوم با محاسبه بازدید اول
-            } else if (visit.isPay === 1 && visit.count === 2) {
-              console.log('second visit with first salary');
-              if (visit.country === 'IR') {
-                user.salary = user.salary + setting[0].iranCPC.second;
-              } else {
-                user.salary = user.salary + setting[0].foreignCPC.second;
-              }
-              // بازدید سوم با محاسبه بازدید اول
-            } else if (visit.isPay === 1 && visit.count === 3) {
-              console.log('third visit with first salary');
-              if (visit.country === 'IR') {
-                user.salary = user.salary + setting[0].iranCPC.second + setting[0].iranCPC.third;
-              } else {
-                user.salary = user.salary + setting[0].foreignCPC.second + setting[0].foreignCPC.third;
-              }
-              // بازدید سوم با محسابه بازدید اول
-            } else if (visit.isPay === 2 && visit.count === 3) {
-              console.log('third visit with second salary');
-              if (visit.country === 'IR') {
-                user.salary = user.salary + setting[0].iranCPC.third;
-              } else {
-                user.salary = user.salary + setting[0].foreignCPC.third;
-              }
+              visit.isPay = visit.count;
+              await visit.save();
             }
-            visit.isPay = visit.count;
-            await visit.save();
           }
         }
+      }
+
+      if (!!user.parent) {
+        const parentUser = await this.userModel.findById(user.parent);
+        parentUser.subsetSalary = parentUser.subsetSalary + (totalSalary / 100) * 5;
+        parentUser.salary = parentUser.salary + (totalSalary / 100) * 5;
+        await parentUser.save();
       }
 
       // بروزرسانی درامد
@@ -108,6 +126,16 @@ export class UserService {
         salary: user.salary,
       }, { new: true });
       return { user: newUser };
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  // پیدا کردن زیر مجموعه های یک کاربر
+  async findSubset(id: string): Promise<{ users: User[] }> {
+    try {
+      const users = await this.userModel.find({ parent: id }).select('phone createdAt');
+      return { users };
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
     }

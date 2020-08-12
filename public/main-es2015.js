@@ -470,21 +470,25 @@ __webpack_require__.r(__webpack_exports__);
 class UserService {
     constructor(http) {
         this.http = http;
-        this.base = "/api/users";
+        this.base = '/api/users';
         this.user$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](null);
-        if (!!localStorage.getItem("token")) {
+        if (!!localStorage.getItem('token')) {
             this.profile().subscribe((res) => {
                 this.user$.next(res.user);
             });
         }
     }
-    signin(phone) {
+    signin(phone, identifier) {
         return this.http.post(`${this.base}/signin`, {
             phone,
+            identifier
         });
     }
     verify(phone, key) {
         return this.http.post(`${this.base}/verify`, { phone, key });
+    }
+    findSubset() {
+        return this.http.get(`${this.base}/subset`);
     }
     profile() {
         return this.http.get(`${this.base}/profile`);
@@ -502,11 +506,11 @@ class UserService {
     }
 }
 UserService.ɵfac = function UserService_Factory(t) { return new (t || UserService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"])); };
-UserService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: UserService, factory: UserService.ɵfac, providedIn: "root" });
+UserService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: UserService, factory: UserService.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](UserService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
-                providedIn: "root",
+                providedIn: 'root',
             }]
     }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }]; }, null); })();
 
@@ -756,7 +760,8 @@ __webpack_require__.r(__webpack_exports__);
 const environment = {
     production: false,
     base: '/',
-    url: 'https://1xad.net'
+    // url: 'https://1xad.net'
+    url: 'http://localhost:3000'
 };
 /*
  * For easier debugging in development mode, you can import the following file

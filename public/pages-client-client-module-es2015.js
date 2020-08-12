@@ -147,6 +147,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _short_link_short_link_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./short-link/short-link.component */ "./src/app/pages/client/short-link/short-link.component.ts");
 /* harmony import */ var _not_found_not_found_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./not-found/not-found.component */ "./src/app/pages/client/not-found/not-found.component.ts");
 /* harmony import */ var _components_client_header_client_header_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../components/client-header/client-header.component */ "./src/app/components/client-header/client-header.component.ts");
+/* harmony import */ var _ref_ref_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./ref/ref.component */ "./src/app/pages/client/ref/ref.component.ts");
+
 
 
 
@@ -172,6 +174,7 @@ const routes = [
     },
     { path: 'user/login', component: _login_login_component__WEBPACK_IMPORTED_MODULE_3__["LoginComponent"] },
     { path: 'page/not-found', component: _not_found_not_found_component__WEBPACK_IMPORTED_MODULE_9__["NotFoundComponent"] },
+    { path: 'ref/:identifier', component: _ref_ref_component__WEBPACK_IMPORTED_MODULE_11__["RefComponent"] },
 ];
 class ClientModule {
 }
@@ -183,7 +186,8 @@ ClientModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjec
         _ticket_ticket_component__WEBPACK_IMPORTED_MODULE_7__["TicketComponent"],
         _short_link_short_link_component__WEBPACK_IMPORTED_MODULE_8__["ShortLinkComponent"],
         _not_found_not_found_component__WEBPACK_IMPORTED_MODULE_9__["NotFoundComponent"],
-        _components_client_header_client_header_component__WEBPACK_IMPORTED_MODULE_10__["ClientHeaderComponent"]], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"], _share_module__WEBPACK_IMPORTED_MODULE_4__["ShareModule"]] }); })();
+        _components_client_header_client_header_component__WEBPACK_IMPORTED_MODULE_10__["ClientHeaderComponent"],
+        _ref_ref_component__WEBPACK_IMPORTED_MODULE_11__["RefComponent"]], imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"], _share_module__WEBPACK_IMPORTED_MODULE_4__["ShareModule"]] }); })();
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](ClientModule, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
         args: [{
@@ -194,7 +198,8 @@ ClientModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjec
                     _ticket_ticket_component__WEBPACK_IMPORTED_MODULE_7__["TicketComponent"],
                     _short_link_short_link_component__WEBPACK_IMPORTED_MODULE_8__["ShortLinkComponent"],
                     _not_found_not_found_component__WEBPACK_IMPORTED_MODULE_9__["NotFoundComponent"],
-                    _components_client_header_client_header_component__WEBPACK_IMPORTED_MODULE_10__["ClientHeaderComponent"]
+                    _components_client_header_client_header_component__WEBPACK_IMPORTED_MODULE_10__["ClientHeaderComponent"],
+                    _ref_ref_component__WEBPACK_IMPORTED_MODULE_11__["RefComponent"],
                 ],
                 imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes), _share_module__WEBPACK_IMPORTED_MODULE_4__["ShareModule"]],
             }]
@@ -581,7 +586,8 @@ class LoginComponent {
         this.state = 'phone';
         this.loading = false;
     }
-    ngOnInit() { }
+    ngOnInit() {
+    }
     // ارسال شماره همراه برای ارسال کد
     signin() {
         if (this.phoneControl.invalid) {
@@ -590,7 +596,8 @@ class LoginComponent {
         if (this.phone.startsWith('0')) {
             this.phone = this.phone.substr(1);
         }
-        this.userService.signin(this.phone).subscribe((res) => {
+        const identifier = localStorage.getItem('identifier');
+        this.userService.signin(this.phone, identifier).subscribe((res) => {
             if (res.status) {
                 this.state = 'key';
             }
@@ -685,6 +692,48 @@ NotFoundComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefine
                 styleUrls: ['./not-found.component.scss']
             }]
     }], function () { return []; }, null); })();
+
+
+/***/ }),
+
+/***/ "./src/app/pages/client/ref/ref.component.ts":
+/*!***************************************************!*\
+  !*** ./src/app/pages/client/ref/ref.component.ts ***!
+  \***************************************************/
+/*! exports provided: RefComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RefComponent", function() { return RefComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+
+
+
+class RefComponent {
+    constructor(route, router) {
+        this.route = route;
+        this.router = router;
+        this.route.paramMap.subscribe((params) => {
+            this.identifier = (params.get('identifier'));
+        });
+        localStorage.setItem('idetifer', this.identifier);
+        this.router.navigate(['/']);
+    }
+    ngOnInit() {
+    }
+}
+RefComponent.ɵfac = function RefComponent_Factory(t) { return new (t || RefComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"])); };
+RefComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: RefComponent, selectors: [["app-ref"]], decls: 0, vars: 0, template: function RefComponent_Template(rf, ctx) { }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhZ2VzL2NsaWVudC9yZWYvcmVmLmNvbXBvbmVudC5zY3NzIn0= */"] });
+/*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](RefComponent, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
+        args: [{
+                selector: 'app-ref',
+                templateUrl: './ref.component.html',
+                styleUrls: ['./ref.component.scss']
+            }]
+    }], function () { return [{ type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"] }]; }, null); })();
 
 
 /***/ }),

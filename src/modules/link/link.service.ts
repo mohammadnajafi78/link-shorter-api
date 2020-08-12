@@ -92,7 +92,7 @@ export class LinkService {
       //پیدا کردن کشور بر اساس ip
       const country = geoip.lookup(ip).country;
       // آیا ip در بازدید ها وجود دارد؟
-      const visit = await this.visitModel.findOne({ ip: '12345', link: id });
+      const visit = await this.visitModel.findOne({ ip, link: id });
       if (visit) {
         if (visit.count >= 3) {
           return { status: true };

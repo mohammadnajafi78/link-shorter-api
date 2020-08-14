@@ -206,11 +206,13 @@ export class UserService {
         if (user.keys.activateExpire <= new Date()) {
           throw { message: 'درخواست شما منقضی شده است.' };
         }
+        if (user.status === 'block') {
+          throw  { message: 'شما بلاک شده اید برای اطلاعات بیشتر به پشتیبانی پیام دهید' };
+        }
         user.keys.activateKey = '';
         user.keys.activateExpire = new Date(Date.now());
         user.status = 'active';
         await user.save();
-
         const payload = { _id: user._id };
         const token = jwt.sign(payload, TOKEN_SECRET_KEY);
 

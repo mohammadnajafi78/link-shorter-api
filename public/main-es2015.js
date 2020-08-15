@@ -397,18 +397,18 @@ __webpack_require__.r(__webpack_exports__);
 class UploadService {
     constructor(http) {
         this.http = http;
-        this.base = "/upload";
+        this.base = '/upload';
     }
     // برای ایجاد ورودی فایل
     openFileChooser() {
         return new Promise((resolve, reject) => {
             try {
                 // ساخت یک ورودی
-                const fileInput = document.createElement("input");
+                const fileInput = document.createElement('input');
                 // نوع ورودی فایل
-                fileInput.type = "file";
+                fileInput.type = 'file';
                 // مدیریت تغییرات و گرفتن فایل انتخاب شده
-                fileInput.addEventListener("change", (e) => {
+                fileInput.addEventListener('change', (e) => {
                     const file = fileInput.files[0];
                     if (file) {
                         // فرستادن فایل
@@ -423,6 +423,7 @@ class UploadService {
                 fileInput.click();
             }
             catch (error) {
+                console.log(error);
                 reject();
             }
         });
@@ -430,20 +431,20 @@ class UploadService {
     // برای آپلود عکس در سرور
     upload(file) {
         const formData = new FormData();
-        formData.append("file", file, file.name);
+        formData.append('file', file, file.name);
         return this.http.post(`${this.base}/image`, formData, {
             // درصد پیشرفت آپلود
             reportProgress: true,
-            observe: "events",
+            observe: 'events',
         });
     }
 }
 UploadService.ɵfac = function UploadService_Factory(t) { return new (t || UploadService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };
-UploadService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: UploadService, factory: UploadService.ɵfac, providedIn: "root" });
+UploadService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: UploadService, factory: UploadService.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](UploadService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
-                providedIn: "root",
+                providedIn: 'root',
             }]
     }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }]; }, null); })();
 
@@ -760,8 +761,8 @@ __webpack_require__.r(__webpack_exports__);
 const environment = {
     production: false,
     base: '/',
-    url: 'https://1xad.net'
-    // url: 'http://localhost:3000'
+    // url: 'https://1xad.net'
+    url: 'http://localhost:3000'
 };
 /*
  * For easier debugging in development mode, you can import the following file

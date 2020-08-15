@@ -2,12 +2,18 @@ import { Body, Controller, Get, Param, Post, Put, Query, Req } from '@nestjs/com
 import { WithdrawsService } from './withdraws.service';
 import { Auth } from '../../guards/auth.guard';
 import { Withdraws } from '../../models/whithdraws.model';
+import { ApiBody, ApiOkResponse, ApiOperation, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { ApiGetQuery } from '../../core/decorators';
+import disableAutomock = jest.disableAutomock;
 
+@ApiTags('Withdraws')
 @Controller('api/withdraws')
 export class WithdrawsController {
   constructor(private readonly withdrawsService: WithdrawsService) {
   }
 
+  @ApiOperation({ summary: 'ایجاد برداشت جدید' })
+  @ApiOkResponse({ type: Withdraws })
   @Auth()
   @Post()
   async create(
@@ -17,6 +23,10 @@ export class WithdrawsController {
     return await this.withdrawsService.create(request.user._id, amount);
   }
 
+  @ApiOperation({ summary: 'گرفتن لیست برداشت ها' })
+  @ApiGetQuery()
+  @ApiQuery({ name: 'status', required: false })
+  @ApiOkResponse({ type: [Withdraws] })
   @Auth('admin')
   @Get('all')
   async getWithdrawsList(
@@ -28,6 +38,9 @@ export class WithdrawsController {
     return await this.withdrawsService.getWithdrawsList(search, skip, limit, status);
   }
 
+  @ApiOperation({ summary: 'لیست برداشت کاربران' })
+  @ApiGetQuery()
+  @ApiOkResponse({ type: [Withdraws] })
   @Auth()
   @Get()
   async getUserWithdrawsList(
@@ -36,12 +49,18 @@ export class WithdrawsController {
     return await this.withdrawsService.getUserWithdrawsList(request.user._id);
   }
 
+  @ApiOperation({ summary: 'گرفتن اطلاعات یک برداشت' })
+  @ApiParam({ name: 'id', description: 'شناسه برداشت' })
+  @ApiOkResponse({ type: Withdraws })
   @Auth()
   @Get(':id')
   async getWithdrawsById(@Param('id')id: string): Promise<{ withdraws: Withdraws }> {
     return await this.withdrawsService.getWithdrawsById(id);
   }
 
+  @ApiOperation({ summary: 'موفق آمیز کردن برداشت' })
+  @ApiParam({ name: 'id', description: 'شناسه برداشت' })
+  @ApiOkResponse({ type: Withdraws })
   @Auth('admin')
   @Put('success/:id')
   async setWithdrawsSuccess(
@@ -51,6 +70,9 @@ export class WithdrawsController {
     return await this.withdrawsService.setWithdrawsSuccess(id, trackNumber);
   }
 
+  @ApiOperation({ summary: 'لغو برداشت' })
+  @ApiParam({ name: 'id', description: 'شناسه برداشت' })
+  @ApiOkResponse({ type: Withdraws })
   @Auth('admin')
   @Put('cancel/:id')
   async setWithdrawsCancel(@Param('id') id: string): Promise<{ withdraws: Withdraws }> {

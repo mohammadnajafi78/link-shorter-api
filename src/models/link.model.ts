@@ -1,22 +1,31 @@
 import { prop, ModelOptions, Ref } from '@typegoose/typegoose';
 import { User } from './user.model';
 import validator from 'validator';
-const LINK_STATUS = ['active','inactive','warning']
+
+const LINK_STATUS = ['active', 'inactive', 'warning'];
+import { BaseSchema } from 'src/core/baseSchema';
+import { ApiProperty } from '@nestjs/swagger';
 
 @ModelOptions({ schemaOptions: { timestamps: true } })
-export class Link {
-  @prop({ required: true ,validate:validator.isURL})
+export class Link extends BaseSchema{
+
+  @ApiProperty({ required: true })
+  @prop({ required: true, validate: validator.isURL })
   mainLink?: string;
 
+  @ApiProperty({ required: true })
   @prop({ required: true, unique: true })
   shortLink?: string;
 
-  @prop({required:true , default:'active' , enum:LINK_STATUS})
-  status?:string;
+  @ApiProperty({ required: true, enum: LINK_STATUS, default: 'active' })
+  @prop({ required: true, default: 'active', enum: LINK_STATUS })
+  status?: string;
 
+  @ApiProperty({ type: User })
   @prop({ ref: User })
   user?: Ref<User>;
 
-  @prop({required:true})
-  showAds?:boolean;
+  @ApiProperty({ required: true })
+  @prop({ required: true })
+  showAds?: boolean;
 }

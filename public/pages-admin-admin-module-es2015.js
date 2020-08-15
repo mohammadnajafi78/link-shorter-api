@@ -364,7 +364,7 @@ class AdsModifyComponent {
                             this.responseImage = res.body;
                             // ذخیره لینک عکس
                             this.ads.image = this.responseImage.url;
-                            console.log(this.BASE_URL + '/' + this.responseImage.url);
+                            // console.log(this.BASE_URL + '/' + this.responseImage.url);
                             this.uploadProgress = 0;
                             break;
                     }
@@ -718,7 +718,6 @@ class AdsComponent {
                 state: 'create',
             },
         }).afterClosed().subscribe((res) => {
-            console.log(res);
             if (res !== null && typeof res !== 'undefined') {
                 this.adsService.create(res).subscribe((resp) => {
                     this._openSnackBar('تبلیغ با موفقیت ایجاد شد');

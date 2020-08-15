@@ -760,8 +760,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                         case _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpEventType"].Response:
                           _this.responseImage = res.body; // ذخیره لینک عکس
 
-                          _this.ads.image = _this.responseImage.url;
-                          console.log(_this.BASE_URL + '/' + _this.responseImage.url);
+                          _this.ads.image = _this.responseImage.url; // console.log(this.BASE_URL + '/' + this.responseImage.url);
+
                           _this.uploadProgress = 0;
                           break;
                       }
@@ -1506,8 +1506,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               state: 'create'
             }
           }).afterClosed().subscribe(function (res) {
-            console.log(res);
-
             if (res !== null && typeof res !== 'undefined') {
               _this2.adsService.create(res).subscribe(function (resp) {
                 _this2._openSnackBar('تبلیغ با موفقیت ایجاد شد');

@@ -3,12 +3,19 @@ import { LinkService } from './link.service';
 import { Link } from '../../models/link.model';
 import { Auth } from '../../guards/auth.guard';
 import { Visit } from '../../models/visit.model';
+import { ApiBody, ApiOkResponse, ApiOperation, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { CreateLinkDto, VisitResponseDto } from './link.dto';
+import { ApiGetQuery } from '../../core/decorators';
 
+@ApiTags('Links')
 @Controller('api/links')
 export class LinkController {
   constructor(private readonly linkService: LinkService) {
   }
 
+  @ApiOperation({ summary: 'ایجاد لینک کوتاه' })
+  @ApiBody({ type: CreateLinkDto })
+  @ApiOkResponse({ type: Link })
   @Post()
   async createLink(
     @Body() link: Link,
@@ -16,6 +23,10 @@ export class LinkController {
     return await this.linkService.create(link);
   }
 
+  @ApiOperation({ summary: 'لیست همه لینک ها' })
+  @ApiGetQuery()
+  @ApiQuery({ name: 'status', required: false })
+  @ApiOkResponse({ type: [Link] })
   @Auth('admin')
   @Get('all')
   async getLinkList(
@@ -27,6 +38,9 @@ export class LinkController {
     return await this.linkService.getLinkList(search, skip, limit, status);
   }
 
+  @ApiOperation({ summary: 'گرفتن لینک با لینک کوتاه' })
+  @ApiParam({ name: 'shortLink', description: 'لینک کوتاه' })
+  @ApiOkResponse({ type: Link })
   @Get(':shortLink')
   async getLinkByShortLink(
     @Param('shortLink')shortLink: string,
@@ -34,6 +48,8 @@ export class LinkController {
     return await this.linkService.getLinkByShortLink(shortLink);
   }
 
+  @ApiOperation({ summary: 'بازدید یک لینک' })
+  @ApiOkResponse({ type: VisitResponseDto })
   @Post('visit')
   async createVisit(
     @Body('link') link: string,
@@ -43,12 +59,19 @@ export class LinkController {
     return await this.linkService.createVisit(link, ip);
   }
 
+
+  @ApiOperation({ summary: 'اطلاعات بازدید' })
+  @ApiParam({ name: 'id', description: 'شناسه یک لینک' })
   @Auth()
   @Get('visits/:id')
   async getVisit(@Param('id')id: string): Promise<any> {
     return await this.linkService.getVisit(id);
   }
 
+  @ApiOperation({ summary: 'لیست لینک های یک کاربر' })
+  @ApiGetQuery()
+  @ApiQuery({ name: 'status', required: false })
+  @ApiOkResponse({ type: [Link] })
   @Auth()
   @Get()
   async getUserLink(
@@ -61,6 +84,10 @@ export class LinkController {
     return await this.linkService.getUserLink(search, request.user._id, skip, limit, status);
   }
 
+  @ApiOperation({ summary: 'ویرایش یک لینک' })
+  @ApiParam({ name: 'id', description: 'شناسه لینک' })
+  @ApiBody({ type: Link })
+  @ApiOkResponse({ type: VisitResponseDto })
   @Auth()
   @Put(':id')
   async update(@Param('id') id: string, @Body() link: Link): Promise<{ status: boolean }> {

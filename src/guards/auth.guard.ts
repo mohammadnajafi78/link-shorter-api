@@ -12,16 +12,22 @@ import { TOKEN_SECRET_KEY } from 'src/config';
 import { User } from 'src/models/user.model';
 import { ReturnModelType } from '@typegoose/typegoose';
 import { InjectModel } from 'nestjs-typegoose';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 export const Auth = (...roles: string[]) =>
-  applyDecorators(SetMetadata('auth', true), SetMetadata('roles', roles));
+  applyDecorators(
+    SetMetadata('auth', true),
+    SetMetadata('roles', roles),
+    ApiBearerAuth(),
+  );
 
 @Injectable()
 export class AuthGaurd implements CanActivate {
   constructor(
     @InjectModel(User) private readonly userModel: ReturnModelType<typeof User>,
     private readonly reflector: Reflector,
-  ) {}
+  ) {
+  }
 
   getUser = (decoded: { _id: string }) =>
     this.userModel.findById(decoded._id).select('-keys');

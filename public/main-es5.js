@@ -761,7 +761,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, UploadService);
 
         this.http = http;
-        this.base = "/upload";
+        this.base = '/upload';
       } // برای ایجاد ورودی فایل
 
 
@@ -771,11 +771,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           return new Promise(function (resolve, reject) {
             try {
               // ساخت یک ورودی
-              var fileInput = document.createElement("input"); // نوع ورودی فایل
+              var fileInput = document.createElement('input'); // نوع ورودی فایل
 
-              fileInput.type = "file"; // مدیریت تغییرات و گرفتن فایل انتخاب شده
+              fileInput.type = 'file'; // مدیریت تغییرات و گرفتن فایل انتخاب شده
 
-              fileInput.addEventListener("change", function (e) {
+              fileInput.addEventListener('change', function (e) {
                 var file = fileInput.files[0];
 
                 if (file) {
@@ -789,6 +789,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
               fileInput.click();
             } catch (error) {
+              console.log(error);
               reject();
             }
           });
@@ -798,11 +799,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "upload",
         value: function upload(file) {
           var formData = new FormData();
-          formData.append("file", file, file.name);
+          formData.append('file', file, file.name);
           return this.http.post("".concat(this.base, "/image"), formData, {
             // درصد پیشرفت آپلود
             reportProgress: true,
-            observe: "events"
+            observe: 'events'
           });
         }
       }]);
@@ -817,7 +818,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     UploadService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
       token: UploadService,
       factory: UploadService.ɵfac,
-      providedIn: "root"
+      providedIn: 'root'
     });
     /*@__PURE__*/
 
@@ -825,7 +826,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](UploadService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
-          providedIn: "root"
+          providedIn: 'root'
         }]
       }], function () {
         return [{
@@ -1495,8 +1496,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var environment = {
       production: false,
       base: '/',
-      url: 'https://1xad.net' // url: 'http://localhost:3000'
-
+      // url: 'https://1xad.net'
+      url: 'http://localhost:3000'
     };
     /*
      * For easier debugging in development mode, you can import the following file

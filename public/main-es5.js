@@ -92,7 +92,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         loadChildren: function loadChildren() {
           return Promise.all(
           /*! import() | pages-admin-admin-module */
-          [__webpack_require__.e("default~pages-admin-admin-module~pages-client-client-module~pages-dashboard-dashboard-module"), __webpack_require__.e("pages-admin-admin-module")]).then(__webpack_require__.bind(null,
+          [__webpack_require__.e("default~pages-admin-admin-module~pages-client-client-module~pages-dashboard-dashboard-module"), __webpack_require__.e("common"), __webpack_require__.e("pages-admin-admin-module")]).then(__webpack_require__.bind(null,
           /*! ./pages/admin/admin.module */
           "./src/app/pages/admin/admin.module.ts")).then(function (m) {
             return m.AdminModule;
@@ -103,7 +103,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         loadChildren: function loadChildren() {
           return Promise.all(
           /*! import() | pages-dashboard-dashboard-module */
-          [__webpack_require__.e("default~pages-admin-admin-module~pages-client-client-module~pages-dashboard-dashboard-module"), __webpack_require__.e("pages-dashboard-dashboard-module")]).then(__webpack_require__.bind(null,
+          [__webpack_require__.e("default~pages-admin-admin-module~pages-client-client-module~pages-dashboard-dashboard-module"), __webpack_require__.e("common"), __webpack_require__.e("pages-dashboard-dashboard-module")]).then(__webpack_require__.bind(null,
           /*! ./pages/dashboard/dashboard.module */
           "./src/app/pages/dashboard/dashboard.module.ts")).then(function (m) {
             return m.DashboardModule;
@@ -435,7 +435,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, LinkService);
 
         this.http = http;
-        this.base = "/api/links";
+        this.base = '/api/links';
       } // گرفتن لینک های کابر
 
 
@@ -504,7 +504,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     LinkService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
       token: LinkService,
       factory: LinkService.ɵfac,
-      providedIn: "root"
+      providedIn: 'root'
     });
     /*@__PURE__*/
 
@@ -512,7 +512,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](LinkService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
-          providedIn: "root"
+          providedIn: 'root'
         }]
       }], function () {
         return [{

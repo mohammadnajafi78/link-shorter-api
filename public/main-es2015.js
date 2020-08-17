@@ -52,11 +52,11 @@ const routes = [
             },
             {
                 path: "admin/dashboard",
-                loadChildren: () => Promise.all(/*! import() | pages-admin-admin-module */[__webpack_require__.e("default~pages-admin-admin-module~pages-client-client-module~pages-dashboard-dashboard-module"), __webpack_require__.e("pages-admin-admin-module")]).then(__webpack_require__.bind(null, /*! ./pages/admin/admin.module */ "./src/app/pages/admin/admin.module.ts")).then((m) => m.AdminModule),
+                loadChildren: () => Promise.all(/*! import() | pages-admin-admin-module */[__webpack_require__.e("default~pages-admin-admin-module~pages-client-client-module~pages-dashboard-dashboard-module"), __webpack_require__.e("common"), __webpack_require__.e("pages-admin-admin-module")]).then(__webpack_require__.bind(null, /*! ./pages/admin/admin.module */ "./src/app/pages/admin/admin.module.ts")).then((m) => m.AdminModule),
             },
             {
                 path: "member/dashboard",
-                loadChildren: () => Promise.all(/*! import() | pages-dashboard-dashboard-module */[__webpack_require__.e("default~pages-admin-admin-module~pages-client-client-module~pages-dashboard-dashboard-module"), __webpack_require__.e("pages-dashboard-dashboard-module")]).then(__webpack_require__.bind(null, /*! ./pages/dashboard/dashboard.module */ "./src/app/pages/dashboard/dashboard.module.ts")).then((m) => m.DashboardModule),
+                loadChildren: () => Promise.all(/*! import() | pages-dashboard-dashboard-module */[__webpack_require__.e("default~pages-admin-admin-module~pages-client-client-module~pages-dashboard-dashboard-module"), __webpack_require__.e("common"), __webpack_require__.e("pages-dashboard-dashboard-module")]).then(__webpack_require__.bind(null, /*! ./pages/dashboard/dashboard.module */ "./src/app/pages/dashboard/dashboard.module.ts")).then((m) => m.DashboardModule),
             },
         ],
     },
@@ -231,7 +231,7 @@ __webpack_require__.r(__webpack_exports__);
 class LinkService {
     constructor(http) {
         this.http = http;
-        this.base = "/api/links";
+        this.base = '/api/links';
     }
     // گرفتن لینک های کابر
     getLinkList(params) {
@@ -271,11 +271,11 @@ class LinkService {
     }
 }
 LinkService.ɵfac = function LinkService_Factory(t) { return new (t || LinkService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };
-LinkService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: LinkService, factory: LinkService.ɵfac, providedIn: "root" });
+LinkService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: LinkService, factory: LinkService.ɵfac, providedIn: 'root' });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](LinkService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
-                providedIn: "root",
+                providedIn: 'root',
             }]
     }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }]; }, null); })();
 

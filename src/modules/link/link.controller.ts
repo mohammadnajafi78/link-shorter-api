@@ -80,8 +80,9 @@ export class LinkController {
     @Query('skip') skip: number = 0,
     @Query('search') search: string,
     @Query('status') status: string = 'active',
+    @Query('showAds') showAds?: boolean,
   ): Promise<{ links: Link[]; count: number }> {
-    return await this.linkService.getUserLink(search, request.user._id, skip, limit, status);
+    return await this.linkService.getUserLink(search, request.user._id, skip, limit, status,showAds);
   }
 
   @ApiOperation({ summary: 'ویرایش یک لینک' })

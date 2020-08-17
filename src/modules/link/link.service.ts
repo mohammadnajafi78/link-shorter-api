@@ -164,11 +164,15 @@ export class LinkService {
     skip: number,
     limit: number,
     status: string,
+    showAds?: boolean,
   ): Promise<{ links: Link[]; count: number }> {
     try {
       const query = { status, user: id };
       if (!!search) {
         Object.assign(query, { mainLink: new RegExp(search, 'ig') });
+      }
+      if (!!showAds) {
+        Object.assign(query, { showAds });
       }
       const links = await this.linkModel.find(query)
         .skip(Number(skip)).limit(Number(limit)).sort({ 'createdAt': -1 });

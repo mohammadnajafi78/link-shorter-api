@@ -16,6 +16,7 @@ import { AdsModule } from './modules/ads/ads.module';
 import { UploadModule } from './modules/upload/upload.module';
 import { ServeStaticModule,ServeStaticModuleOptions } from '@nestjs/serve-static';
 import {join} from 'path'
+import { NotificationModule } from './modules/notification/notification.module';
 const TypegooseConnection = TypegooseModule.forRoot(MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -37,6 +38,7 @@ const TypegooseConnection = TypegooseModule.forRoot(MONGO_URI, {
     SettingModule,
     AdsModule,
     UploadModule,
+    NotificationModule,
   ],
   controllers: [AppController],
   providers: [{ provide: APP_GUARD, useClass: AuthGaurd }, AppService, SmsService],

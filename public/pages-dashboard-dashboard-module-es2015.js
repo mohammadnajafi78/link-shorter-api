@@ -106,15 +106,25 @@ class LinkModifyComponent {
     create() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             if (this.linkController.valid) {
-                try {
-                    yield this.linkService.createLink({ mainLink: this.mainLink, showAds: this.showAds, user: this.user._id }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(res => {
-                        this.link = res.link;
-                    })).toPromise();
+                if (this.mainLink.includes(this.url)) {
+                    this.snackBar.open('اجازه وارد کردن این دامنه را ندارید', null, {
+                        horizontalPosition: 'center',
+                        verticalPosition: 'bottom',
+                        duration: 5000
+                    });
                     this.mainLink = '';
-                    this.showAds = true;
                 }
-                catch (error) {
-                    console.log(error);
+                else {
+                    try {
+                        yield this.linkService.createLink({ mainLink: this.mainLink, showAds: this.showAds, user: this.user._id }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(res => {
+                            this.link = res.link;
+                        })).toPromise();
+                        this.mainLink = '';
+                        this.showAds = true;
+                    }
+                    catch (error) {
+                        console.log(error);
+                    }
                 }
             }
         });
@@ -358,7 +368,7 @@ class HomeComponent {
     }
 }
 HomeComponent.ɵfac = function HomeComponent_Factory(t) { return new (t || HomeComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_services_notification_service__WEBPACK_IMPORTED_MODULE_3__["NotificationService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_services_link_service__WEBPACK_IMPORTED_MODULE_4__["LinkService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"])); };
-HomeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: HomeComponent, selectors: [["app-home"]], decls: 45, vars: 8, consts: [[1, "main"], [1, "col-12"], [1, "title"], ["class", "notif-card", 4, "ngFor", "ngForOf"], [1, "salary-details"], [1, "card", "col-md-3", "col-12"], [1, "icon"], [2, "color", "teal"], [1, "col-md-3", "col-12"], [2, "color", "#2985fd"], [2, "color", "#f5cf02"], [2, "color", "#f5a"], [1, "notif-card"], [1, "title-notif"], [1, "col-6"], [1, "date-notif"], ["color", "accent", "selected", ""], [1, "content-notif"], [1, "col-9", "notif-text", 3, "innerHTML"]], template: function HomeComponent_Template(rf, ctx) { if (rf & 1) {
+HomeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: HomeComponent, selectors: [["app-home"]], decls: 45, vars: 8, consts: [[1, "main"], [1, "col-12"], [1, "title"], ["class", "notif-card", 4, "ngFor", "ngForOf"], [1, "salary-details"], [1, "col-md-3", "col-12"], [1, "icon"], [2, "color", "teal"], [1, "card", "col-md-3", "col-12"], [2, "color", "#2985fd"], [2, "color", "#f5cf02"], [2, "color", "#f5a"], [1, "notif-card"], [1, "title-notif"], [1, "col-6"], [1, "date-notif"], ["color", "accent", "selected", ""], [1, "content-notif"], [1, "col-9", "notif-text", 3, "innerHTML"]], template: function HomeComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "mat-card", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](2, "mat-card-title", 2);
@@ -399,7 +409,7 @@ HomeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComp
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](25, "div", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](25, "div", 8);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](26, "mat-card", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](27, "div", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](28, " \u0645\u062C\u0645\u0648\u0639 \u062F\u0631\u0622\u0645\u062F ");
@@ -415,7 +425,7 @@ HomeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComp
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](35, "div", 5);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](35, "div", 8);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](36, "mat-card", 1);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](37, "div", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](38, " \u062F\u0631\u0622\u0645\u062F \u0627\u0632 \u0632\u06CC\u0631\u0645\u062C\u0645\u0648\u0639\u0647 \u0647\u0627 ");
@@ -2150,7 +2160,7 @@ WithdrawsComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefin
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](9, "b");
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](10, " \u0646\u06A9\u062A\u0647: ");
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](11, " \u0647\u0646\u06AF\u0627\u0645\u06CC\u06A9\u0647 \u062F\u0631\u0622\u0645\u062F \u062D\u0633\u0627\u0628 \u0634\u0645\u0627 \u0628\u0647 \u062D\u062F\u0627\u0642\u0644 \u0645\u0628\u0644\u063A \u0628\u0631\u062F\u0627\u0634\u062A \u06CC\u0627 \u0628\u06CC\u0634\u062A\u0631 \u0628\u0631\u0633\u062F \u0634\u0645\u0627 \u0645\u06CC\u062A\u0648\u0627\u0646\u06CC\u062F \u0628\u0627 \u0627\u0633\u062A\u0641\u0627\u062F\u0647 \u0627\u0632 \u062F\u06A9\u0645\u0647 \u0633\u0645\u062A \u0631\u0627\u0633\u062A \"\u0628\u0631\u062F\u0627\u0634\u062A \u0645\u0628\u0644\u063A\" \u062F\u0631\u062E\u0648\u0627\u0633\u062A \u0648\u0627\u0631\u06CC\u0632 \u0628\u062F\u0647\u06CC\u062F. \u062F\u0631\u0622\u0645\u062F \u0634\u0645\u0627 \u062D\u062F\u0627\u06A9\u062B\u0631 \u062A\u0627 4 \u0631\u0648\u0632 \u06A9\u0627\u0631\u06CC (\u0628\u0647 \u062C\u0632 \u062A\u0639\u0637\u06CC\u0644\u0627\u062A \u0631\u0633\u0645\u06CC) \u0628\u0647 \u062D\u0633\u0627\u0628 \u0648\u0627\u0631\u06CC\u0632 \u062E\u0648\u0627\u0647\u062F \u0634\u062F. \u0644\u0637\u0641\u0627 \u062F\u0631 \u0627\u06CC\u0646 \u0628\u0627\u0631\u0647 \u062A\u0627 \u0627\u062A\u0645\u0627\u0645 \u0632\u0645\u0627\u0646 \u062A\u0639\u06CC\u06CC\u0646 \u0634\u062F\u0647 \u0628\u0627 \u0645\u0627 \u062A\u0645\u0627\u0633 \u0628\u0631\u0642\u0631\u0627\u0631 \u0646\u06A9\u0646\u06CC\u062F \u062A\u0627 \u0631\u0648\u0627\u0644 \u06A9\u0627\u0631 \u0627\u0646\u062C\u0627\u0645 \u0634\u0648\u062F. ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](11, " \u0647\u0646\u06AF\u0627\u0645\u06CC\u06A9\u0647 \u062F\u0631\u0622\u0645\u062F \u062D\u0633\u0627\u0628 \u0634\u0645\u0627 \u0628\u0647 \u062D\u062F\u0627\u0642\u0644 \u0645\u0628\u0644\u063A \u0628\u0631\u062F\u0627\u0634\u062A \u06CC\u0627 \u0628\u06CC\u0634\u062A\u0631 \u0628\u0631\u0633\u062F \u0634\u0645\u0627 \u0645\u06CC\u062A\u0648\u0627\u0646\u06CC\u062F \u0628\u0627 \u0627\u0633\u062A\u0641\u0627\u062F\u0647 \u0627\u0632 \u062F\u06A9\u0645\u0647 \u0633\u0645\u062A \u0631\u0627\u0633\u062A \"\u0628\u0631\u062F\u0627\u0634\u062A \u0645\u0628\u0644\u063A\" \u062F\u0631\u062E\u0648\u0627\u0633\u062A \u0648\u0627\u0631\u06CC\u0632 \u0628\u062F\u0647\u06CC\u062F. \u062F\u0631\u0622\u0645\u062F \u0634\u0645\u0627 \u062D\u062F\u0627\u06A9\u062B\u0631 \u062A\u0627 4 \u0631\u0648\u0632 \u06A9\u0627\u0631\u06CC (\u0628\u0647 \u062C\u0632 \u062A\u0639\u0637\u06CC\u0644\u0627\u062A \u0631\u0633\u0645\u06CC) \u0628\u0647 \u062D\u0633\u0627\u0628 \u0648\u0627\u0631\u06CC\u0632 \u062E\u0648\u0627\u0647\u062F \u0634\u062F. \u0644\u0637\u0641\u0627 \u062F\u0631 \u0627\u06CC\u0646 \u0628\u0627\u0632\u0647 \u062A\u0627 \u0627\u062A\u0645\u0627\u0645 \u0632\u0645\u0627\u0646 \u062A\u0639\u06CC\u06CC\u0646 \u0634\u062F\u0647 \u0628\u0627 \u0645\u0627 \u062A\u0645\u0627\u0633 \u0628\u0631\u0642\u0631\u0627\u0631 \u0646\u06A9\u0646\u06CC\u062F \u062A\u0627 \u0631\u0648\u0627\u0644 \u06A9\u0627\u0631 \u0627\u0646\u062C\u0627\u0645 \u0634\u0648\u062F. ");
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](12, "div", 7);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](13, "b");

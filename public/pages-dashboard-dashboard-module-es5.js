@@ -248,12 +248,27 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 switch (_context.prev = _context.next) {
                   case 0:
                     if (!this.linkController.valid) {
-                      _context.next = 11;
+                      _context.next = 16;
                       break;
                     }
 
-                    _context.prev = 1;
-                    _context.next = 4;
+                    if (!this.mainLink.includes(this.url)) {
+                      _context.next = 6;
+                      break;
+                    }
+
+                    this.snackBar.open('اجازه وارد کردن این دامنه را ندارید', null, {
+                      horizontalPosition: 'center',
+                      verticalPosition: 'bottom',
+                      duration: 5000
+                    });
+                    this.mainLink = '';
+                    _context.next = 16;
+                    break;
+
+                  case 6:
+                    _context.prev = 6;
+                    _context.next = 9;
                     return this.linkService.createLink({
                       mainLink: this.mainLink,
                       showAds: this.showAds,
@@ -262,23 +277,23 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                       _this2.link = res.link;
                     })).toPromise();
 
-                  case 4:
+                  case 9:
                     this.mainLink = '';
                     this.showAds = true;
-                    _context.next = 11;
+                    _context.next = 16;
                     break;
 
-                  case 8:
-                    _context.prev = 8;
-                    _context.t0 = _context["catch"](1);
+                  case 13:
+                    _context.prev = 13;
+                    _context.t0 = _context["catch"](6);
                     console.log(_context.t0);
 
-                  case 11:
+                  case 16:
                   case "end":
                     return _context.stop();
                 }
               }
-            }, _callee, this, [[1, 8]]);
+            }, _callee, this, [[6, 13]]);
           }));
         }
       }]);
@@ -818,7 +833,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       selectors: [["app-home"]],
       decls: 45,
       vars: 8,
-      consts: [[1, "main"], [1, "col-12"], [1, "title"], ["class", "notif-card", 4, "ngFor", "ngForOf"], [1, "salary-details"], [1, "card", "col-md-3", "col-12"], [1, "icon"], [2, "color", "teal"], [1, "col-md-3", "col-12"], [2, "color", "#2985fd"], [2, "color", "#f5cf02"], [2, "color", "#f5a"], [1, "notif-card"], [1, "title-notif"], [1, "col-6"], [1, "date-notif"], ["color", "accent", "selected", ""], [1, "content-notif"], [1, "col-9", "notif-text", 3, "innerHTML"]],
+      consts: [[1, "main"], [1, "col-12"], [1, "title"], ["class", "notif-card", 4, "ngFor", "ngForOf"], [1, "salary-details"], [1, "col-md-3", "col-12"], [1, "icon"], [2, "color", "teal"], [1, "card", "col-md-3", "col-12"], [2, "color", "#2985fd"], [2, "color", "#f5cf02"], [2, "color", "#f5a"], [1, "notif-card"], [1, "title-notif"], [1, "col-6"], [1, "date-notif"], ["color", "accent", "selected", ""], [1, "content-notif"], [1, "col-9", "notif-text", 3, "innerHTML"]],
       template: function HomeComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0);
@@ -901,7 +916,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](25, "div", 5);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](25, "div", 8);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](26, "mat-card", 1);
 
@@ -933,7 +948,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](35, "div", 5);
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](35, "div", 8);
 
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](36, "mat-card", 1);
 
@@ -4491,7 +4506,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
 
-          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](11, " \u0647\u0646\u06AF\u0627\u0645\u06CC\u06A9\u0647 \u062F\u0631\u0622\u0645\u062F \u062D\u0633\u0627\u0628 \u0634\u0645\u0627 \u0628\u0647 \u062D\u062F\u0627\u0642\u0644 \u0645\u0628\u0644\u063A \u0628\u0631\u062F\u0627\u0634\u062A \u06CC\u0627 \u0628\u06CC\u0634\u062A\u0631 \u0628\u0631\u0633\u062F \u0634\u0645\u0627 \u0645\u06CC\u062A\u0648\u0627\u0646\u06CC\u062F \u0628\u0627 \u0627\u0633\u062A\u0641\u0627\u062F\u0647 \u0627\u0632 \u062F\u06A9\u0645\u0647 \u0633\u0645\u062A \u0631\u0627\u0633\u062A \"\u0628\u0631\u062F\u0627\u0634\u062A \u0645\u0628\u0644\u063A\" \u062F\u0631\u062E\u0648\u0627\u0633\u062A \u0648\u0627\u0631\u06CC\u0632 \u0628\u062F\u0647\u06CC\u062F. \u062F\u0631\u0622\u0645\u062F \u0634\u0645\u0627 \u062D\u062F\u0627\u06A9\u062B\u0631 \u062A\u0627 4 \u0631\u0648\u0632 \u06A9\u0627\u0631\u06CC (\u0628\u0647 \u062C\u0632 \u062A\u0639\u0637\u06CC\u0644\u0627\u062A \u0631\u0633\u0645\u06CC) \u0628\u0647 \u062D\u0633\u0627\u0628 \u0648\u0627\u0631\u06CC\u0632 \u062E\u0648\u0627\u0647\u062F \u0634\u062F. \u0644\u0637\u0641\u0627 \u062F\u0631 \u0627\u06CC\u0646 \u0628\u0627\u0631\u0647 \u062A\u0627 \u0627\u062A\u0645\u0627\u0645 \u0632\u0645\u0627\u0646 \u062A\u0639\u06CC\u06CC\u0646 \u0634\u062F\u0647 \u0628\u0627 \u0645\u0627 \u062A\u0645\u0627\u0633 \u0628\u0631\u0642\u0631\u0627\u0631 \u0646\u06A9\u0646\u06CC\u062F \u062A\u0627 \u0631\u0648\u0627\u0644 \u06A9\u0627\u0631 \u0627\u0646\u062C\u0627\u0645 \u0634\u0648\u062F. ");
+          _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](11, " \u0647\u0646\u06AF\u0627\u0645\u06CC\u06A9\u0647 \u062F\u0631\u0622\u0645\u062F \u062D\u0633\u0627\u0628 \u0634\u0645\u0627 \u0628\u0647 \u062D\u062F\u0627\u0642\u0644 \u0645\u0628\u0644\u063A \u0628\u0631\u062F\u0627\u0634\u062A \u06CC\u0627 \u0628\u06CC\u0634\u062A\u0631 \u0628\u0631\u0633\u062F \u0634\u0645\u0627 \u0645\u06CC\u062A\u0648\u0627\u0646\u06CC\u062F \u0628\u0627 \u0627\u0633\u062A\u0641\u0627\u062F\u0647 \u0627\u0632 \u062F\u06A9\u0645\u0647 \u0633\u0645\u062A \u0631\u0627\u0633\u062A \"\u0628\u0631\u062F\u0627\u0634\u062A \u0645\u0628\u0644\u063A\" \u062F\u0631\u062E\u0648\u0627\u0633\u062A \u0648\u0627\u0631\u06CC\u0632 \u0628\u062F\u0647\u06CC\u062F. \u062F\u0631\u0622\u0645\u062F \u0634\u0645\u0627 \u062D\u062F\u0627\u06A9\u062B\u0631 \u062A\u0627 4 \u0631\u0648\u0632 \u06A9\u0627\u0631\u06CC (\u0628\u0647 \u062C\u0632 \u062A\u0639\u0637\u06CC\u0644\u0627\u062A \u0631\u0633\u0645\u06CC) \u0628\u0647 \u062D\u0633\u0627\u0628 \u0648\u0627\u0631\u06CC\u0632 \u062E\u0648\u0627\u0647\u062F \u0634\u062F. \u0644\u0637\u0641\u0627 \u062F\u0631 \u0627\u06CC\u0646 \u0628\u0627\u0632\u0647 \u062A\u0627 \u0627\u062A\u0645\u0627\u0645 \u0632\u0645\u0627\u0646 \u062A\u0639\u06CC\u06CC\u0646 \u0634\u062F\u0647 \u0628\u0627 \u0645\u0627 \u062A\u0645\u0627\u0633 \u0628\u0631\u0642\u0631\u0627\u0631 \u0646\u06A9\u0646\u06CC\u062F \u062A\u0627 \u0631\u0648\u0627\u0644 \u06A9\u0627\u0631 \u0627\u0646\u062C\u0627\u0645 \u0634\u0648\u062F. ");
 
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
 

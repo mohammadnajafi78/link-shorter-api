@@ -2468,18 +2468,21 @@ function AdsModifyComponent_mat_error_23_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
 } }
 function AdsModifyComponent_div_26_div_8_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 25);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](1, "mat-progress-spinner", 26);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 24);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](1, "mat-progress-spinner", 25);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const ctx_r269 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("value", ctx_r269.uploadProgress);
 } }
-function AdsModifyComponent_div_26_img_9_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](0, "img", 27);
+function AdsModifyComponent_div_26_div_9_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](1, "img", 26);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const ctx_r270 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("src", ctx_r270.BASE_URL + "/" + ctx_r270.ads.image, _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵsanitizeUrl"]);
 } }
 function AdsModifyComponent_div_26_Template(rf, ctx) { if (rf & 1) {
@@ -2498,26 +2501,26 @@ function AdsModifyComponent_div_26_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](7, "div", 22);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](8, AdsModifyComponent_div_26_div_8_Template, 2, 1, "div", 23);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](9, AdsModifyComponent_div_26_img_9_Template, 1, 1, "img", 24);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](9, AdsModifyComponent_div_26_div_9_Template, 2, 1, "div", 1);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const ctx_r266 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](8);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx_r266.uploadProgress > 0);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx_r266.uploadProgress > 0 && !ctx_r266.ads.image);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx_r266.ads.image);
 } }
 function AdsModifyComponent_button_33_Template(rf, ctx) { if (rf & 1) {
     const _r274 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "button", 28);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "button", 27);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function AdsModifyComponent_button_33_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r274); const ctx_r273 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](); return ctx_r273.onYesClick(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](1, " \u0627\u06CC\u062C\u0627\u062F ");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
 } }
 function AdsModifyComponent_button_34_Template(rf, ctx) { if (rf & 1) {
     const _r276 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "button", 28);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "button", 27);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function AdsModifyComponent_button_34_Template_button_click_0_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r276); const ctx_r275 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](); return ctx_r275.onYesClick(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](1, " \u0648\u06CC\u0631\u0627\u06CC\u0634 ");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
@@ -2530,6 +2533,7 @@ class AdsModifyComponent {
         this.dialogRef = dialogRef;
         this.BASE_URL = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].url;
         this.ads = data.ads;
+        this.uploadProgress = 0;
     }
     ngOnInit() {
         this.linkControl = new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"]('', [
@@ -2542,35 +2546,43 @@ class AdsModifyComponent {
     // آپلود عمکس
     openFileChooser() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            try {
-                // باز شدن انتخاب کننده عکس
-                const file = yield this.uploadService.openFileChooser();
-                // آپلود تضویر
-                this.uploadService.upload(file).subscribe((res) => {
-                    switch (res.type) {
-                        // میزان پیشرفت آپلود
-                        case _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpEventType"].UploadProgress:
-                            this.uploadProgress = Math.floor((res.loaded / res.total) * 100);
-                            break;
-                        // لینکی که سرور برمیگرداند
-                        case _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpEventType"].Response:
-                            this.responseImage = res.body;
-                            // ذخیره لینک عکس
-                            this.ads.image = this.responseImage.url;
-                            // console.log(this.BASE_URL + '/' + this.responseImage.url);
-                            this.uploadProgress = 0;
-                            break;
-                    }
-                });
+            if (this.uploadProgress !== 0) {
+                return;
             }
-            catch (error) {
-                this.snackBar.open(`آپلود عکس با مشکل مواجه شد`, null, {
-                    duration: 3000,
-                    verticalPosition: 'bottom',
-                    horizontalPosition: 'center',
-                });
-                console.log(error);
+            this.uploadService.openFileChooser().then(fileList => this.uploadFile(fileList));
+        });
+    }
+    uploadFile(files) {
+        if (this.uploadProgress !== 0) {
+            return;
+        }
+        const file = files[0];
+        this.uploadService.upload(file).subscribe(res => {
+            switch (res.type) {
+                case _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpEventType"].UploadProgress:
+                    const progress = res.loaded / res.total; // 0 - 1
+                    this.uploadProgress = Math.ceil(progress * 100); // 0 - 100
+                    break;
+                case _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpEventType"].Response:
+                    const { url } = res.body;
+                    this.ads.image = url;
+                    this.uploadProgress = 0;
+                    this.snackBar.open('تصویر بارگزاری شد .', null, {
+                        verticalPosition: 'top',
+                        horizontalPosition: 'left',
+                        duration: 3000,
+                        direction: 'rtl'
+                    });
             }
+        }, err => {
+            console.log(err.message);
+            this.uploadProgress = 0;
+            this.snackBar.open('بارگزاری با مشکل مواجه شد !', null, {
+                verticalPosition: 'top',
+                horizontalPosition: 'left',
+                duration: 3000,
+                direction: 'rtl'
+            });
         });
     }
     onYesClick() {
@@ -2584,7 +2596,7 @@ class AdsModifyComponent {
     }
 }
 AdsModifyComponent.ɵfac = function AdsModifyComponent_Factory(t) { return new (t || AdsModifyComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](src_app_services_upload_service__WEBPACK_IMPORTED_MODULE_6__["UploadService"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_7__["MatSnackBar"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__["MAT_DIALOG_DATA"]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__["MatDialogRef"])); };
-AdsModifyComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: AdsModifyComponent, selectors: [["app-ads-modify"]], decls: 37, vars: 18, consts: [["mat-dialog-title", "", 4, "ngIf"], [4, "ngIf"], [1, "form-container", "row"], ["appearance", "fill", 1, "col-12"], ["type", "text", "matInput", "", "placeholder", "\u0644\u06CC\u0646\u06A9 \u062A\u0628\u0644\u06CC\u063A", 3, "ngModel", "formControl", "ngModelChange"], ["appearance", "fill", 1, "col-3"], [3, "ngModel", "ngModelChange"], [3, "value"], ["appearance", "fill", 1, "col-4"], [3, "formControl", "ngModel", "ngModelChange"], ["value", "banner"], ["value", "popup"], ["type", "number", "matInput", "", "placeholder", "\u0645\u062D\u0644 \u0642\u0631\u0627\u0631 \u06AF\u06CC\u0631\u06CC \u062A\u0628\u0644\u06CC\u063A", 3, "ngModel", "disabled", "ngModelChange"], ["class", "col-12 row banner", 4, "ngIf"], [1, "col-12", "slide"], [1, "col-5"], ["mat-dialog-actions", "", "dir", "ltr"], ["color", "primary", "mat-raised-button", "", "cdkFocusInitial", "", 3, "click", 4, "ngIf"], ["mat-button", "", 3, "click"], ["mat-dialog-title", ""], [1, "col-12", "row", "banner"], [1, "col-4", "image-chooser", 3, "click"], [1, "col-6"], ["class", "spinner", 4, "ngIf"], [3, "src", 4, "ngIf"], [1, "spinner"], ["color", "warn", "mode", "determinate", "diameter", "60", 3, "value"], [3, "src"], ["color", "primary", "mat-raised-button", "", "cdkFocusInitial", "", 3, "click"]], template: function AdsModifyComponent_Template(rf, ctx) { if (rf & 1) {
+AdsModifyComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: AdsModifyComponent, selectors: [["app-ads-modify"]], decls: 37, vars: 18, consts: [["mat-dialog-title", "", 4, "ngIf"], [4, "ngIf"], [1, "form-container", "row"], ["appearance", "fill", 1, "col-12"], ["type", "text", "matInput", "", "placeholder", "\u0644\u06CC\u0646\u06A9 \u062A\u0628\u0644\u06CC\u063A", 3, "ngModel", "formControl", "ngModelChange"], ["appearance", "fill", 1, "col-3"], [3, "ngModel", "ngModelChange"], [3, "value"], ["appearance", "fill", 1, "col-4"], [3, "formControl", "ngModel", "ngModelChange"], ["value", "banner"], ["value", "popup"], ["type", "number", "matInput", "", "placeholder", "\u0645\u062D\u0644 \u0642\u0631\u0627\u0631 \u06AF\u06CC\u0631\u06CC \u062A\u0628\u0644\u06CC\u063A", 3, "ngModel", "disabled", "ngModelChange"], ["class", "col-12 row banner", 4, "ngIf"], [1, "col-12", "slide"], [1, "col-5"], ["mat-dialog-actions", "", "dir", "ltr"], ["color", "primary", "mat-raised-button", "", "cdkFocusInitial", "", 3, "click", 4, "ngIf"], ["mat-button", "", 3, "click"], ["mat-dialog-title", ""], [1, "col-12", "row", "banner"], [1, "col-4", "image-chooser", 3, "click"], [1, "col-6"], ["class", "spinner", 4, "ngIf"], [1, "spinner"], ["color", "warn", "mode", "determinate", "diameter", "60", 3, "value"], [3, "src"], ["color", "primary", "mat-raised-button", "", "cdkFocusInitial", "", 3, "click"]], template: function AdsModifyComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div");
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](1, AdsModifyComponent_h1_1_Template, 2, 0, "h1", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](2, AdsModifyComponent_h1_2_Template, 2, 0, "h1", 1);

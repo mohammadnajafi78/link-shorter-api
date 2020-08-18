@@ -4258,9 +4258,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     function AdsModifyComponent_div_26_div_8_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 25);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 24);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](1, "mat-progress-spinner", 26);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](1, "mat-progress-spinner", 25);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
       }
@@ -4274,13 +4274,19 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }
     }
 
-    function AdsModifyComponent_div_26_img_9_Template(rf, ctx) {
+    function AdsModifyComponent_div_26_div_9_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](0, "img", 27);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div");
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](1, "img", 26);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
       }
 
       if (rf & 2) {
         var ctx_r270 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](2);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("src", ctx_r270.BASE_URL + "/" + ctx_r270.ads.image, _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵsanitizeUrl"]);
       }
@@ -4324,7 +4330,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](8, AdsModifyComponent_div_26_div_8_Template, 2, 1, "div", 23);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](9, AdsModifyComponent_div_26_img_9_Template, 1, 1, "img", 24);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtemplate"](9, AdsModifyComponent_div_26_div_9_Template, 2, 1, "div", 1);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
 
@@ -4336,7 +4342,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](8);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx_r266.uploadProgress > 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("ngIf", ctx_r266.uploadProgress > 0 && !ctx_r266.ads.image);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](1);
 
@@ -4348,7 +4354,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       if (rf & 1) {
         var _r274 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵgetCurrentView"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "button", 28);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "button", 27);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function AdsModifyComponent_button_33_Template_button_click_0_listener() {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r274);
@@ -4368,7 +4374,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       if (rf & 1) {
         var _r276 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵgetCurrentView"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "button", 28);
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "button", 27);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function AdsModifyComponent_button_34_Template_button_click_0_listener() {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r276);
@@ -4396,6 +4402,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.dialogRef = dialogRef;
         this.BASE_URL = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].url;
         this.ads = data.ads;
+        this.uploadProgress = 0;
       }
 
       _createClass(AdsModifyComponent, [{
@@ -4413,55 +4420,73 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           regeneratorRuntime.mark(function _callee() {
             var _this9 = this;
 
-            var file;
             return regeneratorRuntime.wrap(function _callee$(_context) {
               while (1) {
                 switch (_context.prev = _context.next) {
                   case 0:
-                    _context.prev = 0;
-                    _context.next = 3;
-                    return this.uploadService.openFileChooser();
+                    if (!(this.uploadProgress !== 0)) {
+                      _context.next = 2;
+                      break;
+                    }
+
+                    return _context.abrupt("return");
+
+                  case 2:
+                    this.uploadService.openFileChooser().then(function (fileList) {
+                      return _this9.uploadFile(fileList);
+                    });
 
                   case 3:
-                    file = _context.sent;
-                    // آپلود تضویر
-                    this.uploadService.upload(file).subscribe(function (res) {
-                      switch (res.type) {
-                        // میزان پیشرفت آپلود
-                        case _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpEventType"].UploadProgress:
-                          _this9.uploadProgress = Math.floor(res.loaded / res.total * 100);
-                          break;
-                        // لینکی که سرور برمیگرداند
-
-                        case _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpEventType"].Response:
-                          _this9.responseImage = res.body; // ذخیره لینک عکس
-
-                          _this9.ads.image = _this9.responseImage.url; // console.log(this.BASE_URL + '/' + this.responseImage.url);
-
-                          _this9.uploadProgress = 0;
-                          break;
-                      }
-                    });
-                    _context.next = 11;
-                    break;
-
-                  case 7:
-                    _context.prev = 7;
-                    _context.t0 = _context["catch"](0);
-                    this.snackBar.open("\u0622\u067E\u0644\u0648\u062F \u0639\u06A9\u0633 \u0628\u0627 \u0645\u0634\u06A9\u0644 \u0645\u0648\u0627\u062C\u0647 \u0634\u062F", null, {
-                      duration: 3000,
-                      verticalPosition: 'bottom',
-                      horizontalPosition: 'center'
-                    });
-                    console.log(_context.t0);
-
-                  case 11:
                   case "end":
                     return _context.stop();
                 }
               }
-            }, _callee, this, [[0, 7]]);
+            }, _callee, this);
           }));
+        }
+      }, {
+        key: "uploadFile",
+        value: function uploadFile(files) {
+          var _this10 = this;
+
+          if (this.uploadProgress !== 0) {
+            return;
+          }
+
+          var file = files[0];
+          this.uploadService.upload(file).subscribe(function (res) {
+            switch (res.type) {
+              case _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpEventType"].UploadProgress:
+                var progress = res.loaded / res.total; // 0 - 1
+
+                _this10.uploadProgress = Math.ceil(progress * 100); // 0 - 100
+
+                break;
+
+              case _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpEventType"].Response:
+                var url = res.body.url;
+                _this10.ads.image = url;
+                _this10.uploadProgress = 0;
+
+                _this10.snackBar.open('تصویر بارگزاری شد .', null, {
+                  verticalPosition: 'top',
+                  horizontalPosition: 'left',
+                  duration: 3000,
+                  direction: 'rtl'
+                });
+
+            }
+          }, function (err) {
+            console.log(err.message);
+            _this10.uploadProgress = 0;
+
+            _this10.snackBar.open('بارگزاری با مشکل مواجه شد !', null, {
+              verticalPosition: 'top',
+              horizontalPosition: 'left',
+              duration: 3000,
+              direction: 'rtl'
+            });
+          });
         }
       }, {
         key: "onYesClick",
@@ -4490,7 +4515,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       selectors: [["app-ads-modify"]],
       decls: 37,
       vars: 18,
-      consts: [["mat-dialog-title", "", 4, "ngIf"], [4, "ngIf"], [1, "form-container", "row"], ["appearance", "fill", 1, "col-12"], ["type", "text", "matInput", "", "placeholder", "\u0644\u06CC\u0646\u06A9 \u062A\u0628\u0644\u06CC\u063A", 3, "ngModel", "formControl", "ngModelChange"], ["appearance", "fill", 1, "col-3"], [3, "ngModel", "ngModelChange"], [3, "value"], ["appearance", "fill", 1, "col-4"], [3, "formControl", "ngModel", "ngModelChange"], ["value", "banner"], ["value", "popup"], ["type", "number", "matInput", "", "placeholder", "\u0645\u062D\u0644 \u0642\u0631\u0627\u0631 \u06AF\u06CC\u0631\u06CC \u062A\u0628\u0644\u06CC\u063A", 3, "ngModel", "disabled", "ngModelChange"], ["class", "col-12 row banner", 4, "ngIf"], [1, "col-12", "slide"], [1, "col-5"], ["mat-dialog-actions", "", "dir", "ltr"], ["color", "primary", "mat-raised-button", "", "cdkFocusInitial", "", 3, "click", 4, "ngIf"], ["mat-button", "", 3, "click"], ["mat-dialog-title", ""], [1, "col-12", "row", "banner"], [1, "col-4", "image-chooser", 3, "click"], [1, "col-6"], ["class", "spinner", 4, "ngIf"], [3, "src", 4, "ngIf"], [1, "spinner"], ["color", "warn", "mode", "determinate", "diameter", "60", 3, "value"], [3, "src"], ["color", "primary", "mat-raised-button", "", "cdkFocusInitial", "", 3, "click"]],
+      consts: [["mat-dialog-title", "", 4, "ngIf"], [4, "ngIf"], [1, "form-container", "row"], ["appearance", "fill", 1, "col-12"], ["type", "text", "matInput", "", "placeholder", "\u0644\u06CC\u0646\u06A9 \u062A\u0628\u0644\u06CC\u063A", 3, "ngModel", "formControl", "ngModelChange"], ["appearance", "fill", 1, "col-3"], [3, "ngModel", "ngModelChange"], [3, "value"], ["appearance", "fill", 1, "col-4"], [3, "formControl", "ngModel", "ngModelChange"], ["value", "banner"], ["value", "popup"], ["type", "number", "matInput", "", "placeholder", "\u0645\u062D\u0644 \u0642\u0631\u0627\u0631 \u06AF\u06CC\u0631\u06CC \u062A\u0628\u0644\u06CC\u063A", 3, "ngModel", "disabled", "ngModelChange"], ["class", "col-12 row banner", 4, "ngIf"], [1, "col-12", "slide"], [1, "col-5"], ["mat-dialog-actions", "", "dir", "ltr"], ["color", "primary", "mat-raised-button", "", "cdkFocusInitial", "", 3, "click", 4, "ngIf"], ["mat-button", "", 3, "click"], ["mat-dialog-title", ""], [1, "col-12", "row", "banner"], [1, "col-4", "image-chooser", 3, "click"], [1, "col-6"], ["class", "spinner", 4, "ngIf"], [1, "spinner"], ["color", "warn", "mode", "determinate", "diameter", "60", 3, "value"], [3, "src"], ["color", "primary", "mat-raised-button", "", "cdkFocusInitial", "", 3, "click"]],
       template: function AdsModifyComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div");
@@ -5168,7 +5193,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "openCreateDialog",
         value: function openCreateDialog() {
-          var _this10 = this;
+          var _this11 = this;
 
           this.dialog.open(_ads_modify_ads_modify_component__WEBPACK_IMPORTED_MODULE_3__["AdsModifyComponent"], {
             width: '1000px',
@@ -5183,10 +5208,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             }
           }).afterClosed().subscribe(function (res) {
             if (res !== null && typeof res !== 'undefined') {
-              _this10.adsService.create(res).subscribe(function (resp) {
-                _this10._openSnackBar('تبلیغ با موفقیت ایجاد شد');
+              _this11.adsService.create(res).subscribe(function (resp) {
+                _this11._openSnackBar('تبلیغ با موفقیت ایجاد شد');
 
-                _this10.resetPage();
+                _this11.resetPage();
               }, function (err) {
                 console.log(err);
               });
@@ -5197,7 +5222,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "openEditDialog",
         value: function openEditDialog(ads) {
-          var _this11 = this;
+          var _this12 = this;
 
           this.dialog.open(_ads_modify_ads_modify_component__WEBPACK_IMPORTED_MODULE_3__["AdsModifyComponent"], {
             width: '1000px',
@@ -5207,10 +5232,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             }
           }).afterClosed().subscribe(function (res) {
             if (res !== null && res !== 'undefined') {
-              _this11.adsService.update(res._id, res).subscribe(function (resp) {
-                _this11._openSnackBar('تبلیغ با موفقیت ویرایش شد');
+              _this12.adsService.update(res._id, res).subscribe(function (resp) {
+                _this12._openSnackBar('تبلیغ با موفقیت ویرایش شد');
 
-                _this11.resetPage();
+                _this12.resetPage();
               }, function (err) {
                 console.log(err);
               });
@@ -5221,7 +5246,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "openDeleteDialog",
         value: function openDeleteDialog(ads) {
-          var _this12 = this;
+          var _this13 = this;
 
           this.dialog.open(_components_dialog_dialog_component__WEBPACK_IMPORTED_MODULE_5__["DialogComponent"], {
             width: '250px',
@@ -5231,10 +5256,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             }
           }).afterClosed().subscribe(function (res) {
             if (res) {
-              _this12.adsService["delete"](ads._id).subscribe(function (resp) {
-                _this12._openSnackBar('حذف با موفیت انجام شد');
+              _this13.adsService["delete"](ads._id).subscribe(function (resp) {
+                _this13._openSnackBar('حذف با موفیت انجام شد');
 
-                _this12.resetPage();
+                _this13.resetPage();
               }, function (err) {
                 console.log(err);
               });
@@ -5275,7 +5300,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0,
           /*#__PURE__*/
           regeneratorRuntime.mark(function _callee2() {
-            var _this13 = this;
+            var _this14 = this;
 
             return regeneratorRuntime.wrap(function _callee2$(_context2) {
               while (1) {
@@ -5287,8 +5312,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                       skip: this.skip.toString(),
                       limit: this.limit.toString()
                     }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (res) {
-                      _this13.ads = res.ads;
-                      _this13.count = res.count;
+                      _this14.ads = res.ads;
+                      _this14.count = res.count;
                     })).toPromise();
 
                   case 3:
@@ -6586,14 +6611,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(LinksComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this14 = this;
+          var _this15 = this;
 
           this.getLinkList(); // جست و جو در لینک ها
 
           this.searchControl.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["debounceTime"])(300)).subscribe(function (val) {
-            _this14.search = val;
+            _this15.search = val;
 
-            _this14.resetPage();
+            _this15.resetPage();
           });
         } // باز کردن اسنک بار
 
@@ -6663,7 +6688,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setWarning",
         value: function setWarning(link) {
-          var _this15 = this;
+          var _this16 = this;
 
           this.dialog.open(src_app_components_dialog_dialog_component__WEBPACK_IMPORTED_MODULE_4__["DialogComponent"], {
             data: {
@@ -6673,13 +6698,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             width: '350px'
           }).afterClosed().subscribe(function (status) {
             if (!!status) {
-              _this15.linkService.update(link._id, {
+              _this16.linkService.update(link._id, {
                 status: 'warning'
               }).subscribe(function (res) {
                 if (res.status) {
-                  _this15._openSnackbar('لینک مشکل دار شد');
+                  _this16._openSnackbar('لینک مشکل دار شد');
 
-                  _this15.resetPage();
+                  _this16.resetPage();
                 }
               });
             }
@@ -6692,7 +6717,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0,
           /*#__PURE__*/
           regeneratorRuntime.mark(function _callee3() {
-            var _this16 = this;
+            var _this17 = this;
 
             return regeneratorRuntime.wrap(function _callee3$(_context3) {
               while (1) {
@@ -6707,8 +6732,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                       limit: this.limit.toString(),
                       status: "".concat(this.status)
                     }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) {
-                      _this16.count = res.count;
-                      _this16.links = res.links;
+                      _this17.count = res.count;
+                      _this17.links = res.links;
                     })).toPromise();
 
                   case 4:
@@ -7067,7 +7092,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0,
           /*#__PURE__*/
           regeneratorRuntime.mark(function _callee4() {
-            var _this17 = this;
+            var _this18 = this;
 
             return regeneratorRuntime.wrap(function _callee4$(_context4) {
               while (1) {
@@ -7077,7 +7102,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     _context4.next = 3;
                     return this.notificationService.create(this.data.notification).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
                       if (res.notification) {
-                        _this17.dialogRef.close({
+                        _this18.dialogRef.close({
                           status: true
                         });
                       }
@@ -7106,7 +7131,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0,
           /*#__PURE__*/
           regeneratorRuntime.mark(function _callee5() {
-            var _this18 = this;
+            var _this19 = this;
 
             return regeneratorRuntime.wrap(function _callee5$(_context5) {
               while (1) {
@@ -7116,7 +7141,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     _context5.next = 3;
                     return this.notificationService.update(this.data.notification).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
                       if (res.notification) {
-                        _this18.dialogRef.close({
+                        _this19.dialogRef.close({
                           status: true
                         });
                       }
@@ -7689,7 +7714,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "openCreateDialog",
         value: function openCreateDialog() {
-          var _this19 = this;
+          var _this20 = this;
 
           this.dialog.open(_notification_modify_notification_modify_component__WEBPACK_IMPORTED_MODULE_3__["NotificationModifyComponent"], {
             data: {
@@ -7700,16 +7725,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             }
           }).afterClosed().subscribe(function (res) {
             if (res.status) {
-              _this19._openSnackBar('اطلاعیه با موفقیت ایجادشد');
+              _this20._openSnackBar('اطلاعیه با موفقیت ایجادشد');
 
-              _this19.getAllNotification();
+              _this20.getAllNotification();
             }
           });
         }
       }, {
         key: "openEditDialog",
         value: function openEditDialog(notification) {
-          var _this20 = this;
+          var _this21 = this;
 
           this.dialog.open(_notification_modify_notification_modify_component__WEBPACK_IMPORTED_MODULE_3__["NotificationModifyComponent"], {
             data: {
@@ -7718,16 +7743,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             }
           }).afterClosed().subscribe(function (res) {
             if (res.status) {
-              _this20._openSnackBar('ویرایش با موفقیت ثبت شد');
+              _this21._openSnackBar('ویرایش با موفقیت ثبت شد');
 
-              _this20.getAllNotification();
+              _this21.getAllNotification();
             }
           });
         }
       }, {
         key: "openDeleteDialog",
         value: function openDeleteDialog(notification) {
-          var _this21 = this;
+          var _this22 = this;
 
           this.dialog.open(_components_dialog_dialog_component__WEBPACK_IMPORTED_MODULE_4__["DialogComponent"], {
             width: '300px',
@@ -7737,9 +7762,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             }
           }).afterClosed().subscribe(function (res) {
             if (res) {
-              _this21["delete"](notification._id);
+              _this22["delete"](notification._id);
 
-              _this21.getAllNotification();
+              _this22.getAllNotification();
             }
           });
         }
@@ -7749,7 +7774,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0,
           /*#__PURE__*/
           regeneratorRuntime.mark(function _callee6() {
-            var _this22 = this;
+            var _this23 = this;
 
             return regeneratorRuntime.wrap(function _callee6$(_context6) {
               while (1) {
@@ -7759,7 +7784,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     _context6.next = 3;
                     return this.notificationService["delete"](id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) {
                       if (res.notification) {
-                        _this22._openSnackBar('حذف با موفقیت انجام شد');
+                        _this23._openSnackBar('حذف با موفقیت انجام شد');
                       }
                     })).toPromise();
 
@@ -7786,7 +7811,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0,
           /*#__PURE__*/
           regeneratorRuntime.mark(function _callee7() {
-            var _this23 = this;
+            var _this24 = this;
 
             return regeneratorRuntime.wrap(function _callee7$(_context7) {
               while (1) {
@@ -7796,7 +7821,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     this.loading = true;
                     _context7.next = 4;
                     return this.notificationService.findAll().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) {
-                      _this23.notifications = res.notifications;
+                      _this24.notifications = res.notifications;
                     })).toPromise();
 
                   case 4:
@@ -8316,7 +8341,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "openCreateDialog",
         value: function openCreateDialog() {
-          var _this24 = this;
+          var _this25 = this;
 
           this.dialog.open(_withdraw_method_withdraw_method_component__WEBPACK_IMPORTED_MODULE_4__["WithdrawMethodComponent"], {
             width: '500px',
@@ -8328,14 +8353,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             }
           }).afterClosed().subscribe(function (res) {
             if (res.status) {
-              _this24.setting.withdrawsMethods.push(res.withdrawsMethod); // ویرایش تنظیمات با تغییرات جدید
+              _this25.setting.withdrawsMethods.push(res.withdrawsMethod); // ویرایش تنظیمات با تغییرات جدید
 
 
-              _this24.update(_this24.setting._id);
+              _this25.update(_this25.setting._id);
 
-              _this24.get();
+              _this25.get();
 
-              _this24._openSnackBar('ایجاد با موقفیت انجام شد');
+              _this25._openSnackBar('ایجاد با موقفیت انجام شد');
             }
           });
         } // باز کزدن دیالوگ ویرایش
@@ -8343,7 +8368,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "openEditDialog",
         value: function openEditDialog(method) {
-          var _this25 = this;
+          var _this26 = this;
 
           this.dialog.open(_withdraw_method_withdraw_method_component__WEBPACK_IMPORTED_MODULE_4__["WithdrawMethodComponent"], {
             width: '500px',
@@ -8354,11 +8379,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }).afterClosed().subscribe(function (res) {
             if (res.status) {
               // ویرایش تنظیمات با تغییرات جدید
-              _this25.update(_this25.setting._id);
+              _this26.update(_this26.setting._id);
 
-              _this25.get();
+              _this26.get();
 
-              _this25._openSnackBar('ویرایش با موفقیت انجام شد');
+              _this26._openSnackBar('ویرایش با موفقیت انجام شد');
             }
           });
         } // باز کردن دیالوگ تعرفه کلیک های داخلی
@@ -8366,7 +8391,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "openIranCPC",
         value: function openIranCPC() {
-          var _this26 = this;
+          var _this27 = this;
 
           this.dialog.open(HandleCPC, {
             width: '350px',
@@ -8376,13 +8401,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             }
           }).afterClosed().subscribe(function (res) {
             if (res.status) {
-              _this26.setting.iranCPC = res.cpc;
+              _this27.setting.iranCPC = res.cpc;
 
-              _this26.update(_this26.setting._id);
+              _this27.update(_this27.setting._id);
 
-              _this26.get();
+              _this27.get();
 
-              _this26._openSnackBar('تعرفه داخلی با موفقیت ویرایش شد');
+              _this27._openSnackBar('تعرفه داخلی با موفقیت ویرایش شد');
             }
           });
         } // باز کردن دیالوگ تعرفه کلیک های خارجی
@@ -8390,7 +8415,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "openForeignCPC",
         value: function openForeignCPC() {
-          var _this27 = this;
+          var _this28 = this;
 
           this.dialog.open(HandleCPC, {
             width: '350px',
@@ -8400,13 +8425,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             }
           }).afterClosed().subscribe(function (res) {
             if (res.status) {
-              _this27.setting.foreignCPC = res.cpc;
+              _this28.setting.foreignCPC = res.cpc;
 
-              _this27.update(_this27.setting._id);
+              _this28.update(_this28.setting._id);
 
-              _this27.get();
+              _this28.get();
 
-              _this27._openSnackBar('تعرفه خارجی با موفقیت ایجاد شد');
+              _this28._openSnackBar('تعرفه خارجی با موفقیت ایجاد شد');
             }
           });
         } // گرفتن تنظیمات
@@ -8417,7 +8442,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0,
           /*#__PURE__*/
           regeneratorRuntime.mark(function _callee8() {
-            var _this28 = this;
+            var _this29 = this;
 
             return regeneratorRuntime.wrap(function _callee8$(_context8) {
               while (1) {
@@ -8427,7 +8452,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     _context8.next = 3;
                     return this.settingService.get().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) {
                       // فقط تنظیمات شماره یک نیاز است
-                      _this28.setting = res.setting[0];
+                      _this29.setting = res.setting[0];
                     })).toPromise();
 
                   case 3:
@@ -8454,7 +8479,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0,
           /*#__PURE__*/
           regeneratorRuntime.mark(function _callee9() {
-            var _this29 = this;
+            var _this30 = this;
 
             return regeneratorRuntime.wrap(function _callee9$(_context9) {
               while (1) {
@@ -8463,7 +8488,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     _context9.prev = 0;
                     _context9.next = 3;
                     return this.settingService.update(id, this.setting).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) {
-                      _this29.get();
+                      _this30.get();
                     })).toPromise();
 
                   case 3:
@@ -9181,7 +9206,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /*#__PURE__*/
     function () {
       function TicketDetailComponent(ticketService, route, router) {
-        var _this30 = this;
+        var _this31 = this;
 
         _classCallCheck(this, TicketDetailComponent);
 
@@ -9190,9 +9215,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.router = router;
         this.ticket = {};
         this.route.paramMap.subscribe(function (params) {
-          _this30.id = params.get('id');
+          _this31.id = params.get('id');
 
-          _this30.getTicket(_this30.id);
+          _this31.getTicket(_this31.id);
         });
         this.ticketResponse = {};
       }
@@ -9210,7 +9235,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0,
           /*#__PURE__*/
           regeneratorRuntime.mark(function _callee10() {
-            var _this31 = this;
+            var _this32 = this;
 
             return regeneratorRuntime.wrap(function _callee10$(_context10) {
               while (1) {
@@ -9219,7 +9244,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     _context10.prev = 0;
                     _context10.next = 3;
                     return this.ticketService.readTicket(this.id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) {
-                      _this31.ticket = res.ticket;
+                      _this32.ticket = res.ticket;
                     })).toPromise();
 
                   case 3:
@@ -9243,11 +9268,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "sendResponse",
         value: function sendResponse() {
-          var _this32 = this;
+          var _this33 = this;
 
           if (this.subjectController.valid && this.textController.valid) {
             this.ticketService.sendResponse(this.ticketResponse).subscribe(function (res) {
-              _this32.router.navigate(['/admin/dashboard/tickets']);
+              _this33.router.navigate(['/admin/dashboard/tickets']);
             });
           }
         } // گرفتن تیکت با آی دی
@@ -9255,12 +9280,12 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getTicket",
         value: function getTicket(id) {
-          var _this33 = this;
+          var _this34 = this;
 
           try {
             this.ticketService.getTicketById(id).subscribe(function (res) {
-              _this33.ticket = res.ticket;
-              _this33.ticketResponse.email = res.ticket.email;
+              _this34.ticket = res.ticket;
+              _this34.ticketResponse.email = res.ticket.email;
             });
           } catch (error) {
             console.log(error);
@@ -10233,14 +10258,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(TicketsComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this34 = this;
+          var _this35 = this;
 
           this.getTicketList(); // جست و جو در موضوع تیکت
 
           this.searchControl.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["debounceTime"])(300)).subscribe(function (val) {
-            _this34.search = val;
+            _this35.search = val;
 
-            _this34.resetPage();
+            _this35.resetPage();
           });
         }
       }, {
@@ -10302,7 +10327,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0,
           /*#__PURE__*/
           regeneratorRuntime.mark(function _callee11() {
-            var _this35 = this;
+            var _this36 = this;
 
             return regeneratorRuntime.wrap(function _callee11$(_context11) {
               while (1) {
@@ -10317,8 +10342,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                       limit: this.limit.toString(),
                       read: "".concat(this.read)
                     }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
-                      _this35.count = res.count;
-                      _this35.tickets = res.tickets;
+                      _this36.count = res.count;
+                      _this36.tickets = res.tickets;
                     })).toPromise();
 
                   case 4:
@@ -11337,14 +11362,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(UsersComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this36 = this;
+          var _this37 = this;
 
           this.getUserList(); // جست و جو در نام کاربر
 
           this.searchControl.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["debounceTime"])(300)).subscribe(function (res) {
-            _this36.search = res;
+            _this37.search = res;
 
-            _this36.resetPage();
+            _this37.resetPage();
           });
         } // باز کردن اسنک بار
 
@@ -11414,7 +11439,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "blockUser",
         value: function blockUser(user) {
-          var _this37 = this;
+          var _this38 = this;
 
           this.dialog.open(src_app_components_dialog_dialog_component__WEBPACK_IMPORTED_MODULE_3__["DialogComponent"], {
             data: {
@@ -11424,10 +11449,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             width: '350px'
           }).afterClosed().subscribe(function (status) {
             if (!!status) {
-              _this37.userService.blockUser(user._id).subscribe(function (res) {
-                _this37._openSnackbar("\u06A9\u0627\u0631\u0628\u0631 \u0628\u0627 \u0645\u0648\u0641\u0642\u06CC\u062A \u0628\u0644\u0627\u06A9 \u0634\u062F");
+              _this38.userService.blockUser(user._id).subscribe(function (res) {
+                _this38._openSnackbar("\u06A9\u0627\u0631\u0628\u0631 \u0628\u0627 \u0645\u0648\u0641\u0642\u06CC\u062A \u0628\u0644\u0627\u06A9 \u0634\u062F");
 
-                _this37.getUserList();
+                _this38.getUserList();
               });
             }
           });
@@ -11439,7 +11464,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0,
           /*#__PURE__*/
           regeneratorRuntime.mark(function _callee12() {
-            var _this38 = this;
+            var _this39 = this;
 
             return regeneratorRuntime.wrap(function _callee12$(_context12) {
               while (1) {
@@ -11453,8 +11478,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                       skip: this.skip.toString(),
                       limit: this.limit.toString()
                     }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) {
-                      _this38.users = res.users;
-                      _this38.count = res.count;
+                      _this39.users = res.users;
+                      _this39.count = res.count;
                     })).toPromise();
 
                   case 4:
@@ -12106,7 +12131,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /*#__PURE__*/
     function () {
       function WithdrawsDetailComponent(withdrawsService, route) {
-        var _this39 = this;
+        var _this40 = this;
 
         _classCallCheck(this, WithdrawsDetailComponent);
 
@@ -12114,7 +12139,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.route = route;
         this.withdraws = {};
         this.route.paramMap.subscribe(function (params) {
-          _this39.getWithdrawsById(params.get('id'));
+          _this40.getWithdrawsById(params.get('id'));
         });
         this.limit = 10;
       }
@@ -12125,11 +12150,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "getWithdrawsById",
         value: function getWithdrawsById(id) {
-          var _this40 = this;
+          var _this41 = this;
 
           try {
             this.withdrawsService.getWothdrawsById(id).subscribe(function (res) {
-              _this40.withdraws = res.withdraws;
+              _this41.withdraws = res.withdraws;
             });
           } catch (error) {
             console.log(error);
@@ -13384,13 +13409,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _createClass(WithdrawsComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          var _this41 = this;
+          var _this42 = this;
 
           this.getWithdrawsList();
           this.searchControl.valueChanges.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["debounceTime"])(300)).subscribe(function (val) {
-            _this41.search = val;
+            _this42.search = val;
 
-            _this41.resetPage();
+            _this42.resetPage();
           });
         }
       }, {
@@ -13459,7 +13484,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setCancel",
         value: function setCancel(withdraws) {
-          var _this42 = this;
+          var _this43 = this;
 
           this.dialog.open(src_app_components_dialog_dialog_component__WEBPACK_IMPORTED_MODULE_4__["DialogComponent"], {
             data: {
@@ -13469,10 +13494,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             width: '350px'
           }).afterClosed().subscribe(function (status) {
             if (!!status) {
-              _this42.withdrawsService.setCancelWithdraws(withdraws._id).subscribe(function (res) {
-                _this42._openSnackbar("\u067E\u0631\u062F\u0627\u062E\u062A \u0644\u063A\u0648 \u0634\u062F");
+              _this43.withdrawsService.setCancelWithdraws(withdraws._id).subscribe(function (res) {
+                _this43._openSnackbar("\u067E\u0631\u062F\u0627\u062E\u062A \u0644\u063A\u0648 \u0634\u062F");
 
-                _this42.getWithdrawsList();
+                _this43.getWithdrawsList();
               });
             }
           });
@@ -13481,16 +13506,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "setSuccess",
         value: function setSuccess(withdraws) {
-          var _this43 = this;
+          var _this44 = this;
 
           this.dialog.open(src_app_components_success_dialog_success_dialog_component__WEBPACK_IMPORTED_MODULE_5__["SuccessDialogComponent"], {
             width: '400px'
           }).afterClosed().subscribe(function (res) {
             // console.log(res);
-            _this43.withdrawsService.setSuccessWithdraws(withdraws._id, res).subscribe(function (resp) {
-              _this43._openSnackbar("\u067E\u0631\u062F\u0627\u062E\u062A  \u0645\u0648\u0641\u0642 \u0628\u0648\u062F");
+            _this44.withdrawsService.setSuccessWithdraws(withdraws._id, res).subscribe(function (resp) {
+              _this44._openSnackbar("\u067E\u0631\u062F\u0627\u062E\u062A  \u0645\u0648\u0641\u0642 \u0628\u0648\u062F");
 
-              _this43.resetPage();
+              _this44.resetPage();
             });
           });
         } // گرفتن لیست برداشت ها
@@ -13501,7 +13526,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0,
           /*#__PURE__*/
           regeneratorRuntime.mark(function _callee13() {
-            var _this44 = this;
+            var _this45 = this;
 
             return regeneratorRuntime.wrap(function _callee13$(_context13) {
               while (1) {
@@ -13516,8 +13541,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                       limit: this.limit.toString(),
                       status: this.status
                     }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
-                      _this44.count = res.count;
-                      _this44.withdraws = res.withdraws;
+                      _this45.count = res.count;
+                      _this45.withdraws = res.withdraws;
                     })).toPromise();
 
                   case 4:

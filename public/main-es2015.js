@@ -397,33 +397,26 @@ __webpack_require__.r(__webpack_exports__);
 class UploadService {
     constructor(http) {
         this.http = http;
-        this.base = '/upload';
+        this.base = '/api/upload';
     }
     // برای ایجاد ورودی فایل
     openFileChooser() {
         return new Promise((resolve, reject) => {
             try {
-                // ساخت یک ورودی
                 const fileInput = document.createElement('input');
-                // نوع ورودی فایل
                 fileInput.type = 'file';
-                // مدیریت تغییرات و گرفتن فایل انتخاب شده
-                fileInput.addEventListener('change', (e) => {
-                    const file = fileInput.files[0];
-                    if (file) {
-                        // فرستادن فایل
-                        resolve(file);
+                fileInput.addEventListener('change', ev => {
+                    const files = fileInput.files;
+                    if (files) {
+                        resolve(files);
                     }
                     else {
-                        // برگرداندن خطا
                         reject(undefined);
                     }
                 });
-                // ایجاد کلیک برای باز کردن ورودی
                 fileInput.click();
             }
             catch (error) {
-                console.log(error);
                 reject();
             }
         });
@@ -433,6 +426,7 @@ class UploadService {
         const formData = new FormData();
         formData.append('file', file, file.name);
         return this.http.post(`${this.base}/image`, formData, {
+            // responseType: '',
             // درصد پیشرفت آپلود
             reportProgress: true,
             observe: 'events',

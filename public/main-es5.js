@@ -761,7 +761,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, UploadService);
 
         this.http = http;
-        this.base = '/upload';
+        this.base = '/api/upload';
       } // برای ایجاد ورودی فایل
 
 
@@ -770,26 +770,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function openFileChooser() {
           return new Promise(function (resolve, reject) {
             try {
-              // ساخت یک ورودی
-              var fileInput = document.createElement('input'); // نوع ورودی فایل
+              var fileInput = document.createElement('input');
+              fileInput.type = 'file';
+              fileInput.addEventListener('change', function (ev) {
+                var files = fileInput.files;
 
-              fileInput.type = 'file'; // مدیریت تغییرات و گرفتن فایل انتخاب شده
-
-              fileInput.addEventListener('change', function (e) {
-                var file = fileInput.files[0];
-
-                if (file) {
-                  // فرستادن فایل
-                  resolve(file);
+                if (files) {
+                  resolve(files);
                 } else {
-                  // برگرداندن خطا
                   reject(undefined);
                 }
-              }); // ایجاد کلیک برای باز کردن ورودی
-
+              });
               fileInput.click();
             } catch (error) {
-              console.log(error);
               reject();
             }
           });
@@ -801,6 +794,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var formData = new FormData();
           formData.append('file', file, file.name);
           return this.http.post("".concat(this.base, "/image"), formData, {
+            // responseType: '',
             // درصد پیشرفت آپلود
             reportProgress: true,
             observe: 'events'

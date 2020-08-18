@@ -6,6 +6,7 @@ import * as randomstring from 'randomstring';
 import * as geoip from 'geoip-lite';
 import { Visit } from '../../models/visit.model';
 import { Types } from 'mongoose';
+import { VisitChartDto } from './visit.dto';
 
 @Injectable()
 export class LinkService {
@@ -117,7 +118,18 @@ export class LinkService {
       // لیست بازدید ها برای جدول
       const visits = await this.visitModel.find({ link: id });
       // آمار روزانه برای نمودار
+      let d = new Date();
+      d.setMonth(d.getMonth() - 1);
+      d.setHours(0, 0, 0);
+      d.setMilliseconds(0);
       const visitChart = await this.visitModel.aggregate([
+
+        {
+          '$match': {
+            //تاریخ یک ماه قبل
+            'createdAt': { $gte: d },
+          },
+        },
         {
           '$match': {
             // لینک ها با آیدی داده شده
@@ -146,14 +158,73 @@ export class LinkService {
           },
         }, {
           '$sort': {
-            'date': -1,
+            'name': 1,
           },
         },
-      ]).limit(30);
+      ]);
       return { visitChart, visits };
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
     }
+  }
+
+  async getAllVisit(id: string):Promise<{visitChart:VisitChartDto[]}> {
+    let d = new Date();
+    d.setMonth(d.getMonth() - 1);
+    d.setHours(0, 0, 0);
+    d.setMilliseconds(0);
+    const userId = Types.ObjectId(id);
+    const visitChart = await this.visitModel.aggregate([
+      {
+        '$match': {
+          //تاریخ یک ماه قبل
+          'createdAt': { $gte: d },
+        },
+      },
+      {
+        '$lookup': {
+          'from': 'links',
+          'localField': 'link',
+          'foreignField': '_id',
+          'as': 'link',
+        },
+      }, {
+        '$unwind': {
+          'path': '$link',
+          'preserveNullAndEmptyArrays': true,
+        },
+      }, {
+        '$match': {
+          'link.user': userId,
+        },
+      }, {
+        '$group': {
+          '_id': {
+            '$dateToString': {
+              'format': '%Y-%m-%d',
+              'date': '$createdAt',
+            },
+          },
+          'count': {
+            '$sum': 1,
+          },
+        },
+      },
+      {
+        '$project': {
+          '_id': 0,
+          // برای نمودار بازدید ها باید name و value داشته باشیم
+          'name': '$_id',
+          'value': '$count',
+        },
+      },
+      {
+        '$sort': {
+          'name': 1,
+        },
+      },
+    ]);
+    return { visitChart };
   }
 
 

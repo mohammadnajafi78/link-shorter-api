@@ -6,6 +6,7 @@ import { Visit } from '../../models/visit.model';
 import { ApiBody, ApiOkResponse, ApiOperation, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { CreateLinkDto, VisitResponseDto } from './link.dto';
 import { ApiGetQuery } from '../../core/decorators';
+import { VisitChartDto } from './visit.dto';
 
 @ApiTags('Links')
 @Controller('api/links')
@@ -82,7 +83,15 @@ export class LinkController {
     @Query('status') status: string = 'active',
     @Query('showAds') showAds?: boolean,
   ): Promise<{ links: Link[]; count: number }> {
-    return await this.linkService.getUserLink(search, request.user._id, skip, limit, status,showAds);
+    return await this.linkService.getUserLink(search, request.user._id, skip, limit, status, showAds);
+  }
+
+  @ApiOperation({ summary: 'بازدید یک ماه اخیر لینک های کاربر' })
+  @ApiOkResponse({ type: [VisitChartDto] })
+  @Auth()
+  @Get('visit/all')
+  async getUserVisits(@Req() req: any): Promise<{ visitChart: VisitChartDto[] }> {
+    return await this.linkService.getAllVisit(req.user._id);
   }
 
   @ApiOperation({ summary: 'ویرایش یک لینک' })

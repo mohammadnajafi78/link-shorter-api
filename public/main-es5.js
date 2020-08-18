@@ -471,18 +471,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "getVisit",
         value: function getVisit(id) {
           return this.http.get("".concat(this.base, "/visits/").concat(id));
+        }
+      }, {
+        key: "getUserVisit",
+        value: function getUserVisit() {
+          return this.http.get("".concat(this.base, "/visit/all"));
         } // گرفتن لینک با لینک کوتاه
 
       }, {
         key: "getLinkByShortLink",
         value: function getLinkByShortLink(shortLink) {
           return this.http.get("".concat(this.base, "/").concat(shortLink));
-        } // حذف لینک
-
-      }, {
-        key: "deleteLink",
-        value: function deleteLink(id) {
-          return this.http["delete"]("".concat(this.base, "/").concat(id));
         } // ایجاد یک بازدید جدید
 
       }, {
@@ -1490,8 +1489,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var environment = {
       production: false,
       base: '/',
-      url: 'https://1xad.net' // url: 'http://localhost:3000'
-
+      // url: 'https://1xad.net'
+      url: 'http://localhost:3000'
     };
     /*
      * For easier debugging in development mode, you can import the following file

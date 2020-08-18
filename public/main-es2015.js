@@ -255,13 +255,12 @@ class LinkService {
     getVisit(id) {
         return this.http.get(`${this.base}/visits/${id}`);
     }
+    getUserVisit() {
+        return this.http.get(`${this.base}/visit/all`);
+    }
     // گرفتن لینک با لینک کوتاه
     getLinkByShortLink(shortLink) {
         return this.http.get(`${this.base}/${shortLink}`);
-    }
-    // حذف لینک
-    deleteLink(id) {
-        return this.http.delete(`${this.base}/${id}`);
     }
     // ایجاد یک بازدید جدید
     createVisit(id) {
@@ -755,8 +754,8 @@ __webpack_require__.r(__webpack_exports__);
 const environment = {
     production: false,
     base: '/',
-    url: 'https://1xad.net'
-    // url: 'http://localhost:3000'
+    // url: 'https://1xad.net'
+    url: 'http://localhost:3000'
 };
 /*
  * For easier debugging in development mode, you can import the following file

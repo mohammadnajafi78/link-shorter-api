@@ -10,7 +10,7 @@ export class AppController {
 
   @ApiOperation({summary:'گرفتن یک عکس'})
   @ApiParam({name:'fileId',description:'آدرس فایل'})
-  @Get('files/images/:fileId')
+  @Get('api/files/images/:fileId')
   async serveAvatars(
     @Param('fileId') fileId: string,
     @Res() res: Response,

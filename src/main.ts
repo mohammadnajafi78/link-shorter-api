@@ -4,6 +4,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import * as express from 'express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as helmet from 'helmet';
 
 const swaggerCustomCss = `
 .swagger-ui .topbar .download-url-wrapper {
@@ -63,6 +64,7 @@ const description = `
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, { cors: true });
+  app.use(helmet());
   app.enableCors();
   app.enable('trust proxy');
   app.use(express.static(join(__dirname, '..', 'public')));

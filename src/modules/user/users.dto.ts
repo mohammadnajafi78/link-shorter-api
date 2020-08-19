@@ -35,3 +35,11 @@ export class UserResponseDto {
   @ApiProperty()
   user: User;
 }
+
+export class FindByPhoneResponse {
+  @ApiProperty()
+  _id: string;
+
+  @ApiProperty()
+  phone: string;
+}

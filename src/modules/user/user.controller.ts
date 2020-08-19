@@ -19,6 +19,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import {
+  FindByPhoneResponse,
   SignInBody,
   SignInResponse,
   UserResponseDto,
@@ -95,11 +96,19 @@ export class UserController {
     return await this.userService.updateProfile(request.user._id, data);
   }
 
-  @ApiOperation({summary:'بلاک کردن کاربر'})
-  @ApiParam({name:'id',description:'شناسه کاربر'})
+  @ApiOperation({ summary: 'بلاک کردن کاربر' })
+  @ApiParam({ name: 'id', description: 'شناسه کاربر' })
   @Auth('admin')
   @Put('block/:id')
   async blockUser(@Param('id') id: string): Promise<{ status: boolean }> {
     return await this.userService.blockUser(id);
+  }
+
+  @ApiOperation({ summary: 'گرفتن کاربر با شماره تلفن' })
+  @ApiParam({ name: 'phone', description: 'شماره تلقن کاربر' })
+  @ApiResponse({ type: FindByPhoneResponse })
+  @Get(':phone')
+  async getUserByPhone(@Param('phone') phone: string): Promise<{ user: User }> {
+    return await this.userService.getUserByPhone(phone);
   }
 }

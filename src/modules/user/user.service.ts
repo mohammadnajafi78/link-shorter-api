@@ -280,4 +280,17 @@ export class UserService {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
     }
   }
+
+  // گرفتن کاربر با شماره تلفن برای ربات تلگرام
+  async getUserByPhone(phone: string): Promise<{ user: User }> {
+    try {
+      const user = await this.userModel.findOne({ phone }).select('phone');
+      return { user };
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
+  }
+
 }
+
+

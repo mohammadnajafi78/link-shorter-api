@@ -74,10 +74,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     "./src/app/app.component.ts");
 
     var routes = [{
-      path: "",
+      path: '',
       component: _app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"],
       children: [{
-        path: "",
+        path: '',
         loadChildren: function loadChildren() {
           return Promise.all(
           /*! import() | pages-client-client-module */
@@ -88,7 +88,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           });
         }
       }, {
-        path: "admin/dashboard",
+        path: 'admin/dashboard',
         loadChildren: function loadChildren() {
           return Promise.all(
           /*! import() | pages-admin-admin-module */
@@ -99,7 +99,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           });
         }
       }, {
-        path: "member/dashboard",
+        path: 'member/dashboard',
         loadChildren: function loadChildren() {
           return Promise.all(
           /*! import() | pages-dashboard-dashboard-module */
@@ -109,6 +109,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             return m.DashboardModule;
           });
         }
+      }, {
+        path: '**',
+        redirectTo: 'page/not-found'
       }]
     }];
 
@@ -1153,7 +1156,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   case 0:
                     _context.prev = 0;
 
-                    if (localStorage.getItem("token")) {
+                    if (localStorage.getItem('token')) {
                       _context.next = 3;
                       break;
                     }
@@ -1169,7 +1172,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   case 5:
                     user = _context.sent;
 
-                    if (!(user.status !== "block")) {
+                    if (!(user.status !== 'block')) {
                       _context.next = 10;
                       break;
                     }
@@ -1186,7 +1189,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   case 13:
                     _context.prev = 13;
                     _context.t0 = _context["catch"](0);
-                    this.router.navigate(["/"]);
+                    this.router.navigate(['/page/not-found']);
                     throw false;
 
                   case 17:
@@ -1300,7 +1303,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   case 0:
                     _context2.prev = 0;
 
-                    if (localStorage.getItem("token")) {
+                    if (localStorage.getItem('token')) {
                       _context2.next = 3;
                       break;
                     }
@@ -1316,7 +1319,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   case 5:
                     user = _context2.sent;
 
-                    if (!(user.role === "admin")) {
+                    if (!(user.role === 'admin')) {
                       _context2.next = 10;
                       break;
                     }
@@ -1333,7 +1336,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   case 13:
                     _context2.prev = 13;
                     _context2.t0 = _context2["catch"](0);
-                    this.router.navigate(["/"]);
+                    this.router.navigate(['/page/not-found']);
                     throw false;
 
                   case 17:

@@ -43,21 +43,22 @@ __webpack_require__.r(__webpack_exports__);
 
 const routes = [
     {
-        path: "",
+        path: '',
         component: _app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"],
         children: [
             {
-                path: "",
+                path: '',
                 loadChildren: () => Promise.all(/*! import() | pages-client-client-module */[__webpack_require__.e("default~pages-admin-admin-module~pages-client-client-module~pages-dashboard-dashboard-module"), __webpack_require__.e("pages-client-client-module")]).then(__webpack_require__.bind(null, /*! ./pages/client/client.module */ "./src/app/pages/client/client.module.ts")).then((m) => m.ClientModule),
             },
             {
-                path: "admin/dashboard",
+                path: 'admin/dashboard',
                 loadChildren: () => Promise.all(/*! import() | pages-admin-admin-module */[__webpack_require__.e("default~pages-admin-admin-module~pages-client-client-module~pages-dashboard-dashboard-module"), __webpack_require__.e("common"), __webpack_require__.e("pages-admin-admin-module")]).then(__webpack_require__.bind(null, /*! ./pages/admin/admin.module */ "./src/app/pages/admin/admin.module.ts")).then((m) => m.AdminModule),
             },
             {
-                path: "member/dashboard",
+                path: 'member/dashboard',
                 loadChildren: () => Promise.all(/*! import() | pages-dashboard-dashboard-module */[__webpack_require__.e("default~pages-admin-admin-module~pages-client-client-module~pages-dashboard-dashboard-module"), __webpack_require__.e("common"), __webpack_require__.e("pages-dashboard-dashboard-module")]).then(__webpack_require__.bind(null, /*! ./pages/dashboard/dashboard.module */ "./src/app/pages/dashboard/dashboard.module.ts")).then((m) => m.DashboardModule),
             },
+            { path: '**', redirectTo: 'page/not-found' }
         ],
     },
 ];
@@ -598,7 +599,7 @@ class DashboardGuard {
     canActivate() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             try {
-                if (!localStorage.getItem("token")) {
+                if (!localStorage.getItem('token')) {
                     throw false;
                 }
                 const user = yield this.userService
@@ -607,7 +608,7 @@ class DashboardGuard {
                     return res.user;
                 }))
                     .toPromise();
-                if (user.status !== "block") {
+                if (user.status !== 'block') {
                     return true;
                 }
                 else {
@@ -615,7 +616,7 @@ class DashboardGuard {
                 }
             }
             catch (error) {
-                this.router.navigate(["/"]);
+                this.router.navigate(['/page/not-found']);
                 throw false;
             }
         });
@@ -659,7 +660,7 @@ class Guard {
     canActivate() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             try {
-                if (!localStorage.getItem("token")) {
+                if (!localStorage.getItem('token')) {
                     throw false;
                 }
                 const user = yield this.userService
@@ -668,7 +669,7 @@ class Guard {
                     return res.user;
                 }))
                     .toPromise();
-                if (user.role === "admin") {
+                if (user.role === 'admin') {
                     return true;
                 }
                 else {
@@ -676,7 +677,7 @@ class Guard {
                 }
             }
             catch (error) {
-                this.router.navigate(["/"]);
+                this.router.navigate(['/page/not-found']);
                 throw false;
             }
         });

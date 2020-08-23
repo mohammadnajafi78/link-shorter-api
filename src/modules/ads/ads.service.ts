@@ -13,6 +13,7 @@ export class AdsService {
     try {
       const newAds = new this.adsModel(ads);
       await newAds.save();
+      console.log(newAds);
       return { ads: newAds };
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);

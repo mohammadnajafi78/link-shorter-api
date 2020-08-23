@@ -4,6 +4,7 @@ import { Auth } from '../../guards/auth.guard';
 import { Ads } from '../../models/ads.model';
 import { ApiBody, ApiOkResponse, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { ApiGetQuery } from '../../core/decorators';
+import { AdsResponse } from './ads.dto';
 
 
 @ApiTags('Ads')
@@ -24,7 +25,7 @@ export class AdsController {
   @ApiOperation({ summary: 'گرفتن لیست تبلیغات' })
   @ApiGetQuery()
   @ApiOkResponse({ type: [Ads] })
-  @Get()
+  @Get('all')
   async findAll(
     @Query('skip') skip: number = 0,
     @Query('limit') limit: number = 10,
@@ -37,7 +38,7 @@ export class AdsController {
   @ApiOkResponse({ type: Ads })
   @Auth('admin')
   @Put(':id')
-  async getAll(
+  async update(
     @Param('id') id: string,
     @Body() ads: Ads,
   ): Promise<{ ads: Ads }> {
@@ -54,5 +55,11 @@ export class AdsController {
     return this.adsService.delete(id);
   }
 
+  @ApiOperation({ summary: 'گرفتن تبلیغات برای نمایش' })
+  @ApiOkResponse({ type: AdsResponse })
+  @Get()
+  async showAds(): Promise<{ verticals: Ads[], horizontals: Ads[], popup: Ads[] }> {
+    return this.adsService.showAds();
+  }
 
 }

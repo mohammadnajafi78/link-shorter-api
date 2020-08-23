@@ -13,7 +13,6 @@ export class AdsService {
     try {
       const newAds = new this.adsModel(ads);
       await newAds.save();
-      console.log(newAds);
       return { ads: newAds };
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
@@ -46,6 +45,66 @@ export class AdsService {
     try {
       const ads = await this.adsModel.findByIdAndRemove(id);
       return { ads };
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  // گرفتن تبلیغات برای نمایش
+  async showAds(): Promise<{ verticals: Ads[], horizontals: Ads[], popup: Ads[] }> {
+    try {
+      const verticals = await this.adsModel.aggregate(
+        [
+          {
+            '$match': {
+              'active': true,
+            },
+          }, {
+          '$match': {
+            'type': 'vertical',
+          },
+        }, {
+          '$sample': {
+            'size': 4,
+          },
+        },
+        ],
+      );
+      const horizontals = await this.adsModel.aggregate(
+        [
+          {
+            '$match': {
+              'active': true,
+            },
+          }, {
+          '$match': {
+            'type': 'horizontal',
+          },
+        }, {
+          '$sample': {
+            'size': 2,
+          },
+        },
+        ],
+      );
+      const popup = await this.adsModel.aggregate(
+        [
+          {
+            '$match': {
+              'active': true,
+            },
+          }, {
+          '$match': {
+            'type': 'popup',
+          },
+        }, {
+          '$sample': {
+            'size': 2,
+          },
+        },
+        ],
+      );
+      return { verticals, horizontals, popup };
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
     }

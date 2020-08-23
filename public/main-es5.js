@@ -81,7 +81,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         loadChildren: function loadChildren() {
           return Promise.all(
           /*! import() | pages-client-client-module */
-          [__webpack_require__.e("default~pages-admin-admin-module~pages-client-client-module~pages-dashboard-dashboard-module"), __webpack_require__.e("pages-client-client-module")]).then(__webpack_require__.bind(null,
+          [__webpack_require__.e("default~pages-admin-admin-module~pages-client-client-module~pages-dashboard-dashboard-module"), __webpack_require__.e("common"), __webpack_require__.e("pages-client-client-module")]).then(__webpack_require__.bind(null,
           /*! ./pages/client/client.module */
           "./src/app/pages/client/client.module.ts")).then(function (m) {
             return m.ClientModule;
@@ -1492,8 +1492,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var environment = {
       production: false,
       base: '/',
-      url: 'https://1xad.net' // url: 'http://localhost:3000'
-
+      // url: 'https://1xad.net'
+      url: 'http://localhost:3000'
     };
     /*
      * For easier debugging in development mode, you can import the following file

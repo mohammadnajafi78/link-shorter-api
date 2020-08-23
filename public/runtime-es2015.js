@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"default~pages-admin-admin-module~pages-client-client-module~pages-dashboard-dashboard-module":"default~pages-admin-admin-module~pages-client-client-module~pages-dashboard-dashboard-module","common":"common","pages-admin-admin-module":"pages-admin-admin-module","pages-dashboard-dashboard-module":"pages-dashboard-dashboard-module","pages-client-client-module":"pages-client-client-module"}[chunkId]||chunkId) + "-es2015.js"
+/******/ 		return __webpack_require__.p + "" + ({"default~pages-admin-admin-module~pages-client-client-module~pages-dashboard-dashboard-module":"default~pages-admin-admin-module~pages-client-client-module~pages-dashboard-dashboard-module","common":"common","pages-admin-admin-module":"pages-admin-admin-module","pages-client-client-module":"pages-client-client-module","pages-dashboard-dashboard-module":"pages-dashboard-dashboard-module"}[chunkId]||chunkId) + "-es2015.js"
 /******/ 	}
 /******/
 /******/ 	// The require function

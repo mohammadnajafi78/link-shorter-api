@@ -755,8 +755,8 @@ __webpack_require__.r(__webpack_exports__);
 const environment = {
     production: false,
     base: '/',
-    // url: 'https://1xad.net'
-    url: 'http://localhost:3000'
+    url: 'https://1xad.net'
+    // url: 'http://localhost:3000'
 };
 /*
  * For easier debugging in development mode, you can import the following file

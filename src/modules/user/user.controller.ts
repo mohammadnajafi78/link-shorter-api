@@ -96,13 +96,19 @@ export class UserController {
     return await this.userService.updateProfile(request.user._id, data);
   }
 
-  @ApiOperation({ summary: 'بلاک کردن کاربر' })
+  @ApiOperation({ summary: 'ویرایش کاربر توسط ادمین' })
+  @ApiBody({ type: User })
+  @ApiOkResponse({ type: User })
   @ApiParam({ name: 'id', description: 'شناسه کاربر' })
   @Auth('admin')
-  @Put('block/:id')
-  async blockUser(@Param('id') id: string): Promise<{ status: boolean }> {
-    return await this.userService.blockUser(id);
+  @Put(':id')
+  async adminUpdate(
+    @Param('id')id: string,
+    @Body() user: User,
+  ): Promise<{ user: User }> {
+    return await this.userService.adminUpdate(id, user);
   }
+
 
   @ApiOperation({ summary: 'گرفتن کاربر با شماره تلفن' })
   @ApiParam({ name: 'phone', description: 'شماره تلقن کاربر' })

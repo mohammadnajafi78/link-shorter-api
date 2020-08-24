@@ -62,4 +62,12 @@ export class AdsController {
     return this.adsService.showAds();
   }
 
+  @ApiOperation({ summary: 'گرفتنه تبلیغ ویدیو' })
+  @ApiOkResponse({ type: Ads })
+  @Get('video')
+  async showVideoAds(): Promise<{ ads: Ads[] }> {
+    return await this.adsService.getVideoAds();
+  }
+
+
 }

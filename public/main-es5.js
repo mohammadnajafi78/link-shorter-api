@@ -81,7 +81,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         loadChildren: function loadChildren() {
           return Promise.all(
           /*! import() | pages-client-client-module */
-          [__webpack_require__.e("default~pages-admin-admin-module~pages-client-client-module~pages-dashboard-dashboard-module"), __webpack_require__.e("common"), __webpack_require__.e("pages-client-client-module")]).then(__webpack_require__.bind(null,
+          [__webpack_require__.e("default~pages-admin-admin-module~pages-client-client-module~pages-dashboard-dashboard-module"), __webpack_require__.e("pages-client-client-module")]).then(__webpack_require__.bind(null,
           /*! ./pages/client/client.module */
           "./src/app/pages/client/client.module.ts")).then(function (m) {
             return m.ClientModule;
@@ -925,9 +925,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           });
         }
       }, {
-        key: "blockUser",
-        value: function blockUser(id) {
-          return this.http.put("".concat(this.base, "/block/").concat(id), {});
+        key: "adminUpdate",
+        value: function adminUpdate(user) {
+          return this.http.put("".concat(this.base, "/").concat(user._id), user);
         }
       }, {
         key: "updateUser",

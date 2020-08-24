@@ -69,6 +69,10 @@ async function bootstrap() {
   app.enable('trust proxy');
   app.use(express.static(join(__dirname, '..', 'public')));
 
+  app.use(/^(?!\/?api).+$/g, (req, res) => {
+    res.sendFile(join(__dirname, '..', '/public/index.html'));
+  });
+
 
   const options = new DocumentBuilder()
     .setTitle('راهنمای وب سرویس کوتاه کننده لینک')
@@ -94,10 +98,6 @@ async function bootstrap() {
     },
   });
 
-
-  app.use(/^(?!\/?api).+$/g, (req, res) => {
-    res.sendFile(join(__dirname, '..', '/public/index.html'));
-  });
 
   await app.listen(process.env.PORT || 3000);
 }

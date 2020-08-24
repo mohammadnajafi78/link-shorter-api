@@ -267,15 +267,11 @@ export class UserService {
     }
   }
 
-  // بلاک کردن وضعیت یک کاربر
-  async blockUser(id: string): Promise<{ status: boolean }> {
+  // تغییرات پروفایل کاربری ادمین
+  async adminUpdate(id: string, data: User): Promise<{ user: User }> {
     try {
-      await this.userModel.findByIdAndUpdate(
-        id,
-        { status: 'block' },
-        { new: true },
-      );
-      return { status: true };
+      const user = await this.userModel.findByIdAndUpdate(id, data, { new: true });
+      return { user };
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
     }

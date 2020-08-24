@@ -110,4 +110,28 @@ export class AdsService {
     }
   }
 
+  async getVideoAds(): Promise<{ ads: Ads[] }> {
+    try {
+      const ads = await this.adsModel.aggregate(
+        [
+          {
+            '$match': {
+              'active': true,
+            },
+          }, {
+          '$match': {
+            'type': 'video',
+          },
+        }, {
+          '$sample': {
+            'size': 1,
+          },
+        },
+        ],
+      );
+      return { ads };
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
+  }
 }

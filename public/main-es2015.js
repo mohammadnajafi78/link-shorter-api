@@ -48,7 +48,7 @@ const routes = [
         children: [
             {
                 path: '',
-                loadChildren: () => Promise.all(/*! import() | pages-client-client-module */[__webpack_require__.e("default~pages-admin-admin-module~pages-client-client-module~pages-dashboard-dashboard-module"), __webpack_require__.e("common"), __webpack_require__.e("pages-client-client-module")]).then(__webpack_require__.bind(null, /*! ./pages/client/client.module */ "./src/app/pages/client/client.module.ts")).then((m) => m.ClientModule),
+                loadChildren: () => Promise.all(/*! import() | pages-client-client-module */[__webpack_require__.e("default~pages-admin-admin-module~pages-client-client-module~pages-dashboard-dashboard-module"), __webpack_require__.e("pages-client-client-module")]).then(__webpack_require__.bind(null, /*! ./pages/client/client.module */ "./src/app/pages/client/client.module.ts")).then((m) => m.ClientModule),
             },
             {
                 path: 'admin/dashboard',
@@ -493,8 +493,8 @@ class UserService {
             params,
         });
     }
-    blockUser(id) {
-        return this.http.put(`${this.base}/block/${id}`, {});
+    adminUpdate(user) {
+        return this.http.put(`${this.base}/${user._id}`, user);
     }
     updateUser(user) {
         return this.http.put(`${this.base}/profile`, user);

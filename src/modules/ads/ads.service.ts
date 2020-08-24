@@ -120,7 +120,7 @@ export class AdsService {
             },
           }, {
           '$match': {
-            'type': 'video',
+            'type': 'movie',
           },
         }, {
           '$sample': {

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, Req } from '@nestjs/common';
 import { AdsService } from './ads.service';
 import { Auth } from '../../guards/auth.guard';
 import { Ads } from '../../models/ads.model';
@@ -58,15 +58,19 @@ export class AdsController {
   @ApiOperation({ summary: 'گرفتن تبلیغات برای نمایش' })
   @ApiOkResponse({ type: AdsResponse })
   @Get()
-  async showAds(): Promise<{ verticals: Ads[], horizontals: Ads[], popup: Ads[] }> {
-    return this.adsService.showAds();
+  async showAds(
+    @Req() req: any,
+  ): Promise<{ verticals: Ads[], horizontals: Ads[], popup: Ads[] }> {
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    return this.adsService.showAds(ip);
   }
 
   @ApiOperation({ summary: 'گرفتنه تبلیغ ویدیو' })
   @ApiOkResponse({ type: Ads })
   @Get('video')
-  async showVideoAds(): Promise<{ ads: Ads[] }> {
-    return await this.adsService.getVideoAds();
+  async showVideoAds(@Req()req: any): Promise<{ ads: Ads[] }> {
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    return await this.adsService.getVideoAds(ip);
   }
 
 

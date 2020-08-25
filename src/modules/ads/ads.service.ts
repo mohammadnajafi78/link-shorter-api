@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
 import { Ads } from '../../models/ads.model';
 import { ReturnModelType } from '@typegoose/typegoose';
+import * as geoip from 'geoip-lite';
 
 @Injectable()
 export class AdsService {
@@ -51,10 +52,23 @@ export class AdsService {
   }
 
   // گرفتن تبلیغات برای نمایش
-  async showAds(): Promise<{ verticals: Ads[], horizontals: Ads[], popup: Ads[] }> {
+  async showAds(ip: string): Promise<{ verticals: Ads[], horizontals: Ads[], popup: Ads[] }> {
     try {
+      let iran;
+      //پیدا کردن کشور بر اساس ip
+      const country = geoip.lookup(ip).country;
+      if (country === 'IR') {
+        iran = true;
+      } else {
+        iran = false;
+      }
       const verticals = await this.adsModel.aggregate(
         [
+          {
+            '$match': {
+              'iran': iran,
+            },
+          },
           {
             '$match': {
               'active': true,
@@ -74,6 +88,11 @@ export class AdsService {
         [
           {
             '$match': {
+              'iran': iran,
+            },
+          },
+          {
+            '$match': {
               'active': true,
             },
           }, {
@@ -89,6 +108,11 @@ export class AdsService {
       );
       const popup = await this.adsModel.aggregate(
         [
+          {
+            '$match': {
+              'iran': iran,
+            },
+          },
           {
             '$match': {
               'active': true,
@@ -110,10 +134,23 @@ export class AdsService {
     }
   }
 
-  async getVideoAds(): Promise<{ ads: Ads[] }> {
+  async getVideoAds(ip: string): Promise<{ ads: Ads[] }> {
     try {
+      let iran;
+      //پیدا کردن کشور بر اساس ip
+      const country = geoip.lookup(ip).country;
+      if (country === 'IR') {
+        iran = true;
+      } else {
+        iran = false;
+      }
       const ads = await this.adsModel.aggregate(
         [
+          {
+            '$match': {
+              'iran': iran,
+            },
+          },
           {
             '$match': {
               'active': true,

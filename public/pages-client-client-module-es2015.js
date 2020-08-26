@@ -2307,7 +2307,7 @@ function ShortLinkComponent_div_0_mat_card_3_div_18_div_3_Template(rf, ctx) { if
     const _r48 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵgetCurrentView"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 21);
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "a", 35);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function ShortLinkComponent_div_0_mat_card_3_div_18_div_3_Template_a_click_1_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r48); const ctx_r47 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](4); return ctx_r47.openLink(ctx_r47.link.mainLink); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function ShortLinkComponent_div_0_mat_card_3_div_18_div_3_Template_a_click_1_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r48); const ctx_r47 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](4); return ctx_r47.goToLink(ctx_r47.link.mainLink); });
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2, " \u0628\u0631\u0648 \u0628\u0647 \u0644\u06CC\u0646\u06A9 ");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
@@ -2530,7 +2530,12 @@ class ShortLinkComponent {
         });
     }
     goToLink(link) {
-        window.location.href = link;
+        if (link.startsWith('http')) {
+            window.open(link);
+        }
+        else {
+            window.open('https://' + link);
+        }
     }
     getAds() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
@@ -2551,9 +2556,6 @@ class ShortLinkComponent {
                 console.log(err);
             });
         }
-    }
-    openLink(link) {
-        window.location.href = link;
     }
     startTimer() {
         this.interval = setInterval(() => {

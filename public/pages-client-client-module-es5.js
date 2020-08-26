@@ -3825,7 +3825,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           var ctx_r47 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](4);
 
-          return ctx_r47.openLink(ctx_r47.link.mainLink);
+          return ctx_r47.goToLink(ctx_r47.link.mainLink);
         });
 
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2, " \u0628\u0631\u0648 \u0628\u0647 \u0644\u06CC\u0646\u06A9 ");
@@ -4213,7 +4213,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "goToLink",
         value: function goToLink(link) {
-          window.location.href = link;
+          if (link.startsWith('http')) {
+            window.open(link);
+          } else {
+            window.open('https://' + link);
+          }
         }
       }, {
         key: "getAds",
@@ -4258,11 +4262,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               console.log(err);
             });
           }
-        }
-      }, {
-        key: "openLink",
-        value: function openLink(link) {
-          window.location.href = link;
         }
       }, {
         key: "startTimer",

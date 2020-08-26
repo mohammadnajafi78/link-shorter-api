@@ -234,7 +234,7 @@ export class UserService {
     try {
       const query = {};
       if (!!search) {
-        Object.assign(query, { phone: search });
+        Object.assign(query, { phone: new RegExp(search, 'g') });
       }
       const users = await this.userModel
         .find(query)

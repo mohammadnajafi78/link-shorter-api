@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Query, Req } from '@ne
 import { AdsService } from './ads.service';
 import { Auth } from '../../guards/auth.guard';
 import { Ads } from '../../models/ads.model';
-import { ApiBody, ApiOkResponse, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiOkResponse, ApiOperation, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { ApiGetQuery } from '../../core/decorators';
 import { AdsResponse } from './ads.dto';
 
@@ -27,10 +27,12 @@ export class AdsController {
   @ApiOkResponse({ type: [Ads] })
   @Get('all')
   async findAll(
+    @Query('search') search: string,
     @Query('skip') skip: number = 0,
     @Query('limit') limit: number = 10,
+    @Query('type') type: string = 'vertical',
   ): Promise<{ ads: Ads[], count: number }> {
-    return await this.adsService.getAll(skip, limit);
+    return await this.adsService.getAll(search, type, skip, limit);
   }
 
   @ApiOperation({ summary: 'ویرایش یک تبلیغ' })

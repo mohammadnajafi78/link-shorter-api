@@ -21,10 +21,14 @@ export class AdsService {
   }
 
   // گرفتن لیست تبلیغات
-  async getAll(skip: number, limit: number): Promise<{ ads: Ads[], count: number }> {
+  async getAll(search: string, type: string, skip: number, limit: number): Promise<{ ads: Ads[], count: number }> {
     try {
-      const ads = await this.adsModel.find().skip(Number(skip)).limit(Number(limit)).sort({ 'createdAt': -1 });
-      const count = await this.adsModel.countDocuments();
+      const query = { type };
+      if (!!search) {
+        Object.assign(query, { link: new RegExp(search, 'ig') });
+      }
+      const ads = await this.adsModel.find(query).skip(Number(skip)).limit(Number(limit)).sort({ 'createdAt': -1 });
+      const count = await this.adsModel.countDocuments(query);
       return { ads, count };
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);

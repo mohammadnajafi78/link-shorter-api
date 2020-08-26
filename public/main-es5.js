@@ -109,6 +109,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             return m.DashboardModule;
           });
         }
+      }, {
+        path: '**',
+        redirectTo: 'page/not-found'
       }]
     }];
 

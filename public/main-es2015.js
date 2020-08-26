@@ -58,6 +58,7 @@ const routes = [
                 path: 'member/dashboard',
                 loadChildren: () => Promise.all(/*! import() | pages-dashboard-dashboard-module */[__webpack_require__.e("default~pages-admin-admin-module~pages-client-client-module~pages-dashboard-dashboard-module"), __webpack_require__.e("common"), __webpack_require__.e("pages-dashboard-dashboard-module")]).then(__webpack_require__.bind(null, /*! ./pages/dashboard/dashboard.module */ "./src/app/pages/dashboard/dashboard.module.ts")).then((m) => m.DashboardModule),
             },
+            { path: '**', redirectTo: 'page/not-found' }
         ],
     },
 ];

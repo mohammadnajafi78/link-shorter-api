@@ -1020,7 +1020,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "create",
         value: function create(amount) {
-          console.log(amount);
           return this.http.post(this.base, {
             amount: amount
           });

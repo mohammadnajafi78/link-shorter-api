@@ -538,7 +538,6 @@ class WithdrawsService {
     }
     // ایجاد یک برداشت
     create(amount) {
-        console.log(amount);
         return this.http.post(this.base, { amount });
     }
     // گرفتن اطلاعات یک برداشت

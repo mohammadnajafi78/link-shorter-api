@@ -67,7 +67,7 @@ async function bootstrap() {
   // app.use(helmet());
   app.enableCors();
   app.enable('trust proxy');
-  // app.use(express.static(join(__dirname, '..', 'public')));
+  app.use(express.static(join(__dirname, '..', 'public')));
   app.use(/^(?!\/?api).+$/g, (req, res) => {
     res.sendFile(join(__dirname, '..', '/public/index.html'));
   });

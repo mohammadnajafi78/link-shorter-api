@@ -1810,7 +1810,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "button", 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "button", 8);
+
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ClientHeaderComponent_div_4_Template_button_click_3_listener() {
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r59);
+
+          var ctx_r60 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+
+          return ctx_r60.openLink(["/send/ticket"]);
+        });
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, " \u067E\u0634\u062A\u06CC\u0628\u0627\u0646\u06CC ");
 
@@ -1822,16 +1830,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     function ClientHeaderComponent_div_5_button_1_Template(rf, ctx) {
       if (rf & 1) {
-        var _r63 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+        var _r64 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 11);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ClientHeaderComponent_div_5_button_1_Template_button_click_0_listener() {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r63);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r64);
 
-          var ctx_r62 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+          var ctx_r63 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-          return ctx_r62.openLink(["/member/dashboard"]);
+          return ctx_r63.openLink(["/member/dashboard"]);
         });
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, " \u062F\u0627\u0634\u0628\u0648\u0631\u062F ");
@@ -1842,16 +1850,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     function ClientHeaderComponent_div_5_button_2_Template(rf, ctx) {
       if (rf & 1) {
-        var _r65 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+        var _r66 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 11);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function ClientHeaderComponent_div_5_button_2_Template_button_click_0_listener() {
-          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r65);
+          _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r66);
 
-          var ctx_r64 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
+          var ctx_r65 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2);
 
-          return ctx_r64.openLink(["/user/login"]);
+          return ctx_r65.openLink(["/user/login"]);
         });
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, " \u0648\u0627\u0631\u062F \u0634\u0648\u06CC\u062F ");
@@ -1862,11 +1870,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     function ClientHeaderComponent_div_5_Template(rf, ctx) {
       if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 9);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, ClientHeaderComponent_div_5_button_1_Template, 2, 0, "button", 11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, ClientHeaderComponent_div_5_button_1_Template, 2, 0, "button", 10);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, ClientHeaderComponent_div_5_button_2_Template, 2, 0, "button", 11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](2, ClientHeaderComponent_div_5_button_2_Template, 2, 0, "button", 10);
 
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
       }
@@ -1926,7 +1934,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       selectors: [["app-client-header"]],
       decls: 7,
       vars: 5,
-      consts: [[1, "home-menu"], ["style", "margin-left: 16px; cursor: pointer", 3, "click", 4, "ngIf"], [1, "menu-title"], ["class", "menu-links", 4, "ngIf"], ["class", "menu-profile", 4, "ngIf"], [2, "margin-left", "16px", "cursor", "pointer", 3, "click"], [2, "color", "white"], [1, "menu-links"], ["mat-button", "", 3, "click"], ["mat-button", ""], [1, "menu-profile"], ["mat-flat-button", "", 3, "click", 4, "ngIf"], ["mat-flat-button", "", 3, "click"]],
+      consts: [[1, "home-menu"], ["style", "margin-left: 16px; cursor: pointer", 3, "click", 4, "ngIf"], [1, "menu-title"], ["class", "menu-links", 4, "ngIf"], ["class", "menu-profile", 4, "ngIf"], [2, "margin-left", "16px", "cursor", "pointer", 3, "click"], [2, "color", "white"], [1, "menu-links"], ["mat-button", "", 3, "click"], [1, "menu-profile"], ["mat-flat-button", "", 3, "click", 4, "ngIf"], ["mat-flat-button", "", 3, "click"]],
       template: function ClientHeaderComponent_Template(rf, ctx) {
         if (rf & 1) {
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
@@ -2416,7 +2424,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     break;
 
                   case 10:
-                    if (!this.link.mainLink.includes(this.url)) {
+                    if (!this.link.mainLink.includes(this.url.substr(8))) {
                       _context.next = 15;
                       break;
                     }
@@ -2484,7 +2492,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       selectors: [["app-home"]],
       decls: 46,
       vars: 3,
-      consts: [[1, "home"], [1, "home-header", "row", 2, "height", "70vh"], [1, "col-12"], [1, "header-text"], [1, "right2"], [1, "right"], [1, "title"], [1, "left"], [1, "left2"], [1, "form"], [1, "header-search-container", "col-md-7", "col-11"], ["type", "text", "placeholder", "\u0644\u06CC\u0646\u06A9\u062A \u0631\u0648  \u0628\u0627 \u06CC\u06A9 \u06A9\u0644\u06CC\u06A9 \u06A9\u0648\u062A\u0627\u0647 \u06A9\u0646", 3, "ngModel", "formControl", "ngModelChange", "keydown.enter"], [3, "click"], ["color", "primary"], ["class", "newlink", 4, "ngIf"], ["size", "invisible", 3, "resolved"], ["captchaRef", "reCaptcha"], [1, "header-body"], [1, "level-container"], [1, "levels", "row", "col-10"], [1, "col-md-3", "col-10"], [2, "text-align", "center"], ["src", "../../../../assets/login.svg", 2, "width", "100px", "height", "100px"], [1, "des"], ["src", "../../../../assets/share.svg", 2, "width", "100px", "height", "100px"], ["src", "../../../../assets/bitcoin.svg", 2, "width", "100px", "height", "100px"], [1, "newlink"], [1, "col-md-3", "col-10", "newLink-card"], [3, "cdkCopyToClipboard", "click"]],
+      consts: [[1, "home"], [1, "home-header", "row", 2, "height", "70vh"], [1, "col-12"], [1, "header-text"], [1, "right2"], [1, "right"], [1, "title"], [1, "left"], [1, "left2"], [1, "form"], [1, "header-search-container", "col-md-7", "col-11"], ["type", "text", "placeholder", "\u0644\u06CC\u0646\u06A9\u062A \u0631\u0648  \u0628\u0627 \u06CC\u06A9 \u06A9\u0644\u06CC\u06A9 \u06A9\u0648\u062A\u0627\u0647 \u06A9\u0646", 2, "text-align", "left", "direction", "ltr", 3, "ngModel", "formControl", "ngModelChange", "keydown.enter"], [3, "click"], ["color", "primary"], ["class", "newlink", 4, "ngIf"], ["size", "invisible", 3, "resolved"], ["captchaRef", "reCaptcha"], [1, "header-body"], [1, "level-container"], [1, "levels", "row", "col-10"], [1, "col-md-3", "col-10"], [2, "text-align", "center"], ["src", "../../../../assets/login.svg", 2, "width", "100px", "height", "100px"], [1, "des"], ["src", "../../../../assets/share.svg", 2, "width", "100px", "height", "100px"], ["src", "../../../../assets/bitcoin.svg", 2, "width", "100px", "height", "100px"], [1, "newlink"], [1, "col-md-3", "col-10", "newLink-card"], [3, "cdkCopyToClipboard", "click"]],
       template: function HomeComponent_Template(rf, ctx) {
         if (rf & 1) {
           var _r19 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵgetCurrentView"]();

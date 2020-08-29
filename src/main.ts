@@ -68,10 +68,9 @@ async function bootstrap() {
   app.enableCors();
   app.enable('trust proxy');
   app.use(express.static(join(__dirname, '..', 'public')));
-  app.setGlobalPrefix('api');
-  // app.use(/^(?!\/?api).+$/g, (req, res) => {
-  //   res.sendFile(join(__dirname, '..', '/public/index.html'));
-  // });
+  app.use(/^(?!\/?api).+$/g, (req, res) => {
+    res.sendFile(join(__dirname, '..', '/public/index.html'));
+  });
 
 
   const options = new DocumentBuilder()

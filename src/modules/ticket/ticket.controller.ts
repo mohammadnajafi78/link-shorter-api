@@ -9,7 +9,7 @@ import {
   Req,
 } from '@nestjs/common';
 import { TicketService } from './ticket.service';
-import { Ticket, Messages } from '../../models/ticket.model';
+import { Ticket } from '../../models/ticket.model';
 import { Auth } from '../../guards/auth.guard';
 import {
   ApiBody,
@@ -75,11 +75,10 @@ export class TicketController {
   @Auth()
   @Post('response')
   async sendResponse(
-    @Body() ticket: string,
-    @Body() message: Messages,
-    @Req() req: any,
+    @Body() id: string,
+    @Body() ticket: Ticket,
   ): Promise<{ status: boolean }> {
-    return await this.ticketService.sendResponse(ticket, message, req.user._id);
+    return await this.ticketService.sendResponse(id, ticket);
   }
 
   @ApiOperation({ summary: 'گرفتن تیکت های کاربر' })

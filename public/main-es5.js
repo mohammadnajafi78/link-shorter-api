@@ -244,103 +244,109 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    var _utils_blockGaurd__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! ./utils/blockGaurd */
+    "./src/app/utils/blockGaurd.ts");
+    /* harmony import */
+
+
+    var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/platform-browser */
     "./node_modules/@angular/platform-browser/__ivy_ngcc__/fesm2015/platform-browser.js");
     /* harmony import */
 
 
-    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
     /* harmony import */
 
 
-    var _app_routing_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var _app_routing_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! ./app-routing.module */
     "./src/app/app-routing.module.ts");
     /* harmony import */
 
 
-    var _app_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _app_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! ./app.component */
     "./src/app/app.component.ts");
     /* harmony import */
 
 
-    var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @angular/platform-browser/animations */
     "./node_modules/@angular/platform-browser/__ivy_ngcc__/fesm2015/animations.js");
     /* harmony import */
 
 
-    var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! @angular/common/http */
     "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
     /* harmony import */
 
 
-    var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! @angular/common */
     "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
     /* harmony import */
 
 
-    var _environments_environment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    var _environments_environment__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! ../environments/environment */
     "./src/environments/environment.ts");
     /* harmony import */
 
 
-    var _utils_http_interceptor__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    var _utils_http_interceptor__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! ./utils/http.interceptor */
     "./src/app/utils/http.interceptor.ts");
     /* harmony import */
 
 
-    var _services_user_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    var _services_user_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! ./services/user.service */
     "./src/app/services/user.service.ts");
     /* harmony import */
 
 
-    var _services_link_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+    var _services_link_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
     /*! ./services/link.service */
     "./src/app/services/link.service.ts");
     /* harmony import */
 
 
-    var _services_withdraws_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+    var _services_withdraws_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
     /*! ./services/withdraws.service */
     "./src/app/services/withdraws.service.ts");
     /* harmony import */
 
 
-    var _services_ticket_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+    var _services_ticket_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
     /*! ./services/ticket.service */
     "./src/app/services/ticket.service.ts");
     /* harmony import */
 
 
-    var _utils_gaurd__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+    var _utils_gaurd__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
     /*! ./utils/gaurd */
     "./src/app/utils/gaurd.ts");
     /* harmony import */
 
 
-    var _utils_dashboardGuard__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
+    var _utils_dashboardGuard__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
     /*! ./utils/dashboardGuard */
     "./src/app/utils/dashboardGuard.ts");
     /* harmony import */
 
 
-    var _services_setting_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
+    var _services_setting_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
     /*! ./services/setting.service */
     "./src/app/services/setting.service.ts");
     /* harmony import */
 
 
-    var _services_upload_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
+    var _services_upload_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
     /*! ./services/upload.service */
     "./src/app/services/upload.service.ts");
 
@@ -348,50 +354,50 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _classCallCheck(this, AppModule);
     };
 
-    AppModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineNgModule"]({
+    AppModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineNgModule"]({
       type: AppModule,
-      bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
+      bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
     });
-    AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjector"]({
+    AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjector"]({
       factory: function AppModule_Factory(t) {
         return new (t || AppModule)();
       },
       providers: [{
-        provide: _angular_common__WEBPACK_IMPORTED_MODULE_6__["APP_BASE_HREF"],
-        useValue: _environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].base
+        provide: _angular_common__WEBPACK_IMPORTED_MODULE_7__["APP_BASE_HREF"],
+        useValue: _environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].base
       }, {
-        provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HTTP_INTERCEPTORS"],
-        useClass: _utils_http_interceptor__WEBPACK_IMPORTED_MODULE_8__["MyHttpInterceptor"],
+        provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HTTP_INTERCEPTORS"],
+        useClass: _utils_http_interceptor__WEBPACK_IMPORTED_MODULE_9__["MyHttpInterceptor"],
         multi: true
-      }, _utils_gaurd__WEBPACK_IMPORTED_MODULE_13__["Guard"], _utils_dashboardGuard__WEBPACK_IMPORTED_MODULE_14__["DashboardGuard"], _services_link_service__WEBPACK_IMPORTED_MODULE_10__["LinkService"], _services_withdraws_service__WEBPACK_IMPORTED_MODULE_11__["WithdrawsService"], _services_ticket_service__WEBPACK_IMPORTED_MODULE_12__["TicketService"], _services_user_service__WEBPACK_IMPORTED_MODULE_9__["UserService"], _services_setting_service__WEBPACK_IMPORTED_MODULE_15__["SettingService"], _services_upload_service__WEBPACK_IMPORTED_MODULE_16__["UploadService"]],
-      imports: [[_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"]]]
+      }, _utils_gaurd__WEBPACK_IMPORTED_MODULE_14__["Guard"], _utils_dashboardGuard__WEBPACK_IMPORTED_MODULE_15__["DashboardGuard"], _utils_blockGaurd__WEBPACK_IMPORTED_MODULE_0__["BlockGaurd"], _services_link_service__WEBPACK_IMPORTED_MODULE_11__["LinkService"], _services_withdraws_service__WEBPACK_IMPORTED_MODULE_12__["WithdrawsService"], _services_ticket_service__WEBPACK_IMPORTED_MODULE_13__["TicketService"], _services_user_service__WEBPACK_IMPORTED_MODULE_10__["UserService"], _services_setting_service__WEBPACK_IMPORTED_MODULE_16__["SettingService"], _services_upload_service__WEBPACK_IMPORTED_MODULE_17__["UploadService"]],
+      imports: [[_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_5__["BrowserAnimationsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClientModule"]]]
     });
 
     (function () {
-      (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵsetNgModuleScope"](AppModule, {
-        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]],
-        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"]]
+      (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵsetNgModuleScope"](AppModule, {
+        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]],
+        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_5__["BrowserAnimationsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClientModule"]]
       });
     })();
     /*@__PURE__*/
 
 
     (function () {
-      _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵsetClassMetadata"](AppModule, [{
-        type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"],
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵsetClassMetadata"](AppModule, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"],
         args: [{
-          declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]],
-          imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_2__["AppRoutingModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"]],
+          declarations: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]],
+          imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_3__["AppRoutingModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_5__["BrowserAnimationsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HttpClientModule"]],
           providers: [{
-            provide: _angular_common__WEBPACK_IMPORTED_MODULE_6__["APP_BASE_HREF"],
-            useValue: _environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].base
+            provide: _angular_common__WEBPACK_IMPORTED_MODULE_7__["APP_BASE_HREF"],
+            useValue: _environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].base
           }, {
-            provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HTTP_INTERCEPTORS"],
-            useClass: _utils_http_interceptor__WEBPACK_IMPORTED_MODULE_8__["MyHttpInterceptor"],
+            provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_6__["HTTP_INTERCEPTORS"],
+            useClass: _utils_http_interceptor__WEBPACK_IMPORTED_MODULE_9__["MyHttpInterceptor"],
             multi: true
-          }, _utils_gaurd__WEBPACK_IMPORTED_MODULE_13__["Guard"], _utils_dashboardGuard__WEBPACK_IMPORTED_MODULE_14__["DashboardGuard"], _services_link_service__WEBPACK_IMPORTED_MODULE_10__["LinkService"], _services_withdraws_service__WEBPACK_IMPORTED_MODULE_11__["WithdrawsService"], _services_ticket_service__WEBPACK_IMPORTED_MODULE_12__["TicketService"], _services_user_service__WEBPACK_IMPORTED_MODULE_9__["UserService"], _services_setting_service__WEBPACK_IMPORTED_MODULE_15__["SettingService"], _services_upload_service__WEBPACK_IMPORTED_MODULE_16__["UploadService"]],
+          }, _utils_gaurd__WEBPACK_IMPORTED_MODULE_14__["Guard"], _utils_dashboardGuard__WEBPACK_IMPORTED_MODULE_15__["DashboardGuard"], _utils_blockGaurd__WEBPACK_IMPORTED_MODULE_0__["BlockGaurd"], _services_link_service__WEBPACK_IMPORTED_MODULE_11__["LinkService"], _services_withdraws_service__WEBPACK_IMPORTED_MODULE_12__["WithdrawsService"], _services_ticket_service__WEBPACK_IMPORTED_MODULE_13__["TicketService"], _services_user_service__WEBPACK_IMPORTED_MODULE_10__["UserService"], _services_setting_service__WEBPACK_IMPORTED_MODULE_16__["SettingService"], _services_upload_service__WEBPACK_IMPORTED_MODULE_17__["UploadService"]],
           // exports: [RecaptchaModule],
-          bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
+          bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
         }]
       }], null, null);
     })();
@@ -657,14 +663,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, TicketService);
 
         this.http = http;
-        this.base = '/api/tickets';
+        this.base = "/api/tickets";
       } // گرفتن لیست تیکت ها
 
 
       _createClass(TicketService, [{
         key: "getTicketList",
         value: function getTicketList(params) {
-          return this.http.get(this.base, {
+          return this.http.get("".concat(this.base, "/all"), {
             params: params
           });
         } // خواندن تیکت
@@ -685,12 +691,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "getTicketById",
         value: function getTicketById(id) {
           return this.http.get("".concat(this.base, "/").concat(id));
-        } // ارسال جواب با ایمیل
+        } // ارسال جواب با تیکت پشتیبانی
 
       }, {
         key: "sendResponse",
-        value: function sendResponse(response) {
-          return this.http.post("".concat(this.base, "/email"), response);
+        value: function sendResponse(ticket) {
+          return this.http.post("".concat(this.base, "/response"), ticket);
+        } // لیست تیکت های یک کاربر
+
+      }, {
+        key: "getUserTicket",
+        value: function getUserTicket() {
+          return this.http.get(this.base);
         }
       }]);
 
@@ -704,7 +716,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     TicketService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
       token: TicketService,
       factory: TicketService.ɵfac,
-      providedIn: 'root'
+      providedIn: "root"
     });
     /*@__PURE__*/
 
@@ -712,7 +724,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](TicketService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
-          providedIn: 'root'
+          providedIn: "root"
         }]
       }], function () {
         return [{
@@ -881,10 +893,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, UserService);
 
         this.http = http;
-        this.base = '/api/users';
+        this.base = "/api/users";
         this.user$ = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](null);
 
-        if (!!localStorage.getItem('token')) {
+        if (!!localStorage.getItem("token")) {
           this.profile().subscribe(function (res) {
             _this.user$.next(res.user);
           });
@@ -946,7 +958,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     UserService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
       token: UserService,
       factory: UserService.ɵfac,
-      providedIn: 'root'
+      providedIn: "root"
     });
     /*@__PURE__*/
 
@@ -954,7 +966,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](UserService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
-          providedIn: 'root'
+          providedIn: "root"
         }]
       }], function () {
         return [{
@@ -1083,6 +1095,140 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   },
 
   /***/
+  "./src/app/utils/blockGaurd.ts":
+  /*!*************************************!*\
+    !*** ./src/app/utils/blockGaurd.ts ***!
+    \*************************************/
+
+  /*! exports provided: BlockGaurd */
+
+  /***/
+  function srcAppUtilsBlockGaurdTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "BlockGaurd", function () {
+      return BlockGaurd;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var rxjs_operators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! rxjs/operators */
+    "./node_modules/rxjs/_esm2015/operators/index.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _services_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ../services/user.service */
+    "./src/app/services/user.service.ts");
+    /* harmony import */
+
+
+    var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @angular/router */
+    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+
+    var BlockGaurd =
+    /*#__PURE__*/
+    function () {
+      function BlockGaurd(userService, router) {
+        _classCallCheck(this, BlockGaurd);
+
+        this.userService = userService;
+        this.router = router;
+      }
+
+      _createClass(BlockGaurd, [{
+        key: "canActivate",
+        value: function canActivate() {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0,
+          /*#__PURE__*/
+          regeneratorRuntime.mark(function _callee() {
+            var user;
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    _context.prev = 0;
+
+                    if (localStorage.getItem("token")) {
+                      _context.next = 3;
+                      break;
+                    }
+
+                    throw false;
+
+                  case 3:
+                    _context.next = 5;
+                    return this.userService.profile().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["map"])(function (res) {
+                      return res.user;
+                    })).toPromise();
+
+                  case 5:
+                    user = _context.sent;
+                    return _context.abrupt("return", true);
+
+                  case 9:
+                    _context.prev = 9;
+                    _context.t0 = _context["catch"](0);
+                    this.router.navigate(["/page/not-found"]);
+                    throw false;
+
+                  case 13:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            }, _callee, this, [[0, 9]]);
+          }));
+        }
+      }]);
+
+      return BlockGaurd;
+    }();
+
+    BlockGaurd.ɵfac = function BlockGaurd_Factory(t) {
+      return new (t || BlockGaurd)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](_services_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"]), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵinject"](_angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]));
+    };
+
+    BlockGaurd.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineInjectable"]({
+      token: BlockGaurd,
+      factory: BlockGaurd.ɵfac
+    });
+    /*@__PURE__*/
+
+    (function () {
+      _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵsetClassMetadata"](BlockGaurd, [{
+        type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"]
+      }], function () {
+        return [{
+          type: _services_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"]
+        }, {
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]
+        }];
+      }, null);
+    })();
+    /***/
+
+  },
+
+  /***/
   "./src/app/utils/dashboardGuard.ts":
   /*!*****************************************!*\
     !*** ./src/app/utils/dashboardGuard.ts ***!
@@ -1147,56 +1293,56 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function canActivate() {
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0,
           /*#__PURE__*/
-          regeneratorRuntime.mark(function _callee() {
+          regeneratorRuntime.mark(function _callee2() {
             var user;
-            return regeneratorRuntime.wrap(function _callee$(_context) {
+            return regeneratorRuntime.wrap(function _callee2$(_context2) {
               while (1) {
-                switch (_context.prev = _context.next) {
+                switch (_context2.prev = _context2.next) {
                   case 0:
-                    _context.prev = 0;
+                    _context2.prev = 0;
 
-                    if (localStorage.getItem('token')) {
-                      _context.next = 3;
+                    if (localStorage.getItem("token")) {
+                      _context2.next = 3;
                       break;
                     }
 
                     throw false;
 
                   case 3:
-                    _context.next = 5;
+                    _context2.next = 5;
                     return this.userService.profile().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["map"])(function (res) {
                       return res.user;
                     })).toPromise();
 
                   case 5:
-                    user = _context.sent;
+                    user = _context2.sent;
 
-                    if (!(user.status !== 'block')) {
-                      _context.next = 10;
+                    if (!(user.status !== "block")) {
+                      _context2.next = 10;
                       break;
                     }
 
-                    return _context.abrupt("return", true);
+                    return _context2.abrupt("return", true);
 
                   case 10:
-                    return _context.abrupt("return", false);
+                    this.router.navigate(["/member/dashboard/support"]);
 
                   case 11:
-                    _context.next = 17;
+                    _context2.next = 17;
                     break;
 
                   case 13:
-                    _context.prev = 13;
-                    _context.t0 = _context["catch"](0);
-                    this.router.navigate(['/page/not-found']);
+                    _context2.prev = 13;
+                    _context2.t0 = _context2["catch"](0);
+                    this.router.navigate(["/page/not-found"]);
                     throw false;
 
                   case 17:
                   case "end":
-                    return _context.stop();
+                    return _context2.stop();
                 }
               }
-            }, _callee, this, [[0, 13]]);
+            }, _callee2, this, [[0, 13]]);
           }));
         }
       }]);
@@ -1294,56 +1440,56 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function canActivate() {
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0,
           /*#__PURE__*/
-          regeneratorRuntime.mark(function _callee2() {
+          regeneratorRuntime.mark(function _callee3() {
             var user;
-            return regeneratorRuntime.wrap(function _callee2$(_context2) {
+            return regeneratorRuntime.wrap(function _callee3$(_context3) {
               while (1) {
-                switch (_context2.prev = _context2.next) {
+                switch (_context3.prev = _context3.next) {
                   case 0:
-                    _context2.prev = 0;
+                    _context3.prev = 0;
 
-                    if (localStorage.getItem('token')) {
-                      _context2.next = 3;
+                    if (localStorage.getItem("token")) {
+                      _context3.next = 3;
                       break;
                     }
 
                     throw false;
 
                   case 3:
-                    _context2.next = 5;
+                    _context3.next = 5;
                     return this.userService.profile().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["map"])(function (res) {
                       return res.user;
                     })).toPromise();
 
                   case 5:
-                    user = _context2.sent;
+                    user = _context3.sent;
 
-                    if (!(user.role === 'admin')) {
-                      _context2.next = 10;
+                    if (!(user.role === "admin" && user.status !== "block")) {
+                      _context3.next = 10;
                       break;
                     }
 
-                    return _context2.abrupt("return", true);
+                    return _context3.abrupt("return", true);
 
                   case 10:
                     throw false;
 
                   case 11:
-                    _context2.next = 17;
+                    _context3.next = 17;
                     break;
 
                   case 13:
-                    _context2.prev = 13;
-                    _context2.t0 = _context2["catch"](0);
-                    this.router.navigate(['/page/not-found']);
+                    _context3.prev = 13;
+                    _context3.t0 = _context3["catch"](0);
+                    this.router.navigate(["/page/not-found"]);
                     throw false;
 
                   case 17:
                   case "end":
-                    return _context2.stop();
+                    return _context3.stop();
                 }
               }
-            }, _callee2, this, [[0, 13]]);
+            }, _callee3, this, [[0, 13]]);
           }));
         }
       }]);
@@ -1490,9 +1636,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var environment = {
       production: false,
-      base: '/',
-      url: 'https://1xad.net' // url: 'http://localhost:3000'
-
+      base: "/",
+      url: "https://1xad.net"
     };
     /*
      * For easier debugging in development mode, you can import the following file

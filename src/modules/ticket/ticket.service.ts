@@ -1,7 +1,6 @@
-import { User } from './../../models/user.model';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from 'nestjs-typegoose';
-import { Ticket, Messages } from '../../models/ticket.model';
+import { Ticket } from '../../models/ticket.model';
 import { ReturnModelType } from '@typegoose/typegoose';
 
 @Injectable()
@@ -9,8 +8,6 @@ export class TicketService {
   constructor(
     @InjectModel(Ticket)
     private readonly ticketModel: ReturnModelType<typeof Ticket>,
-    @InjectModel(User)
-    private readonly userModel: ReturnModelType<typeof User>,
   ) {}
 
   // ایجاد یک تیکت پشتیبانی
@@ -73,22 +70,10 @@ export class TicketService {
     }
   }
 
-  async sendResponse(
-    id: string,
-    message: Messages,
-    userId: string,
-  ): Promise<{ status: boolean }> {
+  async sendResponse(id: string, data: Ticket): Promise<{ status: boolean }> {
     try {
-      const user = await this.userModel.findById(userId);
-      if (user.role === 'admin') {
-        message.from = 'admin';
-      } else {
-        message.from = 'user';
-      }
-      const ticket = await this.ticketModel.findById(id);
-      ticket.messages.push(message);
-      ticket.read = false;
-      await ticket.save();
+      await this.ticketModel.findByIdAndUpdate(id, data, { new: true });
+
       return { status: true };
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);

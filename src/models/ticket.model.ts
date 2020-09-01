@@ -52,7 +52,7 @@ export class Ticket extends BaseSchema {
   // کاربر
   user?: Ref<User>;
 
-  @ApiProperty({ required: false })
-  @prop()
+  @ApiProperty({ required: false, type: Messages })
+  @prop({ type: Messages })
   messages?: Messages[];
 }

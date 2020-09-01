@@ -63,15 +63,12 @@ const description = `
 `;
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule, { cors: true });
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    cors: true,
+  });
   // app.use(helmet());
   app.enableCors();
   app.enable('trust proxy');
-  app.use(express.static(join(__dirname, '..', 'public')));
-  app.use(/^(?!\/?api).+$/g, (req, res) => {
-    res.sendFile(join(__dirname, '..', '/public/index.html'));
-  });
-
 
   const options = new DocumentBuilder()
     .setTitle('راهنمای وب سرویس کوتاه کننده لینک')
@@ -92,11 +89,17 @@ async function bootstrap() {
         const sortArray = ['get', 'post', 'put', 'patch', 'delete'];
         const aMethod = a._root.entries.find(e => e[0] === 'method')[1];
         const bMethod = b._root.entries.find(e => e[0] === 'method')[1];
-        return sortArray.indexOf(aMethod) <= sortArray.indexOf(bMethod) ? -1 : 1;
+        return sortArray.indexOf(aMethod) <= sortArray.indexOf(bMethod)
+          ? -1
+          : 1;
       },
     },
   });
 
+  app.use(express.static(join(__dirname, '..', 'public')));
+  app.use(/^(?!\/?api).+$/g, (req, res) => {
+    res.sendFile(join(__dirname, '..', '/public/index.html'));
+  });
 
   await app.listen(process.env.PORT || 3000);
 }

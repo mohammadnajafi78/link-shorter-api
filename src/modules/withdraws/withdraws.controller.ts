@@ -1,24 +1,37 @@
-import { Body, Controller, Get, Param, Post, Put, Query, Req } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+  Req,
+} from '@nestjs/common';
 import { WithdrawsService } from './withdraws.service';
 import { Auth } from '../../guards/auth.guard';
 import { Withdraws } from '../../models/whithdraws.model';
-import { ApiBody, ApiOkResponse, ApiOperation, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
+import {
+  ApiOkResponse,
+  ApiOperation,
+  ApiParam,
+  ApiQuery,
+  ApiTags,
+} from '@nestjs/swagger';
 import { ApiGetQuery } from '../../core/decorators';
-import disableAutomock = jest.disableAutomock;
 
 @ApiTags('Withdraws')
 @Controller('api/withdraws')
 export class WithdrawsController {
-  constructor(private readonly withdrawsService: WithdrawsService) {
-  }
+  constructor(private readonly withdrawsService: WithdrawsService) {}
 
   @ApiOperation({ summary: 'ایجاد برداشت جدید' })
   @ApiOkResponse({ type: Withdraws })
   @Auth()
   @Post()
   async create(
-    @Body('amount')amount: number,
-    @Req()request: any,
+    @Body('amount') amount: number,
+    @Req() request: any,
   ): Promise<{ withdraws: Withdraws }> {
     return await this.withdrawsService.create(request.user._id, amount);
   }
@@ -35,7 +48,12 @@ export class WithdrawsController {
     @Query('limit') limit: number = 10,
     @Query('status') status: string = 'waiting',
   ): Promise<{ withdraws: Withdraws[]; count: number }> {
-    return await this.withdrawsService.getWithdrawsList(search, skip, limit, status);
+    return await this.withdrawsService.getWithdrawsList(
+      search,
+      skip,
+      limit,
+      status,
+    );
   }
 
   @ApiOperation({ summary: 'لیست برداشت کاربران' })
@@ -54,7 +72,9 @@ export class WithdrawsController {
   @ApiOkResponse({ type: Withdraws })
   @Auth()
   @Get(':id')
-  async getWithdrawsById(@Param('id')id: string): Promise<{ withdraws: Withdraws }> {
+  async getWithdrawsById(
+    @Param('id') id: string,
+  ): Promise<{ withdraws: Withdraws }> {
     return await this.withdrawsService.getWithdrawsById(id);
   }
 
@@ -75,8 +95,9 @@ export class WithdrawsController {
   @ApiOkResponse({ type: Withdraws })
   @Auth('admin')
   @Put('cancel/:id')
-  async setWithdrawsCancel(@Param('id') id: string): Promise<{ withdraws: Withdraws }> {
+  async setWithdrawsCancel(
+    @Param('id') id: string,
+  ): Promise<{ withdraws: Withdraws }> {
     return await this.withdrawsService.setWithdrawsCancel(id);
   }
-
 }

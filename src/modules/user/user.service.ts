@@ -9,18 +9,18 @@ import { Link } from '../../models/link.model';
 import { Setting } from '../../models/setting.model';
 import { Visit } from '../../models/visit.model';
 import { SmsService } from '../../services/sms-service/sms-service';
-import { identity } from 'rxjs';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel(User) private readonly userModel: ReturnModelType<typeof User>,
     @InjectModel(Link) private readonly linkModel: ReturnModelType<typeof Link>,
-    @InjectModel(Setting) private readonly settingModel: ReturnModelType<typeof Setting>,
-    @InjectModel(Visit) private readonly visitModel: ReturnModelType<typeof Visit>,
+    @InjectModel(Setting)
+    private readonly settingModel: ReturnModelType<typeof Setting>,
+    @InjectModel(Visit)
+    private readonly visitModel: ReturnModelType<typeof Visit>,
     private readonly smsService: SmsService,
-  ) {
-  }
+  ) {}
 
   async createUniqueString() {
     const identifierCode = randomstring.generate({
@@ -51,7 +51,11 @@ export class UserService {
         if (visits.length > 0) {
           for (const visit of visits) {
             // اگر بازدید لینک بین 0 تا 3 باشد
-            if (visit.count > 0 && visit.count !== visit.isPay && visit.isPay <= 3) {
+            if (
+              visit.count > 0 &&
+              visit.count !== visit.isPay &&
+              visit.isPay <= 3
+            ) {
               // بازدید اول بدون دریافت مبلغ
               if (visit.isPay === 0 && visit.count === 1) {
                 if (visit.country === 'IR') {
@@ -64,20 +68,42 @@ export class UserService {
                 // بازدید دوم بدون دریافت مبلغ
               } else if (visit.isPay === 0 && visit.count === 2) {
                 if (visit.country === 'IR') {
-                  user.salary = user.salary + setting[0].iranCPC.first + setting[0].iranCPC.second;
-                  totalSalary += setting[0].iranCPC.first + setting[0].iranCPC.second;
+                  user.salary =
+                    user.salary +
+                    setting[0].iranCPC.first +
+                    setting[0].iranCPC.second;
+                  totalSalary +=
+                    setting[0].iranCPC.first + setting[0].iranCPC.second;
                 } else {
-                  user.salary = user.salary + setting[0].foreignCPC.first + setting[0].foreignCPC.second;
-                  totalSalary += setting[0].foreignCPC.first + setting[0].foreignCPC.second;
+                  user.salary =
+                    user.salary +
+                    setting[0].foreignCPC.first +
+                    setting[0].foreignCPC.second;
+                  totalSalary +=
+                    setting[0].foreignCPC.first + setting[0].foreignCPC.second;
                 }
                 // بازدید سوم دریافت مبلغ
               } else if (visit.isPay === 0 && visit.count === 3) {
                 if (visit.country === 'IR') {
-                  user.salary = user.salary + setting[0].iranCPC.first + setting[0].iranCPC.second + setting[0].iranCPC.third;
-                  totalSalary += setting[0].iranCPC.first + setting[0].iranCPC.second + setting[0].iranCPC.third;
+                  user.salary =
+                    user.salary +
+                    setting[0].iranCPC.first +
+                    setting[0].iranCPC.second +
+                    setting[0].iranCPC.third;
+                  totalSalary +=
+                    setting[0].iranCPC.first +
+                    setting[0].iranCPC.second +
+                    setting[0].iranCPC.third;
                 } else {
-                  user.salary = user.salary + setting[0].foreignCPC.first + setting[0].foreignCPC.second + setting[0].foreignCPC.third;
-                  totalSalary += setting[0].foreignCPC.first + setting[0].foreignCPC.second + setting[0].foreignCPC.third;
+                  user.salary =
+                    user.salary +
+                    setting[0].foreignCPC.first +
+                    setting[0].foreignCPC.second +
+                    setting[0].foreignCPC.third;
+                  totalSalary +=
+                    setting[0].foreignCPC.first +
+                    setting[0].foreignCPC.second +
+                    setting[0].foreignCPC.third;
                 }
                 // بازدید دوم با محاسبه بازدید اول
               } else if (visit.isPay === 1 && visit.count === 2) {
@@ -91,11 +117,19 @@ export class UserService {
                 // بازدید سوم با محاسبه بازدید اول
               } else if (visit.isPay === 1 && visit.count === 3) {
                 if (visit.country === 'IR') {
-                  user.salary = user.salary + setting[0].iranCPC.second + setting[0].iranCPC.third;
-                  totalSalary += setting[0].iranCPC.second + setting[0].iranCPC.third;
+                  user.salary =
+                    user.salary +
+                    setting[0].iranCPC.second +
+                    setting[0].iranCPC.third;
+                  totalSalary +=
+                    setting[0].iranCPC.second + setting[0].iranCPC.third;
                 } else {
-                  user.salary = user.salary + setting[0].foreignCPC.second + setting[0].foreignCPC.third;
-                  totalSalary += setting[0].foreignCPC.second + setting[0].foreignCPC.third;
+                  user.salary =
+                    user.salary +
+                    setting[0].foreignCPC.second +
+                    setting[0].foreignCPC.third;
+                  totalSalary +=
+                    setting[0].foreignCPC.second + setting[0].foreignCPC.third;
                 }
                 // بازدید سوم با محسابه بازدید اول
               } else if (visit.isPay === 2 && visit.count === 3) {
@@ -116,15 +150,20 @@ export class UserService {
 
       if (!!user.parent) {
         const parentUser = await this.userModel.findById(user.parent);
-        parentUser.subsetSalary = parentUser.subsetSalary + (totalSalary / 100) * 5;
+        parentUser.subsetSalary =
+          parentUser.subsetSalary + (totalSalary / 100) * 5;
         parentUser.salary = parentUser.salary + (totalSalary / 100) * 5;
         await parentUser.save();
       }
 
       // بروزرسانی درامد
-      const newUser = await this.userModel.findByIdAndUpdate(user._id, {
-        salary: user.salary,
-      }, { new: true });
+      const newUser = await this.userModel.findByIdAndUpdate(
+        user._id,
+        {
+          salary: user.salary,
+        },
+        { new: true },
+      );
       return { user: newUser };
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
@@ -134,7 +173,9 @@ export class UserService {
   // پیدا کردن زیر مجموعه های یک کاربر
   async findSubset(id: string): Promise<{ users: User[] }> {
     try {
-      const users = await this.userModel.find({ parent: id }).select('phone createdAt');
+      const users = await this.userModel
+        .find({ parent: id })
+        .select('phone createdAt');
       return { users };
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
@@ -142,7 +183,10 @@ export class UserService {
   }
 
   // ثبت نام کاربر
-  async signin(phone: string, identifier?: string): Promise<{ status: boolean }> {
+  async signin(
+    phone: string,
+    identifier?: string,
+  ): Promise<{ status: boolean }> {
     try {
       // حذف صفر ابتدای شماره
       if (phone.startsWith('0')) {
@@ -172,11 +216,15 @@ export class UserService {
         // آیا کد معرف وجود دارد؟
         let identifierExist: boolean;
         if (!!identifier) {
-          identifierExist = await this.userModel.exists({ identifierCode: identifier });
+          identifierExist = await this.userModel.exists({
+            identifierCode: identifier,
+          });
         }
         // اگر کد معرف وجود دارد در مدل کاربر ثبت شود
         if (identifierExist) {
-          const identifierUser = await this.userModel.findOne({ identifierCode: identifier });
+          const identifierUser = await this.userModel.findOne({
+            identifierCode: identifier,
+          });
           Object.assign(newUser, { parent: identifierUser._id });
         }
         const user = new this.userModel(newUser);
@@ -205,9 +253,6 @@ export class UserService {
         // آیا کلید منقضی شده است یا خیر؟
         if (user.keys.activateExpire <= new Date()) {
           throw { message: 'درخواست شما منقضی شده است.' };
-        }
-        if (user.status === 'block') {
-          throw  { message: 'شما بلاک شده اید برای اطلاعات بیشتر به پشتیبانی پیام دهید' };
         }
         user.keys.activateKey = '';
         user.keys.activateExpire = new Date(Date.now());
@@ -241,7 +286,7 @@ export class UserService {
         .skip(Number(skip))
         .limit(Number(limit))
         .select('-keys')
-        .sort({ 'createdAt': -1 });
+        .sort({ createdAt: -1 });
 
       const count = await this.userModel.countDocuments(query);
 
@@ -270,7 +315,9 @@ export class UserService {
   // تغییرات پروفایل کاربری ادمین
   async adminUpdate(id: string, data: User): Promise<{ user: User }> {
     try {
-      const user = await this.userModel.findByIdAndUpdate(id, data, { new: true });
+      const user = await this.userModel.findByIdAndUpdate(id, data, {
+        new: true,
+      });
       return { user };
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
@@ -286,7 +333,4 @@ export class UserService {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
     }
   }
-
 }
-
-

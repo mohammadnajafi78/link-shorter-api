@@ -51,9 +51,6 @@ export class AuthGaurd implements CanActivate {
         if (!!decoded) {
           const user: User = await this.getUser(decoded);
           (request as any).user = user;
-          if (user.status === 'block') {
-            return false;
-          }
           if (!roles || roles.length === 0) {
             return true;
           } else {

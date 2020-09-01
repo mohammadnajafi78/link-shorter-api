@@ -371,8 +371,10 @@ class TicketService {
         return this.http.post(`${this.base}/response`, ticket);
     }
     // لیست تیکت های یک کاربر
-    getUserTicket() {
-        return this.http.get(this.base);
+    getUserTicket(params) {
+        return this.http.get(this.base, {
+            params,
+        });
     }
 }
 TicketService.ɵfac = function TicketService_Factory(t) { return new (t || TicketService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };
@@ -538,7 +540,7 @@ __webpack_require__.r(__webpack_exports__);
 class WithdrawsService {
     constructor(http) {
         this.http = http;
-        this.base = '/api/withdraws';
+        this.base = "/api/withdraws";
     }
     // گرفتن لیست همه برداشت ها
     getWithdrawsList(params) {
@@ -561,16 +563,16 @@ class WithdrawsService {
         return this.http.put(`${this.base}/success/${id}`, { trackNumber });
     }
     // گرفتن برداشت های یک کاربر
-    getUserWithdrawsList() {
-        return this.http.get(this.base);
+    getUserWithdrawsList(params) {
+        return this.http.get(this.base, { params });
     }
 }
 WithdrawsService.ɵfac = function WithdrawsService_Factory(t) { return new (t || WithdrawsService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };
-WithdrawsService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: WithdrawsService, factory: WithdrawsService.ɵfac, providedIn: 'root' });
+WithdrawsService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: WithdrawsService, factory: WithdrawsService.ɵfac, providedIn: "root" });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](WithdrawsService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
-                providedIn: 'root',
+                providedIn: "root",
             }]
     }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }]; }, null); })();
 

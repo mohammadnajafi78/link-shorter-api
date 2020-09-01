@@ -85,7 +85,11 @@ export class TicketController {
   @ApiOkResponse({ type: [Ticket] })
   @Auth()
   @Get()
-  async getUserTickets(@Req() req: any): Promise<{ tickets: Ticket[] }> {
-    return await this.ticketService.getUserTickets(req.user._id);
+  async getUserTickets(
+    @Req() req: any,
+    @Query('skip') skip: number = 0,
+    @Query('limit') limit: number = 10,
+  ): Promise<{ tickets: Ticket[]; count: number }> {
+    return await this.ticketService.getUserTickets(req.user._id, skip, limit);
   }
 }

@@ -63,8 +63,14 @@ export class WithdrawsController {
   @Get()
   async getUserWithdrawsList(
     @Req() request: any,
-  ): Promise<{ withdraws: Withdraws[] }> {
-    return await this.withdrawsService.getUserWithdrawsList(request.user._id);
+    @Query('skip') skip: number = 0,
+    @Query('limit') limit: number = 10,
+  ): Promise<{ withdraws: Withdraws[]; count: number }> {
+    return await this.withdrawsService.getUserWithdrawsList(
+      request.user._id,
+      skip,
+      limit,
+    );
   }
 
   @ApiOperation({ summary: 'گرفتن اطلاعات یک برداشت' })

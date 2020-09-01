@@ -2331,27 +2331,32 @@ __webpack_require__.r(__webpack_exports__);
 
 const routes = [
     {
-        path: '',
+        path: "",
         canActivate: [src_app_utils_gaurd__WEBPACK_IMPORTED_MODULE_13__["Guard"]],
         component: _templates_admin_template_admin_template_component__WEBPACK_IMPORTED_MODULE_4__["AdminTemplateComponent"],
         children: [
-            { path: '', component: _home_home_component__WEBPACK_IMPORTED_MODULE_9__["HomeComponent"] },
-            { path: 'users', component: _users_users_component__WEBPACK_IMPORTED_MODULE_5__["UsersComponent"] },
-            { path: 'links', component: _links_links_component__WEBPACK_IMPORTED_MODULE_6__["LinksComponent"] },
-            { path: 'withdraws', component: _withdraws_withdraws_component__WEBPACK_IMPORTED_MODULE_7__["WithdrawsComponent"] },
-            { path: 'withdraws/:id', component: _withdraws_detail_withdraws_detail_component__WEBPACK_IMPORTED_MODULE_12__["WithdrawsDetailComponent"] },
-            { path: 'tickets', component: _tickets_tickets_component__WEBPACK_IMPORTED_MODULE_8__["TicketsComponent"] },
-            { path: 'ticket/:id', component: _ticket_detail_ticket_detail_component__WEBPACK_IMPORTED_MODULE_11__["TicketDetailComponent"] },
-            { path: 'ads', component: _ads_ads_component__WEBPACK_IMPORTED_MODULE_10__["AdsComponent"] },
-            { path: 'setting', component: _setting_setting_component__WEBPACK_IMPORTED_MODULE_15__["SettingComponent"] },
-            { path: 'notifications', component: _notification_notification_component__WEBPACK_IMPORTED_MODULE_18__["NotificationComponent"] },
+            { path: "", component: _home_home_component__WEBPACK_IMPORTED_MODULE_9__["HomeComponent"] },
+            { path: "users", component: _users_users_component__WEBPACK_IMPORTED_MODULE_5__["UsersComponent"] },
+            { path: "links", component: _links_links_component__WEBPACK_IMPORTED_MODULE_6__["LinksComponent"] },
+            { path: "withdraws", component: _withdraws_withdraws_component__WEBPACK_IMPORTED_MODULE_7__["WithdrawsComponent"] },
+            { path: "withdraws/:id", component: _withdraws_detail_withdraws_detail_component__WEBPACK_IMPORTED_MODULE_12__["WithdrawsDetailComponent"] },
+            { path: "tickets", component: _tickets_tickets_component__WEBPACK_IMPORTED_MODULE_8__["TicketsComponent"] },
+            { path: "ticket/:id", component: _ticket_detail_ticket_detail_component__WEBPACK_IMPORTED_MODULE_11__["TicketDetailComponent"] },
+            { path: "ads", component: _ads_ads_component__WEBPACK_IMPORTED_MODULE_10__["AdsComponent"] },
+            { path: "setting", component: _setting_setting_component__WEBPACK_IMPORTED_MODULE_15__["SettingComponent"] },
+            { path: "notifications", component: _notification_notification_component__WEBPACK_IMPORTED_MODULE_18__["NotificationComponent"] },
         ],
     },
 ];
 class AdminModule {
 }
 AdminModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({ type: AdminModule });
-AdminModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({ factory: function AdminModule_Factory(t) { return new (t || AdminModule)(); }, imports: [[_kolkov_angular_editor__WEBPACK_IMPORTED_MODULE_19__["AngularEditorModule"], _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _share_module__WEBPACK_IMPORTED_MODULE_3__["ShareModule"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)]] });
+AdminModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({ factory: function AdminModule_Factory(t) { return new (t || AdminModule)(); }, imports: [[
+            _kolkov_angular_editor__WEBPACK_IMPORTED_MODULE_19__["AngularEditorModule"],
+            _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
+            _share_module__WEBPACK_IMPORTED_MODULE_3__["ShareModule"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes),
+        ]] });
 (function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](AdminModule, { declarations: [_templates_admin_template_admin_template_component__WEBPACK_IMPORTED_MODULE_4__["AdminTemplateComponent"],
         _users_users_component__WEBPACK_IMPORTED_MODULE_5__["UsersComponent"],
         _home_home_component__WEBPACK_IMPORTED_MODULE_9__["HomeComponent"],
@@ -2369,7 +2374,9 @@ AdminModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInject
         _ads_ads_component__WEBPACK_IMPORTED_MODULE_10__["AdsDialog"],
         _notification_notification_component__WEBPACK_IMPORTED_MODULE_18__["NotificationComponent"],
         _notification_modify_notification_modify_component__WEBPACK_IMPORTED_MODULE_20__["NotificationModifyComponent"],
-        _edit_user_edit_user_component__WEBPACK_IMPORTED_MODULE_21__["EditUserComponent"]], imports: [_kolkov_angular_editor__WEBPACK_IMPORTED_MODULE_19__["AngularEditorModule"], _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _share_module__WEBPACK_IMPORTED_MODULE_3__["ShareModule"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]] }); })();
+        _edit_user_edit_user_component__WEBPACK_IMPORTED_MODULE_21__["EditUserComponent"]], imports: [_kolkov_angular_editor__WEBPACK_IMPORTED_MODULE_19__["AngularEditorModule"],
+        _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
+        _share_module__WEBPACK_IMPORTED_MODULE_3__["ShareModule"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]] }); })();
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](AdminModule, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
         args: [{
@@ -2393,7 +2400,12 @@ AdminModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInject
                     _notification_modify_notification_modify_component__WEBPACK_IMPORTED_MODULE_20__["NotificationModifyComponent"],
                     _edit_user_edit_user_component__WEBPACK_IMPORTED_MODULE_21__["EditUserComponent"],
                 ],
-                imports: [_kolkov_angular_editor__WEBPACK_IMPORTED_MODULE_19__["AngularEditorModule"], _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], _share_module__WEBPACK_IMPORTED_MODULE_3__["ShareModule"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)],
+                imports: [
+                    _kolkov_angular_editor__WEBPACK_IMPORTED_MODULE_19__["AngularEditorModule"],
+                    _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
+                    _share_module__WEBPACK_IMPORTED_MODULE_3__["ShareModule"],
+                    _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes),
+                ],
             }]
     }], null, null); })();
 
@@ -6012,7 +6024,7 @@ function UsersComponent_div_17_td_28_Template(rf, ctx) { if (rf & 1) {
 } }
 function UsersComponent_div_17_th_30_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "th", 39);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](1, " \u062F\u0631\u0627\u0645\u062F \u0632\u06CC\u0631 \u0645\u062C\u0645\u0648\u0639\u0647");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](1, "\u062F\u0631\u0627\u0645\u062F \u0632\u06CC\u0631 \u0645\u062C\u0645\u0648\u0639\u0647");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
 } }
 function UsersComponent_div_17_td_31_Template(rf, ctx) { if (rf & 1) {
@@ -6181,22 +6193,22 @@ class UsersComponent {
         this.snackBar = snackBar;
         this.searchControl = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]();
         this.displayedColumns = [
-            'index',
-            'name',
-            'family',
-            'phone',
-            'status',
-            'role',
-            'createAt',
-            'updateAt',
-            'salary',
-            'subSalary',
-            'action',
+            "index",
+            "name",
+            "family",
+            "phone",
+            "status",
+            "role",
+            "createAt",
+            "updateAt",
+            "salary",
+            "subSalary",
+            "action",
         ];
         this.users = [];
         this.skip = 0;
         this.limit = 10;
-        this.search = '';
+        this.search = "";
         this.count = 0;
         this.loading = false;
     }
@@ -6211,10 +6223,10 @@ class UsersComponent {
     // باز کردن اسنک بار
     _openSnackbar(message) {
         this.snackBar.open(message, null, {
-            verticalPosition: 'top',
-            horizontalPosition: 'left',
+            verticalPosition: "top",
+            horizontalPosition: "left",
             duration: 3000,
-            direction: 'rtl',
+            direction: "rtl",
         });
     }
     selectionChange() {
@@ -6260,18 +6272,21 @@ class UsersComponent {
         this.getUserList();
     }
     openEditDialog(user) {
-        this.dialog.open(_edit_user_edit_user_component__WEBPACK_IMPORTED_MODULE_4__["EditUserComponent"], {
-            width: '500px',
-            data: { user }
-        }).afterClosed().subscribe(resp => {
-            if (typeof resp !== 'undefined') {
-                this.userService.adminUpdate(resp).subscribe(res => {
-                    this.snackBar.open('ویرایش با موفقیت انجام شد', null, {
-                        horizontalPosition: 'left',
-                        verticalPosition: 'top',
-                        duration: 3000
+        this.dialog
+            .open(_edit_user_edit_user_component__WEBPACK_IMPORTED_MODULE_4__["EditUserComponent"], {
+            width: "500px",
+            data: { user },
+        })
+            .afterClosed()
+            .subscribe((resp) => {
+            if (typeof resp !== "undefined") {
+                this.userService.adminUpdate(resp).subscribe((res) => {
+                    this.snackBar.open("ویرایش با موفقیت انجام شد", null, {
+                        horizontalPosition: "left",
+                        verticalPosition: "top",
+                        duration: 3000,
                     });
-                }, error => console.log(error));
+                }, (error) => console.log(error));
             }
         });
     }
@@ -6343,9 +6358,9 @@ UsersComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineCom
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵsetClassMetadata"](UsersComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"],
         args: [{
-                selector: 'app-users',
-                templateUrl: './users.component.html',
-                styleUrls: ['./users.component.scss'],
+                selector: "app-users",
+                templateUrl: "./users.component.html",
+                styleUrls: ["./users.component.scss"],
             }]
     }], function () { return [{ type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"] }, { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialog"] }, { type: _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_7__["MatSnackBar"] }]; }, null); })();
 

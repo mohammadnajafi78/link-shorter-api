@@ -70,6 +70,7 @@ export class TicketService {
     }
   }
 
+  // جواب دادن به تیکت پشتیبانی
   async sendResponse(id: string, data: Ticket): Promise<{ status: boolean }> {
     try {
       await this.ticketModel.findByIdAndUpdate(id, data, { new: true });
@@ -80,10 +81,19 @@ export class TicketService {
     }
   }
 
-  async getUserTickets(id: string): Promise<{ tickets: Ticket[] }> {
+  // گرفتن لیست تیکت های یک کاربر خاص
+  async getUserTickets(
+    id: string,
+    skip: number,
+    limit: number,
+  ): Promise<{ tickets: Ticket[]; count: number }> {
     try {
-      const tickets = await this.ticketModel.find({ user: id });
-      return { tickets };
+      const tickets = await this.ticketModel
+        .find({ user: id })
+        .skip(Number(skip))
+        .limit(Number(limit));
+      const count = await this.ticketModel.countDocuments({ user: id });
+      return { tickets, count };
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
     }

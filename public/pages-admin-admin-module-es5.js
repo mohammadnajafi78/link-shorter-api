@@ -4016,38 +4016,38 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     "./src/app/pages/admin/edit-user/edit-user.component.ts");
 
     var routes = [{
-      path: '',
+      path: "",
       canActivate: [src_app_utils_gaurd__WEBPACK_IMPORTED_MODULE_13__["Guard"]],
       component: _templates_admin_template_admin_template_component__WEBPACK_IMPORTED_MODULE_4__["AdminTemplateComponent"],
       children: [{
-        path: '',
+        path: "",
         component: _home_home_component__WEBPACK_IMPORTED_MODULE_9__["HomeComponent"]
       }, {
-        path: 'users',
+        path: "users",
         component: _users_users_component__WEBPACK_IMPORTED_MODULE_5__["UsersComponent"]
       }, {
-        path: 'links',
+        path: "links",
         component: _links_links_component__WEBPACK_IMPORTED_MODULE_6__["LinksComponent"]
       }, {
-        path: 'withdraws',
+        path: "withdraws",
         component: _withdraws_withdraws_component__WEBPACK_IMPORTED_MODULE_7__["WithdrawsComponent"]
       }, {
-        path: 'withdraws/:id',
+        path: "withdraws/:id",
         component: _withdraws_detail_withdraws_detail_component__WEBPACK_IMPORTED_MODULE_12__["WithdrawsDetailComponent"]
       }, {
-        path: 'tickets',
+        path: "tickets",
         component: _tickets_tickets_component__WEBPACK_IMPORTED_MODULE_8__["TicketsComponent"]
       }, {
-        path: 'ticket/:id',
+        path: "ticket/:id",
         component: _ticket_detail_ticket_detail_component__WEBPACK_IMPORTED_MODULE_11__["TicketDetailComponent"]
       }, {
-        path: 'ads',
+        path: "ads",
         component: _ads_ads_component__WEBPACK_IMPORTED_MODULE_10__["AdsComponent"]
       }, {
-        path: 'setting',
+        path: "setting",
         component: _setting_setting_component__WEBPACK_IMPORTED_MODULE_15__["SettingComponent"]
       }, {
-        path: 'notifications',
+        path: "notifications",
         component: _notification_notification_component__WEBPACK_IMPORTED_MODULE_18__["NotificationComponent"]
       }]
     }];
@@ -11642,7 +11642,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "th", 39);
 
-        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](1, " \u062F\u0631\u0627\u0645\u062F \u0632\u06CC\u0631 \u0645\u062C\u0645\u0648\u0639\u0647");
+        _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](1, "\u062F\u0631\u0627\u0645\u062F \u0632\u06CC\u0631 \u0645\u062C\u0645\u0648\u0639\u0647");
 
         _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
       }
@@ -12020,11 +12020,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.dialog = dialog;
         this.snackBar = snackBar;
         this.searchControl = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]();
-        this.displayedColumns = ['index', 'name', 'family', 'phone', 'status', 'role', 'createAt', 'updateAt', 'salary', 'subSalary', 'action'];
+        this.displayedColumns = ["index", "name", "family", "phone", "status", "role", "createAt", "updateAt", "salary", "subSalary", "action"];
         this.users = [];
         this.skip = 0;
         this.limit = 10;
-        this.search = '';
+        this.search = "";
         this.count = 0;
         this.loading = false;
       }
@@ -12047,10 +12047,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "_openSnackbar",
         value: function _openSnackbar(message) {
           this.snackBar.open(message, null, {
-            verticalPosition: 'top',
-            horizontalPosition: 'left',
+            verticalPosition: "top",
+            horizontalPosition: "left",
             duration: 3000,
-            direction: 'rtl'
+            direction: "rtl"
           });
         }
       }, {
@@ -12111,16 +12111,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           var _this39 = this;
 
           this.dialog.open(_edit_user_edit_user_component__WEBPACK_IMPORTED_MODULE_4__["EditUserComponent"], {
-            width: '500px',
+            width: "500px",
             data: {
               user: user
             }
           }).afterClosed().subscribe(function (resp) {
-            if (typeof resp !== 'undefined') {
+            if (typeof resp !== "undefined") {
               _this39.userService.adminUpdate(resp).subscribe(function (res) {
-                _this39.snackBar.open('ویرایش با موفقیت انجام شد', null, {
-                  horizontalPosition: 'left',
-                  verticalPosition: 'top',
+                _this39.snackBar.open("ویرایش با موفقیت انجام شد", null, {
+                  horizontalPosition: "left",
+                  verticalPosition: "top",
                   duration: 3000
                 });
               }, function (error) {
@@ -12275,9 +12275,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵsetClassMetadata"](UsersComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"],
         args: [{
-          selector: 'app-users',
-          templateUrl: './users.component.html',
-          styleUrls: ['./users.component.scss']
+          selector: "app-users",
+          templateUrl: "./users.component.html",
+          styleUrls: ["./users.component.scss"]
         }]
       }], function () {
         return [{

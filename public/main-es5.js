@@ -701,8 +701,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       }, {
         key: "getUserTicket",
-        value: function getUserTicket() {
-          return this.http.get(this.base);
+        value: function getUserTicket(params) {
+          return this.http.get(this.base, {
+            params: params
+          });
         }
       }]);
 
@@ -1017,7 +1019,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, WithdrawsService);
 
         this.http = http;
-        this.base = '/api/withdraws';
+        this.base = "/api/withdraws";
       } // گرفتن لیست همه برداشت ها
 
 
@@ -1059,8 +1061,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       }, {
         key: "getUserWithdrawsList",
-        value: function getUserWithdrawsList() {
-          return this.http.get(this.base);
+        value: function getUserWithdrawsList(params) {
+          return this.http.get(this.base, {
+            params: params
+          });
         }
       }]);
 
@@ -1074,7 +1078,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     WithdrawsService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
       token: WithdrawsService,
       factory: WithdrawsService.ɵfac,
-      providedIn: 'root'
+      providedIn: "root"
     });
     /*@__PURE__*/
 
@@ -1082,7 +1086,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](WithdrawsService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
-          providedIn: 'root'
+          providedIn: "root"
         }]
       }], function () {
         return [{

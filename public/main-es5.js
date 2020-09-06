@@ -444,7 +444,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, LinkService);
 
         this.http = http;
-        this.base = '/api/links';
+        this.base = "/api/links";
       } // گرفتن لینک های کابر
 
 
@@ -467,6 +467,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "createLink",
         value: function createLink(newLink) {
+          newLink.mainLink.trim();
           return this.http.post(this.base, newLink);
         } // ویرایش لینک
 
@@ -512,7 +513,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     LinkService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({
       token: LinkService,
       factory: LinkService.ɵfac,
-      providedIn: 'root'
+      providedIn: "root"
     });
     /*@__PURE__*/
 
@@ -520,7 +521,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](LinkService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
-          providedIn: 'root'
+          providedIn: "root"
         }]
       }], function () {
         return [{

@@ -236,7 +236,7 @@ __webpack_require__.r(__webpack_exports__);
 class LinkService {
     constructor(http) {
         this.http = http;
-        this.base = '/api/links';
+        this.base = "/api/links";
     }
     // گرفتن لینک های کابر
     getLinkList(params) {
@@ -250,6 +250,7 @@ class LinkService {
     }
     // ایجاد لینک کوتاه جدید
     createLink(newLink) {
+        newLink.mainLink.trim();
         return this.http.post(this.base, newLink);
     }
     // ویرایش لینک
@@ -275,11 +276,11 @@ class LinkService {
     }
 }
 LinkService.ɵfac = function LinkService_Factory(t) { return new (t || LinkService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"])); };
-LinkService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: LinkService, factory: LinkService.ɵfac, providedIn: 'root' });
+LinkService.ɵprov = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: LinkService, factory: LinkService.ɵfac, providedIn: "root" });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](LinkService, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
         args: [{
-                providedIn: 'root',
+                providedIn: "root",
             }]
     }], function () { return [{ type: _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"] }]; }, null); })();
 

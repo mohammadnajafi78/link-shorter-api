@@ -4112,14 +4112,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this.BASE_URL = _environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].url; // فرمت های ویدیو
 
-        this.videoFormat = ['.mp4', '.mkv', '.webm', '.ogg', '.mov', '.mkv', '.avi']; // فرمت های فایل
+        this.videoFormat = [".mp4", ".mkv", ".webm", ".ogg", ".mov", ".mkv", ".avi"]; // فرمت های فایل
 
-        this.fileFormat = ['.asc', '.exe', '.doc', '.docx', '.rtf', ' .msg', '.pdf', '.txt', '.arc', '.arj ', '.gz', '.hqx', '.rar', '.sit', '.tar', '.z', '.zip']; // برای تست
+        this.fileFormat = [".asc", ".exe", ".doc", ".docx", ".rtf", " .msg", ".pdf", ".txt", ".arc", ".arj ", ".gz", ".hqx", ".rar", ".sit", ".tar", ".z", ".zip"]; // برای تست
 
         this.showLink = false;
-        this.format = '';
+        this.format = "";
         this.route.paramMap.subscribe(function (params) {
-          _this10.shortLink = params.get('shortLink');
+          _this10.shortLink = params.get("shortLink");
 
           _this10.getLinkByShortLink(_this10.shortLink);
         });
@@ -4144,7 +4144,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           // آیا پاپ آپ باز شود؟
           if (!this.openPopup) {
             // باز کردن پاپ آپ
-            var newWindow = window.open(this.ads.popup[this.popupNumber].link, 'bottom', 'height=600,width=800');
+            var newWindow = window.open(this.ads.popup[this.popupNumber].link, "bottom", "height=600,width=800");
 
             if (window.focus) {
               newWindow.focus();
@@ -4167,7 +4167,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           });
 
           if (type) {
-            return 'video';
+            return "video";
           } else {
             // آیا نوع لینک فایل است؟
             type = this.fileFormat.some(function (el) {
@@ -4175,12 +4175,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             });
 
             if (type) {
-              return 'file';
+              return "file";
             }
           } // نوع خاصی نیست
 
 
-          return 'default';
+          return "default";
         } // گرفتن لینک با لینک کوتاه
 
       }, {
@@ -4201,7 +4201,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       _this12.link = res.link;
 
                       if (!_this12.link.showAds) {
-                        window.location.href = _this12.link.mainLink;
+                        if (_this12.link.shortLink.startsWith("http")) {
+                          window.location.href = _this12.link.mainLink;
+                        } else {
+                          window.location.href = "https://" + _this12.link.mainLink;
+                        }
                       }
 
                       _this12.format = _this12.findLinkFormat();
@@ -4214,7 +4218,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   case 5:
                     _context2.prev = 5;
                     _context2.t0 = _context2["catch"](0);
-                    this.router.navigate(['/page/not-found']);
+                    this.router.navigate(["/page/not-found"]);
                     console.log(_context2.t0);
 
                   case 9:
@@ -4228,10 +4232,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "goToLink",
         value: function goToLink(link) {
-          if (link.startsWith('http')) {
+          if (link.startsWith("http")) {
             window.open(link);
           } else {
-            window.open('https://' + link);
+            window.open("https://" + link);
           }
         }
       }, {
@@ -4322,9 +4326,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵsetClassMetadata"](ShortLinkComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"],
         args: [{
-          selector: 'app-short-link',
-          templateUrl: './short-link.component.html',
-          styleUrls: ['./short-link.component.scss']
+          selector: "app-short-link",
+          templateUrl: "./short-link.component.html",
+          styleUrls: ["./short-link.component.scss"]
         }]
       }], function () {
         return [{

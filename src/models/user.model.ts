@@ -4,7 +4,6 @@ import { BaseSchema } from 'src/core/baseSchema';
 //وضعیت های کاربران
 const USER_STATUS = ['active', 'inactive', 'block'];
 
-
 // نقش های کاربران
 const USER_ROLE = ['admin', 'user'];
 
@@ -20,7 +19,6 @@ class UserKey {
 
 @ModelOptions({ schemaOptions: { timestamps: true } })
 export class User extends BaseSchema {
-
   @ApiProperty({ required: false })
   @prop()
   name?: string;
@@ -58,7 +56,12 @@ export class User extends BaseSchema {
   @prop({ default: 0 })
   salary?: number;
 
-  @ApiProperty({ required: false, enum: USER_STATUS, readOnly: true, default: 'inactive' })
+  @ApiProperty({
+    required: false,
+    enum: USER_STATUS,
+    readOnly: true,
+    default: 'inactive',
+  })
   @prop({
     required: true,
     type: String,
@@ -67,7 +70,12 @@ export class User extends BaseSchema {
   })
   status?: string;
 
-  @ApiProperty({ required: false, enum: USER_ROLE, readOnly: true, default: 'user' })
+  @ApiProperty({
+    required: false,
+    enum: USER_ROLE,
+    readOnly: true,
+    default: 'user',
+  })
   @prop({ required: true, enum: USER_ROLE, default: 'user' })
   role?: string;
 

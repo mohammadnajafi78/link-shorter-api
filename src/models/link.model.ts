@@ -7,10 +7,9 @@ import { BaseSchema } from 'src/core/baseSchema';
 import { ApiProperty } from '@nestjs/swagger';
 
 @ModelOptions({ schemaOptions: { timestamps: true } })
-export class Link extends BaseSchema{
-
+export class Link extends BaseSchema {
   @ApiProperty({ required: true })
-  @prop({ required: true, validate: validator.isURL })
+  @prop({ required: true })
   mainLink?: string;
 
   @ApiProperty({ required: true })

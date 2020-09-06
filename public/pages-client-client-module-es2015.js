@@ -2452,32 +2452,32 @@ class ShortLinkComponent {
         // دامنه سایت
         this.BASE_URL = _environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].url;
         // فرمت های ویدیو
-        this.videoFormat = ['.mp4', '.mkv', '.webm', '.ogg', '.mov', '.mkv', '.avi'];
+        this.videoFormat = [".mp4", ".mkv", ".webm", ".ogg", ".mov", ".mkv", ".avi"];
         // فرمت های فایل
         this.fileFormat = [
-            '.asc',
-            '.exe',
-            '.doc',
-            '.docx',
-            '.rtf',
-            ' .msg',
-            '.pdf',
-            '.txt',
-            '.arc',
-            '.arj ',
-            '.gz',
-            '.hqx',
-            '.rar',
-            '.sit',
-            '.tar',
-            '.z',
-            '.zip',
+            ".asc",
+            ".exe",
+            ".doc",
+            ".docx",
+            ".rtf",
+            " .msg",
+            ".pdf",
+            ".txt",
+            ".arc",
+            ".arj ",
+            ".gz",
+            ".hqx",
+            ".rar",
+            ".sit",
+            ".tar",
+            ".z",
+            ".zip",
         ];
         // برای تست
         this.showLink = false;
-        this.format = '';
+        this.format = "";
         this.route.paramMap.subscribe((params) => {
-            this.shortLink = params.get('shortLink');
+            this.shortLink = params.get("shortLink");
             this.getLinkByShortLink(this.shortLink);
         });
         this.ads = { horizontals: [], verticals: [], popup: [] };
@@ -2492,7 +2492,7 @@ class ShortLinkComponent {
         // آیا پاپ آپ باز شود؟
         if (!this.openPopup) {
             // باز کردن پاپ آپ
-            const newWindow = window.open(this.ads.popup[this.popupNumber].link, 'bottom', 'height=600,width=800');
+            const newWindow = window.open(this.ads.popup[this.popupNumber].link, "bottom", "height=600,width=800");
             if (window.focus) {
                 newWindow.focus();
             }
@@ -2506,7 +2506,7 @@ class ShortLinkComponent {
         // آیا نوع لینک ویدیو است؟
         let type = this.videoFormat.some((el) => this.link.mainLink.includes(el));
         if (type) {
-            return 'video';
+            return "video";
         }
         else {
             // آیا نوع لینک فایل است؟
@@ -2514,11 +2514,11 @@ class ShortLinkComponent {
                 return this.link.mainLink.includes(el);
             });
             if (type) {
-                return 'file';
+                return "file";
             }
         }
         // نوع خاصی نیست
-        return 'default';
+        return "default";
     }
     // گرفتن لینک با لینک کوتاه
     getLinkByShortLink(shortLink) {
@@ -2529,31 +2529,39 @@ class ShortLinkComponent {
                     .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])((res) => {
                     this.link = res.link;
                     if (!this.link.showAds) {
-                        window.location.href = this.link.mainLink;
+                        if (this.link.shortLink.startsWith("http")) {
+                            window.location.href = this.link.mainLink;
+                        }
+                        else {
+                            window.location.href = "https://" + this.link.mainLink;
+                        }
                     }
                     this.format = this.findLinkFormat();
                 }))
                     .toPromise();
             }
             catch (error) {
-                this.router.navigate(['/page/not-found']);
+                this.router.navigate(["/page/not-found"]);
                 console.log(error);
             }
         });
     }
     goToLink(link) {
-        if (link.startsWith('http')) {
+        if (link.startsWith("http")) {
             window.open(link);
         }
         else {
-            window.open('https://' + link);
+            window.open("https://" + link);
         }
     }
     getAds() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
-            yield this.adsService.showAds().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(res => {
+            yield this.adsService
+                .showAds()
+                .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])((res) => {
                 this.ads = res;
-            })).toPromise();
+            }))
+                .toPromise();
         });
     }
     resolved(captchaResponse, id) {
@@ -2586,9 +2594,9 @@ ShortLinkComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefin
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵsetClassMetadata"](ShortLinkComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"],
         args: [{
-                selector: 'app-short-link',
-                templateUrl: './short-link.component.html',
-                styleUrls: ['./short-link.component.scss'],
+                selector: "app-short-link",
+                templateUrl: "./short-link.component.html",
+                styleUrls: ["./short-link.component.scss"],
             }]
     }], function () { return [{ type: src_app_services_link_service__WEBPACK_IMPORTED_MODULE_4__["LinkService"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"] }, { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] }, { type: _services_ads_service__WEBPACK_IMPORTED_MODULE_6__["AdsService"] }]; }, null); })();
 

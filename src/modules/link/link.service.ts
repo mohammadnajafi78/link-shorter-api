@@ -12,9 +12,9 @@ import { VisitChartDto } from './visit.dto';
 export class LinkService {
   constructor(
     @InjectModel(Link) private readonly linkModel: ReturnModelType<typeof Link>,
-    @InjectModel(Visit) private readonly visitModel: ReturnModelType<typeof Visit>,
-  ) {
-  }
+    @InjectModel(Visit)
+    private readonly visitModel: ReturnModelType<typeof Visit>,
+  ) {}
 
   // ساخت استرینگ یونیک
   async createRandomString() {
@@ -34,6 +34,15 @@ export class LinkService {
       // لینک کوتاه
       const shortLink = await this.createRandomString();
 
+      const linkExist = await this.linkModel.findOne({
+        mainLink: link.mainLink,
+        user: link.user,
+      });
+
+      if (!!linkExist) {
+        return { link: linkExist };
+      }
+
       // لینک کوتاه جدید
       link.shortLink = shortLink;
 
@@ -51,18 +60,23 @@ export class LinkService {
   }
 
   //   گرفتن لیست لینک ها که فقط توسط ادمین امکان پذیر است
-  async getLinkList(search: string, skip: number, limit: number, status: string):
-    Promise<{ links: Link[]; count: number }> {
+  async getLinkList(
+    search: string,
+    skip: number,
+    limit: number,
+    status: string,
+  ): Promise<{ links: Link[]; count: number }> {
     try {
       const query = { status };
       if (!!search) {
         Object.assign(query, { mainLink: new RegExp(search, 'ig') });
       }
-      const links = await this.linkModel.find(query)
+      const links = await this.linkModel
+        .find(query)
         .skip(Number(skip))
         .limit(Number(limit))
         .populate({ path: 'user', select: 'phone' })
-        .sort({ 'createdAt': -1 });
+        .sort({ createdAt: -1 });
       const count = await this.linkModel.countDocuments(query);
       return { links, count };
     } catch (error) {
@@ -123,42 +137,44 @@ export class LinkService {
       d.setHours(0, 0, 0);
       d.setMilliseconds(0);
       const visitChart = await this.visitModel.aggregate([
-
         {
-          '$match': {
+          $match: {
             //تاریخ یک ماه قبل
-            'createdAt': { $gte: d },
+            createdAt: { $gte: d },
           },
         },
         {
-          '$match': {
+          $match: {
             // لینک ها با آیدی داده شده
-            'link': linkId,
+            link: linkId,
           },
-        }, {
-          '$group': {
-            '_id': {
-              '$dateToString': {
+        },
+        {
+          $group: {
+            _id: {
+              $dateToString: {
                 // از آیدی تاریخ روز را به این فرمت استخراج میکند
-                'format': '%Y/%m/%d',
-                'date': '$createdAt',
+                format: '%Y/%m/%d',
+                date: '$createdAt',
               },
             },
-            'count': {
+            count: {
               // تعداد بازدید های دیده شده در این روز
-              '$sum': 1,
+              $sum: 1,
             },
           },
-        }, {
-          '$project': {
-            '_id': 0,
+        },
+        {
+          $project: {
+            _id: 0,
             // برای نمودار بازدید ها باید name و value داشته باشیم
-            'name': '$_id',
-            'value': '$count',
+            name: '$_id',
+            value: '$count',
           },
-        }, {
-          '$sort': {
-            'name': 1,
+        },
+        {
+          $sort: {
+            name: 1,
           },
         },
       ]);
@@ -168,7 +184,7 @@ export class LinkService {
     }
   }
 
-  async getAllVisit(id: string):Promise<{visitChart:VisitChartDto[]}> {
+  async getAllVisit(id: string): Promise<{ visitChart: VisitChartDto[] }> {
     let d = new Date();
     d.setMonth(d.getMonth() - 1);
     d.setHours(0, 0, 0);
@@ -176,57 +192,59 @@ export class LinkService {
     const userId = Types.ObjectId(id);
     const visitChart = await this.visitModel.aggregate([
       {
-        '$match': {
+        $match: {
           //تاریخ یک ماه قبل
-          'createdAt': { $gte: d },
+          createdAt: { $gte: d },
         },
       },
       {
-        '$lookup': {
-          'from': 'links',
-          'localField': 'link',
-          'foreignField': '_id',
-          'as': 'link',
+        $lookup: {
+          from: 'links',
+          localField: 'link',
+          foreignField: '_id',
+          as: 'link',
         },
-      }, {
-        '$unwind': {
-          'path': '$link',
-          'preserveNullAndEmptyArrays': true,
+      },
+      {
+        $unwind: {
+          path: '$link',
+          preserveNullAndEmptyArrays: true,
         },
-      }, {
-        '$match': {
+      },
+      {
+        $match: {
           'link.user': userId,
         },
-      }, {
-        '$group': {
-          '_id': {
-            '$dateToString': {
-              'format': '%Y-%m-%d',
-              'date': '$createdAt',
+      },
+      {
+        $group: {
+          _id: {
+            $dateToString: {
+              format: '%Y-%m-%d',
+              date: '$createdAt',
             },
           },
-          'count': {
-            '$sum': 1,
+          count: {
+            $sum: 1,
           },
         },
       },
       {
-        '$project': {
-          '_id': 0,
+        $project: {
+          _id: 0,
           // برای نمودار بازدید ها باید name و value داشته باشیم
-          'name': '$_id',
-          'value': '$count',
+          name: '$_id',
+          value: '$count',
         },
       },
       {
-        '$sort': {
-          'name': 1,
+        $sort: {
+          name: 1,
         },
       },
     ]);
     return { visitChart };
   }
-
 
   // گرفتن لینک های یک کاربر خاص
   async getUserLink(
@@ -245,8 +263,11 @@ export class LinkService {
       if (!!showAds) {
         Object.assign(query, { showAds });
       }
-      const links = await this.linkModel.find(query)
-        .skip(Number(skip)).limit(Number(limit)).sort({ 'createdAt': -1 });
+      const links = await this.linkModel
+        .find(query)
+        .skip(Number(skip))
+        .limit(Number(limit))
+        .sort({ createdAt: -1 });
       const count = await this.linkModel.countDocuments(query);
       return { links, count };
     } catch (error) {
@@ -266,5 +287,4 @@ export class LinkService {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
     }
   }
-
 }

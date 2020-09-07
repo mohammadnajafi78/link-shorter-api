@@ -250,7 +250,7 @@ class LinkService {
     }
     // ایجاد لینک کوتاه جدید
     createLink(newLink) {
-        newLink.mainLink.trim();
+        newLink.mainLink = newLink.mainLink.trim();
         return this.http.post(this.base, newLink);
     }
     // ویرایش لینک

@@ -1,15 +1,42 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" dir="rtl">
-<head>
-  <meta charset="utf-8">
-  <title> 1xad.net </title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
-<body>
-  <app-root></app-root>
-<script src="runtime-es2015.js" type="module"></script><script src="runtime-es5.js" nomodule defer></script><script src="polyfills-es5.js" nomodule defer></script><script src="polyfills-es2015.js" type="module"></script><script src="styles-es2015.js" type="module"></script><script src="styles-es5.js" nomodule defer></script><script src="vendor-es2015.js" type="module"></script><script src="vendor-es5.js" nomodule defer></script><script src="main-es2015.js" type="module"></script><script src="main-es5.js" nomodule defer></script></body>
+  <head>
+    <meta charset="utf-8" />
+    <title>1xad.net</title>
+    <base href="/" />
+    <script type="text/javascript">
+      (function () {
+        var now = new Date();
+        var head = document.getElementsByTagName("head")[0];
+        var script = document.createElement("script");
+        script.async = true;
+        var script_address =
+          "https://cdn.yektanet.com/js/10ad.co/native-10ad.co-9968.js";
+        script.src =
+          script_address +
+          "?v=" +
+          now.getFullYear().toString() +
+          "0" +
+          now.getMonth() +
+          "0" +
+          now.getDate() +
+          "0" +
+          now.getHours();
+        head.appendChild(script);
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <app-root></app-root>
+  <script src="runtime-es2015.js" type="module"></script><script src="runtime-es5.js" nomodule defer></script><script src="polyfills-es5.js" nomodule defer></script><script src="polyfills-es2015.js" type="module"></script><script src="styles-es2015.js" type="module"></script><script src="styles-es5.js" nomodule defer></script><script src="vendor-es2015.js" type="module"></script><script src="vendor-es5.js" nomodule defer></script><script src="main-es2015.js" type="module"></script><script src="main-es5.js" nomodule defer></script></body>
 </html>

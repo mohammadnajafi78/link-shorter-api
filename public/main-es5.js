@@ -467,7 +467,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "createLink",
         value: function createLink(newLink) {
-          newLink.mainLink.trim();
+          newLink.mainLink = newLink.mainLink.trim();
           return this.http.post(this.base, newLink);
         } // ویرایش لینک
 

@@ -1,24 +1,39 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, Req } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+  Req,
+} from '@nestjs/common';
 import { AdsService } from './ads.service';
 import { Auth } from '../../guards/auth.guard';
 import { Ads } from '../../models/ads.model';
-import { ApiBody, ApiOkResponse, ApiOperation, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiOkResponse,
+  ApiOperation,
+  ApiParam,
+  ApiQuery,
+  ApiTags,
+} from '@nestjs/swagger';
 import { ApiGetQuery } from '../../core/decorators';
 import { AdsResponse } from './ads.dto';
-
 
 @ApiTags('Ads')
 @Controller('api/ads')
 export class AdsController {
-  constructor(private readonly adsService: AdsService) {
-  }
+  constructor(private readonly adsService: AdsService) {}
 
   @ApiOperation({ summary: 'ایجاد تبلیغ جدید' })
   @ApiBody({ type: Ads })
   @ApiOkResponse({ type: Ads })
   @Auth('admin')
   @Post()
-  async create(@Body()ads: Ads): Promise<{ ads: Ads }> {
+  async create(@Body() ads: Ads): Promise<{ ads: Ads }> {
     return await this.adsService.create(ads);
   }
 
@@ -31,7 +46,7 @@ export class AdsController {
     @Query('skip') skip: number = 0,
     @Query('limit') limit: number = 10,
     @Query('type') type: string = 'vertical',
-  ): Promise<{ ads: Ads[], count: number }> {
+  ): Promise<{ ads: Ads[]; count: number }> {
     return await this.adsService.getAll(search, type, skip, limit);
   }
 
@@ -62,18 +77,20 @@ export class AdsController {
   @Get()
   async showAds(
     @Req() req: any,
-  ): Promise<{ verticals: Ads[], horizontals: Ads[], popup: Ads[] }> {
+  ): Promise<{ verticals: Ads[]; horizontals: Ads[]; popup: Ads[] }> {
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     return this.adsService.showAds(ip);
   }
 
   @ApiOperation({ summary: 'گرفتنه تبلیغ ویدیو' })
   @ApiOkResponse({ type: Ads })
+  @ApiQuery({ name: 'type', type: String })
   @Get('video')
-  async showVideoAds(@Req()req: any): Promise<{ ads: Ads[] }> {
+  async showVideoAds(
+    @Req() req: any,
+    @Query('type') type: string,
+  ): Promise<{ ads: Ads[] }> {
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    return await this.adsService.getVideoAds(ip);
+    return await this.adsService.getVideoAds(ip, type);
   }
-
-
 }

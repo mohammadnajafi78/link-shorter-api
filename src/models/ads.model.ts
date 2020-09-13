@@ -2,10 +2,10 @@ import { prop, ModelOptions } from '@typegoose/typegoose';
 import { BaseSchema } from 'src/core/baseSchema';
 import { ApiProperty } from '@nestjs/swagger';
 // انواع تبلیغات شامل پاپ آپ و بنری
-const ADS_TYPE = ['popup', 'vertical', 'horizontal', 'movie'];
+const ADS_TYPE = ['popup', 'vertical', 'horizontal', 'movie', 'vast'];
 
 @ModelOptions({ schemaOptions: { timestamps: true } })
-export class Ads {
+export class Ads extends BaseSchema {
   @ApiProperty({ required: false })
   @prop()
   image?: string;

@@ -533,7 +533,7 @@ class ShortLinkComponent {
         // لینک دریافت شده
         this.link = {};
         // تایمر برای انتظار
-        this.timeLeft = 7;
+        this.timeLeft = 0;
         // دامنه سایت
         this.BASE_URL = _environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].url;
         // فرمت های ویدیو
@@ -545,7 +545,7 @@ class ShortLinkComponent {
             ".doc",
             ".docx",
             ".rtf",
-            " .msg",
+            ".msg",
             ".pdf",
             ".txt",
             ".arc",
@@ -559,7 +559,7 @@ class ShortLinkComponent {
             ".zip",
         ];
         // برای تست
-        this.showLink = false;
+        this.showLink = true;
         this.format = "";
         this.route.paramMap.subscribe((params) => {
             this.shortLink = params.get("shortLink");

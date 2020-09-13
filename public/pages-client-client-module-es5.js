@@ -1148,15 +1148,15 @@
 
           this.link = {}; // تایمر برای انتظار
 
-          this.timeLeft = 7; // دامنه سایت
+          this.timeLeft = 0; // دامنه سایت
 
           this.BASE_URL = _environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].url; // فرمت های ویدیو
 
           this.videoFormat = [".mp4", ".mkv", ".webm", ".ogg", ".mov", ".mkv", ".avi"]; // فرمت های فایل
 
-          this.fileFormat = [".asc", ".exe", ".doc", ".docx", ".rtf", " .msg", ".pdf", ".txt", ".arc", ".arj ", ".gz", ".hqx", ".rar", ".sit", ".tar", ".z", ".zip"]; // برای تست
+          this.fileFormat = [".asc", ".exe", ".doc", ".docx", ".rtf", ".msg", ".pdf", ".txt", ".arc", ".arj ", ".gz", ".hqx", ".rar", ".sit", ".tar", ".z", ".zip"]; // برای تست
 
-          this.showLink = false;
+          this.showLink = true;
           this.format = "";
           this.route.paramMap.subscribe(function (params) {
             _this5.shortLink = params.get("shortLink");

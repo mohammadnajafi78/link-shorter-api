@@ -12,7 +12,7 @@ export class Ads extends BaseSchema {
 
   //آدرس تبلیغ
   @ApiProperty({ required: true })
-  @prop({ required: true })
+  @prop({ required: true, trim: true })
   link?: string;
 
   //نوع تبلیغ

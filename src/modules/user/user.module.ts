@@ -6,15 +6,14 @@ import { User } from 'src/models/user.model';
 import { Setting } from '../../models/setting.model';
 import { Visit } from '../../models/visit.model';
 import { Link } from '../../models/link.model';
-import { SmsService } from '../../services/sms-service/sms-service';
 @Module({
   imports: [
     TypegooseModule.forFeature([User]),
     TypegooseModule.forFeature([Setting]),
     TypegooseModule.forFeature([Visit]),
-    TypegooseModule.forFeature([Link])
+    TypegooseModule.forFeature([Link]),
   ],
-  providers: [UserService,SmsService],
+  providers: [UserService],
   controllers: [UserController],
 })
 export class UserModule {}

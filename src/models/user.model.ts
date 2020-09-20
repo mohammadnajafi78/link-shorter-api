@@ -1,4 +1,4 @@
-import { prop, ModelOptions, pre, post, Ref } from '@typegoose/typegoose';
+import { prop, ModelOptions, Ref } from '@typegoose/typegoose';
 import { ApiProperty } from '@nestjs/swagger';
 import { BaseSchema } from 'src/core/baseSchema';
 //وضعیت های کاربران
@@ -7,18 +7,30 @@ const USER_STATUS = ['active', 'inactive', 'block'];
 // نقش های کاربران
 const USER_ROLE = ['admin', 'user'];
 
-class UserKey {
-  //کلید اعتبار سنجی کاربر
+class Key {
+  @ApiProperty()
   @prop()
-  activateKey?: string;
+  resetPasswordKey?: string;
 
-  // مدت زمان اعتبار کلید
+  @ApiProperty()
   @prop()
-  activateExpire?: Date;
+  expierTime?: Date;
 }
 
 @ModelOptions({ schemaOptions: { timestamps: true } })
 export class User extends BaseSchema {
+  @ApiProperty({ required: true })
+  @prop({ required: true, unique: true, trim: true })
+  email?: string;
+
+  @ApiProperty({ required: true })
+  @prop({ required: true })
+  password?: string;
+
+  @ApiProperty({ required: true })
+  @prop({ required: true, unique: true, trim: true })
+  username?: string;
+
   @ApiProperty({ required: false })
   @prop()
   name?: string;
@@ -47,8 +59,8 @@ export class User extends BaseSchema {
   @prop()
   country?: string;
 
-  @ApiProperty({ required: true })
-  @prop({ required: true, unique: true, type: String, trim: true })
+  @ApiProperty({ required: false })
+  @prop({ required: false, trim: true })
   phone?: string;
 
   @ApiProperty({ required: false, default: 0 })
@@ -89,11 +101,8 @@ export class User extends BaseSchema {
   @prop()
   accountAddress?: string;
 
-  @prop()
-  keys?: UserKey;
-
   @ApiProperty({ required: true, readOnly: true })
-  @prop({ unique: true, required: true })
+  @prop({ required: true, unique: true })
   identifierCode?: string;
 
   @ApiProperty({ type: User })
@@ -103,4 +112,8 @@ export class User extends BaseSchema {
   @ApiProperty()
   @prop({ default: 0 })
   subsetSalary?: number;
+
+  @ApiProperty()
+  @prop()
+  keys?: Key;
 }

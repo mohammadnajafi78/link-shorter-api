@@ -1,34 +1,31 @@
 import { User } from 'src/models/user.model';
 import { ApiProperty, ApiResponseProperty } from '@nestjs/swagger';
 
-
-export class SignInBody {
+export class SignUpBody {
   @ApiProperty()
-  phone: string;
+  username: string;
+
+  @ApiProperty()
+  email: string;
+
+  @ApiProperty()
+  password: string;
 }
 
 export class SignInResponse {
-  @ApiResponseProperty()
+  @ApiProperty()
+  token: string;
+
+  @ApiProperty()
   status: boolean;
 }
 
-export class VerifyBody {
+export class LoginBody {
   @ApiProperty()
-  phone: string;
+  username: string;
 
   @ApiProperty()
-  key: string;
-}
-
-export class VerifyResponse {
-  @ApiResponseProperty()
-  message: string;
-
-  @ApiResponseProperty()
-  token: string;
-
-  @ApiResponseProperty()
-  id: string;
+  password: string;
 }
 
 export class UserResponseDto {
@@ -42,4 +39,25 @@ export class FindByPhoneResponse {
 
   @ApiProperty()
   phone: string;
+}
+export class ForgetPasswordBody {
+  @ApiProperty()
+  email: string;
+}
+export class ForgetPasswordRes {
+  @ApiResponseProperty()
+  status: boolean;
+}
+
+export class ResetPassword {
+  @ApiProperty()
+  code: string;
+
+  @ApiProperty()
+  password: string;
+}
+
+export class ResetRes {
+  @ApiProperty()
+  status: boolean;
 }

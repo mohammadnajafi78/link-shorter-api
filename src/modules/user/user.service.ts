@@ -8,8 +8,9 @@ import { TOKEN_SECRET_KEY } from 'src/config';
 import { Link } from '../../models/link.model';
 import { Setting } from '../../models/setting.model';
 import { Visit } from '../../models/visit.model';
-import { SmsService } from '../../services/sms-service/sms-service';
-
+import * as md5 from 'md5';
+import * as nodemailer from 'nodemailer';
+import e = require('express');
 @Injectable()
 export class UserService {
   constructor(
@@ -19,7 +20,6 @@ export class UserService {
     private readonly settingModel: ReturnModelType<typeof Setting>,
     @InjectModel(Visit)
     private readonly visitModel: ReturnModelType<typeof Visit>,
-    private readonly smsService: SmsService,
   ) {}
 
   async createUniqueString() {
@@ -151,20 +151,43 @@ export class UserService {
       if (!!user.parent) {
         const parentUser = await this.userModel.findById(user.parent);
         parentUser.subsetSalary =
-          parentUser.subsetSalary + (totalSalary / 100) * 5;
-        parentUser.salary = parentUser.salary + (totalSalary / 100) * 5;
+          parentUser.subsetSalary + Math.ceil((totalSalary / 100) * 5);
+        parentUser.salary =
+          parentUser.salary + Math.ceil((totalSalary / 100) * 5);
         await parentUser.save();
       }
 
       // بروزرسانی درامد
-      const newUser = await this.userModel.findByIdAndUpdate(
-        user._id,
-        {
-          salary: user.salary,
-        },
-        { new: true },
-      );
+      const newUser = await this.userModel
+        .findByIdAndUpdate(
+          user._id,
+          {
+            salary: user.salary,
+          },
+          { new: true },
+        )
+        .select('-password');
       return { user: newUser };
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  async changePassword(password: string, code: string) {
+    try {
+      const user = await this.userModel.findOne({
+        'keys.resetPasswordKey': code,
+      });
+
+      if (user) {
+        user.keys.resetPasswordKey = '';
+        user.keys.expierTime = new Date(Date.now());
+        user.password = md5(password);
+        await user.save();
+        return { status: true };
+      } else {
+        throw { message: 'کاربر وجود ندارد' };
+      }
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
     }
@@ -175,95 +198,137 @@ export class UserService {
     try {
       const users = await this.userModel
         .find({ parent: id })
-        .select('phone createdAt');
+        .select('username createdAt');
       return { users };
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
     }
   }
 
-  // ثبت نام کاربر
-  async signin(
-    phone: string,
-    identifier?: string,
-  ): Promise<{ status: boolean }> {
+  async resetPassword(email: string) {
     try {
-      // حذف صفر ابتدای شماره
-      if (phone.startsWith('0')) {
-        phone = phone.substr(1);
+      const user = await this.userModel.findOne({ email });
+
+      if (!user) {
+        throw { message: 'ایمیل وجود ندارد' };
       }
-      const userExist = await this.userModel.exists({ phone });
-      const keys = {
-        activateKey: randomstring.generate({
-          charset: 'numeric',
-          length: 6,
-        }),
-        activateExpire: new Date(Date.now() + 60 * 60 * 1000),
-      };
+      const resetKey = randomstring.generate({
+        length: 30,
+        charset: 'alphanumeric',
+      });
 
-      // اگر کاربر وجود دارد فقط کلید جدید تولید شود
-      if (userExist) {
-        await this.userModel.findOneAndUpdate(
-          { phone },
-          { keys },
-          { new: true },
-        );
-      } else {
-        // ایجاد کد معرف برای کاربر
-        const identifierCode = await this.createUniqueString();
-        // افزودن اطلاعات مورد نیاز به آبجکت
-        const newUser: User = { phone, keys, identifierCode };
-        // آیا کد معرف وجود دارد؟
-        let identifierExist: boolean;
-        if (!!identifier) {
-          identifierExist = await this.userModel.exists({
-            identifierCode: identifier,
-          });
-        }
-        // اگر کد معرف وجود دارد در مدل کاربر ثبت شود
-        if (identifierExist) {
-          const identifierUser = await this.userModel.findOne({
-            identifierCode: identifier,
-          });
-          Object.assign(newUser, { parent: identifierUser._id });
-        }
-        const user = new this.userModel(newUser);
-        await user.save();
-      }
+      const transporter = nodemailer.createTransport({
+        host: 'mail.igad.ir',
+        port: 587,
+        tls: {
+          rejectUnauthorized: false,
+        },
+        secure: false, // true for 465, false for other ports
+        auth: {
+          user: 'no.reply@igad.ir', // generated ethereal user
+          pass: 'QNfPdRoRQM', // generated ethereal password
+        },
+      });
 
-      // اسال SMS
-      this.smsService.send(phone, keys.activateKey);
+      const info = await transporter.sendMail({
+        from: '1xad.net <no.reply@igad.ir>', // sender address
+        to: email, // list of receivers
+        subject: 'فراموشی رمز عبور', // Subject line
+        html: `<div style="text-align: right;font-size: 16px;font-weight: 600;">
+                برای بازیابی رمز عبور روی این <a href='https://1xad.net/email/verify/${user.keys.resetPasswordKey}'> لینک </a> کلیک کنید
+              </div>`, // html body
+      });
 
+      user.keys.resetPasswordKey = resetKey;
+      user.keys.expierTime = new Date(Date.now() + 60 * 60 * 1000);
+      await user.save();
       return { status: true };
+    } catch (error) {
+      console.log(error);
+
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  async verifyRessetPassword(code: string) {
+    try {
+      const user = await this.userModel.findOne({
+        'keys.resetPasswordKey': code,
+      });
+
+      if (user) {
+        if (user.keys.expierTime <= new Date()) {
+          throw { message: 'درخواست شما منقضی شده است' };
+        }
+        return { status: true };
+      } else {
+        throw { message: 'کد اشتباه است' };
+      }
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
     }
   }
 
-  // اعتبار سنجی کاربر
-  async verify(phone: string, key: string) {
+  async signUp(
+    username: string,
+    email: string,
+    password: string,
+    identifier?: string,
+  ) {
+    try {
+      const userExist = await this.userModel.exists({ email });
+      if (!!userExist) {
+        throw { message: 'ایمیل قبلا ثبت شده است' };
+      }
+      const identifierCode = await this.createUniqueString();
+
+      const newUser: User = {
+        username,
+        email,
+        password: md5(password),
+        identifierCode,
+        status: 'active',
+      };
+
+      if (!!identifier) {
+        const parent = await this.userModel.findOne({
+          identifierCode: identifier,
+        });
+        Object.assign(newUser, { parent: parent._id });
+      }
+
+      const user = new this.userModel(newUser);
+
+      await user.save();
+      const payload = { _id: user._id };
+      const token = jwt.sign(payload, TOKEN_SECRET_KEY);
+
+      return { token, status: true };
+    } catch (error) {
+      throw new HttpException(error, HttpStatus.BAD_REQUEST);
+    }
+  }
+
+  async usernameExist(username: string): Promise<boolean> {
+    try {
+      return await this.userModel.exists({ username });
+    } catch (error) {
+      throw { message: 'نام کاربری یا رمز عبور اشتباه' };
+    }
+  }
+
+  async login(username: string, password: string) {
     try {
       const user = await this.userModel.findOne({
-        phone,
-        'keys.activateKey': key,
+        username,
+        password: md5(password),
       });
-
-      // آیا کاربر با این شماره تلفن و کلید وجود دارد؟
-      if (user) {
-        // آیا کلید منقضی شده است یا خیر؟
-        if (user.keys.activateExpire <= new Date()) {
-          throw { message: 'درخواست شما منقضی شده است.' };
-        }
-        user.keys.activateKey = '';
-        user.keys.activateExpire = new Date(Date.now());
-        user.status = 'active';
-        await user.save();
+      if (!!user) {
         const payload = { _id: user._id };
         const token = jwt.sign(payload, TOKEN_SECRET_KEY);
-
-        return { message: 'شما وارد شدید', token };
+        return { token, status: true };
       } else {
-        throw { message: 'کد فعالسازی اشتباه است' };
+        throw { message: 'نام کاربری یا رمز عبور اشتباه' };
       }
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
@@ -279,13 +344,13 @@ export class UserService {
     try {
       const query = {};
       if (!!search) {
-        Object.assign(query, { phone: new RegExp(search, 'g') });
+        Object.assign(query, { username: new RegExp(search, 'g') });
       }
       const users = await this.userModel
         .find(query)
         .skip(Number(skip))
         .limit(Number(limit))
-        .select('-keys')
+        .select('-password')
         .sort({ createdAt: -1 });
 
       const count = await this.userModel.countDocuments(query);
@@ -302,9 +367,8 @@ export class UserService {
       // حذف برای امنیت بروزرسانی
       delete data.role;
       delete data.status;
-      delete data.keys;
       delete data.salary;
-      delete data.phone;
+      delete data.password;
       await this.userModel.findByIdAndUpdate(id, data, { new: true });
       return { status: true };
     } catch (error) {

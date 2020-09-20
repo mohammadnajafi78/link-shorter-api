@@ -668,14 +668,11 @@ class UserService {
             });
         }
     }
-    signin(phone, identifier) {
-        return this.http.post(`${this.base}/signin`, {
-            phone,
-            identifier,
-        });
+    login(username, password) {
+        return this.http.post(`${this.base}/login`, { username, password });
     }
-    verify(phone, key) {
-        return this.http.post(`${this.base}/verify`, { phone, key });
+    signUp(user) {
+        return this.http.post(`${this.base}/signup`, user);
     }
     findSubset() {
         return this.http.get(`${this.base}/subset`);
@@ -693,6 +690,23 @@ class UserService {
     }
     updateUser(user) {
         return this.http.put(`${this.base}/profile`, user);
+    }
+    usernameExist(username) {
+        return this.http.post(`${this.base}/username`, { username });
+    }
+    forgetPassword(email) {
+        return this.http.post(`${this.base}/forget-password`, {
+            email,
+        });
+    }
+    verifyResetPassword(code) {
+        return this.http.post(`${this.base}/verify/${code}`, {});
+    }
+    changePassword(code, password) {
+        return this.http.post(`${this.base}/change-password`, {
+            code,
+            password,
+        });
     }
 }
 UserService.ɵfac = function UserService_Factory(t) { return new (t || UserService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"])); };

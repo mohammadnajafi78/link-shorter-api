@@ -14,47 +14,51 @@ import { Auth } from 'src/guards/auth.guard';
 import {
   ApiBody,
   ApiOkResponse,
-  ApiOperation, ApiParam,
+  ApiOperation,
+  ApiParam,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
 import {
   FindByPhoneResponse,
-  SignInBody,
+  SignUpBody,
+  LoginBody,
   SignInResponse,
-  UserResponseDto,
-  VerifyBody,
-  VerifyResponse,
+  ForgetPasswordBody,
+  ForgetPasswordRes,
+  ResetPassword,
+  ResetRes,
 } from './users.dto';
 import { ApiGetQuery } from '../../core/decorators';
 
-@ApiTags('Users')
+@ApiTags('users')
 @Controller('api/users')
 export class UserController {
-  constructor(
-    private readonly userService: UserService,
-  ) {
-  }
+  constructor(private readonly userService: UserService) {}
 
-  @ApiOperation({ summary: 'ورود کاربر' })
-  @ApiBody({ type: SignInBody })
-  @ApiOkResponse({ type: SignInBody })
-  @Post('signin')
-  async signin(
-    @Body('phone') phone: string,
+  @ApiOperation({ summary: 'ثبت نام' })
+  @ApiBody({ type: SignUpBody })
+  @ApiOkResponse({ type: SignInResponse })
+  @Post('signup')
+  async signUp(
+    @Body('username') username: string,
+    @Body('password') password: string,
+    @Body('email') email: string,
     @Body('identifier') identifier?: string,
   ) {
-    return await this.userService.signin(phone, identifier);
+    return await this.userService.signUp(username, email, password, identifier);
   }
 
-  @ApiOperation({ summary: 'اعتبار سنجی کاربر' })
-  @ApiBody({ type: VerifyBody })
-  @ApiResponse({ type: VerifyResponse })
-  @Post('verify')
-  async verify(@Body('phone') phone: string, @Body('key') key: string) {
-    return await this.userService.verify(phone, key);
+  @ApiOperation({ summary: 'ورود' })
+  @ApiBody({ type: LoginBody })
+  @ApiOkResponse({ type: SignInResponse })
+  @Post('login')
+  async login(
+    @Body('username') username: string,
+    @Body('password') password: string,
+  ) {
+    return await this.userService.login(username, password);
   }
-
   @ApiOperation({ summary: 'لیست کاربران' })
   @ApiGetQuery()
   @ApiOkResponse({ type: [User] })
@@ -62,10 +66,18 @@ export class UserController {
   @Get()
   async getUserList(
     @Query('search') search: string,
-    @Query('skip') skip: number = 1,
-    @Query('limit') limit: number = 1,
+    @Query('skip') skip = 1,
+    @Query('limit') limit = 10,
   ): Promise<{ users: User[]; count: number }> {
     return await this.userService.getUserList(search, skip, limit);
+  }
+
+  @ApiOperation({ summary: 'ارسال ایمیل فراموشی رمز عبور' })
+  @ApiBody({ type: ForgetPasswordBody })
+  @ApiOkResponse({ type: ForgetPasswordRes })
+  @Post('forget-password')
+  async forgetPassword(@Body('email') email: string) {
+    return await this.userService.resetPassword(email);
   }
 
   @ApiOperation({ summary: 'پروفایل کاربر' })
@@ -80,6 +92,13 @@ export class UserController {
     }
   }
 
+  @ApiOperation({ summary: 'بررسی وجود یا عدم وجود نام کاربری' })
+  @ApiOkResponse({ type: Boolean })
+  @Post('username')
+  async usernameExist(@Body('username') username: string): Promise<boolean> {
+    return await this.userService.usernameExist(username);
+  }
+
   @ApiOperation({ summary: 'گرفتن لیست زیر مجموعه ها' })
   @ApiOkResponse({ type: User })
   @Auth()
@@ -88,11 +107,33 @@ export class UserController {
     return this.userService.findSubset(req.user._id);
   }
 
+  @ApiOperation({ summary: 'اعتبار سنجی کد فراموشی رمز' })
+  @ApiParam({ name: 'code', description: 'کد فراموشی رمز عبور' })
+  @ApiOkResponse({ type: ResetRes })
+  @Post('verify/:code')
+  async verifyResetPassword(@Param('code') code: string) {
+    return await this.userService.verifyRessetPassword(code);
+  }
+
+  @ApiOperation({ summary: 'تغییر رمز عبور' })
+  @ApiBody({ type: ResetPassword })
+  @ApiOkResponse({ type: ResetRes })
+  @Post('change-password')
+  async changePassword(
+    @Body('code') code: string,
+    @Body('password') password: string,
+  ) {
+    return await this.userService.changePassword(password, code);
+  }
+
   @ApiOperation({ summary: 'ویرایش حساب کاربری' })
   @ApiBody({ type: User })
   @Auth()
   @Put('profile')
-  async updateProfile(@Req() request: any, @Body() data: User): Promise<{ status: boolean }> {
+  async updateProfile(
+    @Req() request: any,
+    @Body() data: User,
+  ): Promise<{ status: boolean }> {
     return await this.userService.updateProfile(request.user._id, data);
   }
 
@@ -103,12 +144,11 @@ export class UserController {
   @Auth('admin')
   @Put(':id')
   async adminUpdate(
-    @Param('id')id: string,
+    @Param('id') id: string,
     @Body() user: User,
   ): Promise<{ user: User }> {
     return await this.userService.adminUpdate(id, user);
   }
-
 
   @ApiOperation({ summary: 'گرفتن کاربر با شماره تلفن' })
   @ApiParam({ name: 'phone', description: 'شماره تلقن کاربر' })

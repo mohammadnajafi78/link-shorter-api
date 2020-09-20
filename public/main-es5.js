@@ -1284,20 +1284,17 @@
         }
 
         _createClass(UserService, [{
-          key: "signin",
-          value: function signin(phone, identifier) {
-            return this.http.post("".concat(this.base, "/signin"), {
-              phone: phone,
-              identifier: identifier
+          key: "login",
+          value: function login(username, password) {
+            return this.http.post("".concat(this.base, "/login"), {
+              username: username,
+              password: password
             });
           }
         }, {
-          key: "verify",
-          value: function verify(phone, key) {
-            return this.http.post("".concat(this.base, "/verify"), {
-              phone: phone,
-              key: key
-            });
+          key: "signUp",
+          value: function signUp(user) {
+            return this.http.post("".concat(this.base, "/signup"), user);
           }
         }, {
           key: "findSubset",
@@ -1325,6 +1322,33 @@
           key: "updateUser",
           value: function updateUser(user) {
             return this.http.put("".concat(this.base, "/profile"), user);
+          }
+        }, {
+          key: "usernameExist",
+          value: function usernameExist(username) {
+            return this.http.post("".concat(this.base, "/username"), {
+              username: username
+            });
+          }
+        }, {
+          key: "forgetPassword",
+          value: function forgetPassword(email) {
+            return this.http.post("".concat(this.base, "/forget-password"), {
+              email: email
+            });
+          }
+        }, {
+          key: "verifyResetPassword",
+          value: function verifyResetPassword(code) {
+            return this.http.post("".concat(this.base, "/verify/").concat(code), {});
+          }
+        }, {
+          key: "changePassword",
+          value: function changePassword(code, password) {
+            return this.http.post("".concat(this.base, "/change-password"), {
+              code: code,
+              password: password
+            });
           }
         }]);
 

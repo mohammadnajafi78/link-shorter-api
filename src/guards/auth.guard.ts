@@ -26,11 +26,10 @@ export class AuthGaurd implements CanActivate {
   constructor(
     @InjectModel(User) private readonly userModel: ReturnModelType<typeof User>,
     private readonly reflector: Reflector,
-  ) {
-  }
+  ) {}
 
   getUser = (decoded: { _id: string }) =>
-    this.userModel.findById(decoded._id).select('-keys');
+    this.userModel.findById(decoded._id).select('-keys -password');
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     try {

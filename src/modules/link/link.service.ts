@@ -75,7 +75,7 @@ export class LinkService {
         .find(query)
         .skip(Number(skip))
         .limit(Number(limit))
-        .populate({ path: 'user', select: 'phone' })
+        .populate({ path: 'user', select: 'username' })
         .sort({ createdAt: -1 });
       const count = await this.linkModel.countDocuments(query);
       return { links, count };

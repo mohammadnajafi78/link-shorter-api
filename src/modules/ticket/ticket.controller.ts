@@ -53,10 +53,10 @@ export class TicketController {
     return await this.ticketService.getTicketList(search, skip, limit, read);
   }
 
-  @ApiOperation({ summary: 'گرفتن یک لینک' })
+  @ApiOperation({ summary: 'گرفتن یک تیکت' })
   @ApiParam({ name: 'id', description: 'شناسه تیکت' })
   @ApiOkResponse({ type: Ticket })
-  @Auth('admin')
+  @Auth()
   @Get(':id')
   async getTicket(@Param('id') id: string): Promise<{ ticket: Ticket }> {
     return await this.ticketService.getTicket(id);

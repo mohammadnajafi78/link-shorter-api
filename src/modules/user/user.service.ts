@@ -235,7 +235,7 @@ export class UserService {
         to: email, // list of receivers
         subject: 'فراموشی رمز عبور', // Subject line
         html: `<div style="text-align: right;font-size: 16px;font-weight: 600;">
-                برای بازیابی رمز عبور روی این <a href='https://1xad.net/email/verify/${user.keys.resetPasswordKey}'> لینک </a> کلیک کنید
+                برای بازیابی رمز عبور روی این <a href='https://1xad.net/email/verify/${resetKey}'> لینک </a> کلیک کنید
               </div>`, // html body
       });
 

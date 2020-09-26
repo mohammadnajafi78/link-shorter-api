@@ -27,4 +27,8 @@ export class Link extends BaseSchema {
   @ApiProperty({ required: true })
   @prop({ required: true })
   showAds?: boolean;
+
+  @ApiProperty()
+  @prop({ default: true })
+  popUp?: boolean;
 }

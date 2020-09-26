@@ -683,7 +683,6 @@ class ShortLinkComponent {
         });
         this.ads = { horizontals: [], verticals: [], popup: [] };
         this.openPopup = false;
-        this.popupNumber = 0;
         this.showProgess = false;
         this.advandeError = false;
     }
@@ -707,16 +706,12 @@ class ShortLinkComponent {
     }
     popUp() {
         // آیا پاپ آپ باز شود؟
-        if (!this.openPopup) {
+        if (!this.openPopup && this.link.popUp) {
             // باز کردن پاپ آپ
-            const newWindow = window.open(this.ads.popup[this.popupNumber].link, "bottom", "height=600,width=800");
+            const newWindow = window.open(this.ads.popup[0].link, "bottom", "height=600,width=800");
             if (window.focus) {
                 newWindow.focus();
             }
-            // پاپ آپ نمایش داده شد
-            this.openPopup = true;
-            // پاپ آپ بعدی نمایش داده شود
-            this.popupNumber = 1;
         }
     }
     findLinkFormat() {
@@ -805,7 +800,6 @@ class ShortLinkComponent {
                 this.showLink = res.status;
                 this.getAds();
                 this.startTimer();
-                this.openPopup = false;
                 // this.link.mainLink.some();
             }, (err) => {
                 console.log(err);

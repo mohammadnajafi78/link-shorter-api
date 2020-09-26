@@ -1448,7 +1448,6 @@
             popup: []
           };
           this.openPopup = false;
-          this.popupNumber = 0;
           this.showProgess = false;
           this.advandeError = false;
         }
@@ -1470,18 +1469,13 @@
           key: "popUp",
           value: function popUp() {
             // آیا پاپ آپ باز شود؟
-            if (!this.openPopup) {
+            if (!this.openPopup && this.link.popUp) {
               // باز کردن پاپ آپ
-              var newWindow = window.open(this.ads.popup[this.popupNumber].link, "bottom", "height=600,width=800");
+              var newWindow = window.open(this.ads.popup[0].link, "bottom", "height=600,width=800");
 
               if (window.focus) {
                 newWindow.focus();
-              } // پاپ آپ نمایش داده شد
-
-
-              this.openPopup = true; // پاپ آپ بعدی نمایش داده شود
-
-              this.popupNumber = 1;
+              }
             }
           }
         }, {
@@ -1618,9 +1612,8 @@
 
                 _this10.getAds();
 
-                _this10.startTimer();
+                _this10.startTimer(); // this.link.mainLink.some();
 
-                _this10.openPopup = false; // this.link.mainLink.some();
               }, function (err) {
                 console.log(err);
               });

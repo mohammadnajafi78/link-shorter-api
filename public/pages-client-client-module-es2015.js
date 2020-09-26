@@ -689,11 +689,20 @@ class ShortLinkComponent {
     ngOnInit() {
         // دریافت تبلیغات
         this.getAds();
-        // let script = this._renderer2.createElement("script");
-        // script.type = `text/javascript`;
-        // script.text = `
-        // `;
-        // this._renderer2.appendChild(this._document.head, script);
+        let script = this._renderer2.createElement("script");
+        script.type = `text/javascript`;
+        script.text = `
+    (function(){
+      var now = new Date();
+      var head = document.getElementsByTagName('head')[0];
+      var script = document.createElement('script');
+      script.async = true;
+      var script_address = 'https://cdn.yektanet.com/js/10ad.co/native-10ad.co-9968.js';
+      script.src = script_address + '?v=' + now.getFullYear().toString() + '0' + now.getMonth() + '0' + now.getDate() + '0' + now.getHours();
+      head.appendChild(script);
+      })();
+    `;
+        this._renderer2.appendChild(this._document.head, script);
     }
     popUp() {
         // آیا پاپ آپ باز شود؟

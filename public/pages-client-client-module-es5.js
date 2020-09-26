@@ -1456,14 +1456,11 @@
           key: "ngOnInit",
           value: function ngOnInit() {
             // دریافت تبلیغات
-            this.getAds();
-
-            var script = this._renderer2.createElement("script");
-
-            script.type = "text/javascript";
-            script.text = "\n    (function(){\n      var now = new Date();\n      var head = document.getElementsByTagName('head')[0];\n      var script = document.createElement('script');\n      script.async = true;\n      var script_address = 'https://cdn.yektanet.com/js/10ad.co/native-10ad.co-9968.js';\n      script.src = script_address + '?v=' + now.getFullYear().toString() + '0' + now.getMonth() + '0' + now.getDate() + '0' + now.getHours();\n      head.appendChild(script);\n      })();\n    ";
-
-            this._renderer2.appendChild(this._document.head, script);
+            this.getAds(); // let script = this._renderer2.createElement("script");
+            // script.type = `text/javascript`;
+            // script.text = `
+            // `;
+            // this._renderer2.appendChild(this._document.head, script);
           }
         }, {
           key: "popUp",
@@ -1592,7 +1589,6 @@
                     case 0:
                       _context4.next = 2;
                       return this.adsService.showAds().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) {
-                        console.log(res);
                         _this9.ads = res;
                       })).toPromise();
 

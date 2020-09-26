@@ -4062,8 +4062,7 @@
             try {
               this.loading = true;
               this.linkService.update(id, {
-                showAds: showAds,
-                popUp: !showAds
+                showAds: showAds
               }).subscribe(function (res) {
                 _this17.loading = false;
 
@@ -4089,8 +4088,7 @@
             try {
               this.loading = true;
               this.linkService.update(id, {
-                popUp: popUp,
-                showAds: !popUp
+                popUp: popUp
               }).subscribe(function (res) {
                 _this18.loading = false;
 

@@ -1924,9 +1924,7 @@ class LinksComponent {
     toggleChange(id, showAds) {
         try {
             this.loading = true;
-            this.linkService
-                .update(id, { showAds, popUp: !showAds })
-                .subscribe((res) => {
+            this.linkService.update(id, { showAds }).subscribe((res) => {
                 this.loading = false;
                 if (res.status) {
                     this.snackBar.open("با موفقیت انجام شد", null, {
@@ -1946,9 +1944,7 @@ class LinksComponent {
     togglePopUp(id, popUp) {
         try {
             this.loading = true;
-            this.linkService
-                .update(id, { popUp, showAds: !popUp })
-                .subscribe((res) => {
+            this.linkService.update(id, { popUp }).subscribe((res) => {
                 this.loading = false;
                 if (res.status) {
                     this.snackBar.open("با موفقیت انجام شد", null, {

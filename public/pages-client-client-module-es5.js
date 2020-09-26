@@ -1590,6 +1590,7 @@
                     case 0:
                       _context4.next = 2;
                       return this.adsService.showAds().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) {
+                        console.log(res);
                         _this9.ads = res;
                       })).toPromise();
 

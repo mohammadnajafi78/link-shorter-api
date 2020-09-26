@@ -789,6 +789,7 @@ class ShortLinkComponent {
             yield this.adsService
                 .showAds()
                 .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])((res) => {
+                console.log(res);
                 this.ads = res;
             }))
                 .toPromise();

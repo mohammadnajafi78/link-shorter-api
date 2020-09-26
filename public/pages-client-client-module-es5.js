@@ -1476,6 +1476,8 @@
               if (window.focus) {
                 newWindow.focus();
               }
+
+              this.openPopup = true;
             }
           }
         }, {

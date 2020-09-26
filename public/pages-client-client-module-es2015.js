@@ -712,6 +712,7 @@ class ShortLinkComponent {
             if (window.focus) {
                 newWindow.focus();
             }
+            this.openPopup = true;
         }
     }
     findLinkFormat() {

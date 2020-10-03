@@ -239,7 +239,7 @@ class LoginComponent {
         this.passwordControl = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]);
         userService.user$.subscribe((res) => {
             if (res !== null) {
-                this.router.navigate(["/"]);
+                this.router.navigate(["/member/dashboard"]);
             }
         });
         this.username = "";
@@ -258,12 +258,12 @@ class LoginComponent {
                         .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["map"])((res) => {
                         if (res.status) {
                             localStorage.setItem("token", res.token);
+                            this.profile();
                             this.snackbar.open("وارد شدید", null, {
                                 verticalPosition: "bottom",
                                 horizontalPosition: "center",
                                 duration: 4000,
                             });
-                            this.profile();
                             this.router.navigate(["/member/dashboard"]);
                         }
                     }))
@@ -1332,7 +1332,7 @@ class SignupComponent {
         this.emailError = false;
         userService.user$.subscribe((res) => {
             if (res !== null) {
-                this.router.navigate(["/"]);
+                this.router.navigate(["/member/dashboard"]);
             }
         });
     }
@@ -1360,14 +1360,6 @@ class SignupComponent {
     get inputs() {
         return this.signUpForm.controls;
     }
-    // گرفتن پروفایل کاربر
-    profile() {
-        this.userService.profile().subscribe((res) => {
-            this.userService.user$.next(res.user);
-        }, (err) => {
-            console.log(err);
-        });
-    }
     signUp() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             try {
@@ -1379,16 +1371,13 @@ class SignupComponent {
                     yield this.userService
                         .signUp(this.user)
                         .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["map"])((res) => {
-                        console.log(res);
-                        if (!!res.status) {
+                        if (res.status) {
                             this.snackBar.open("ثبت نام با موفقیت انجام شد", null, {
                                 verticalPosition: "bottom",
                                 horizontalPosition: "center",
                                 duration: 4000,
                             });
-                            localStorage.setItem("token", res.token);
-                            this.profile();
-                            this.router.navigate(["/member/dashboard"]);
+                            this.router.navigate(["/user/login"]);
                         }
                     }))
                         .toPromise();

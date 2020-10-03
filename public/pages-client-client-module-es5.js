@@ -549,7 +549,7 @@
           this.passwordControl = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]);
           userService.user$.subscribe(function (res) {
             if (res !== null) {
-              _this2.router.navigate(["/"]);
+              _this2.router.navigate(["/member/dashboard"]);
             }
           });
           this.username = "";
@@ -584,13 +584,13 @@
                         if (res.status) {
                           localStorage.setItem("token", res.token);
 
+                          _this3.profile();
+
                           _this3.snackbar.open("وارد شدید", null, {
                             verticalPosition: "bottom",
                             horizontalPosition: "center",
                             duration: 4000
                           });
-
-                          _this3.profile();
 
                           _this3.router.navigate(["/member/dashboard"]);
                         }
@@ -2794,7 +2794,7 @@
           this.emailError = false;
           userService.user$.subscribe(function (res) {
             if (res !== null) {
-              _this16.router.navigate(["/"]);
+              _this16.router.navigate(["/member/dashboard"]);
             }
           });
         }
@@ -2817,22 +2817,10 @@
             });
           }
         }, {
-          key: "profile",
-          // گرفتن پروفایل کاربر
-          value: function profile() {
-            var _this18 = this;
-
-            this.userService.profile().subscribe(function (res) {
-              _this18.userService.user$.next(res.user);
-            }, function (err) {
-              console.log(err);
-            });
-          }
-        }, {
           key: "signUp",
           value: function signUp() {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
-              var _this19 = this;
+              var _this18 = this;
 
               var identifier;
               return regeneratorRuntime.wrap(function _callee7$(_context7) {
@@ -2854,20 +2842,14 @@
 
                       _context7.next = 6;
                       return this.userService.signUp(this.user).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_1__["map"])(function (res) {
-                        console.log(res);
-
-                        if (!!res.status) {
-                          _this19.snackBar.open("ثبت نام با موفقیت انجام شد", null, {
+                        if (res.status) {
+                          _this18.snackBar.open("ثبت نام با موفقیت انجام شد", null, {
                             verticalPosition: "bottom",
                             horizontalPosition: "center",
                             duration: 4000
                           });
 
-                          localStorage.setItem("token", res.token);
-
-                          _this19.profile();
-
-                          _this19.router.navigate(["/member/dashboard"]);
+                          _this18.router.navigate(["/user/login"]);
                         }
                       })).toPromise();
 
@@ -4209,7 +4191,7 @@
 
       var CircleProgressComponent = /*#__PURE__*/function () {
         function CircleProgressComponent(defaultOptions, elRef, document) {
-          var _this20 = this;
+          var _this19 = this;
 
           _classCallCheck(this, CircleProgressComponent);
 
@@ -4229,30 +4211,30 @@
           this._gradientUUID = null;
 
           this.render = function () {
-            _this20.applyOptions();
+            _this19.applyOptions();
 
-            if (_this20.options.lazy) {
+            if (_this19.options.lazy) {
               // Draw svg if it doesn't exist
-              _this20.svgElement === null && _this20.draw(_this20._lastPercent); // Draw it only when it's in the viewport
+              _this19.svgElement === null && _this19.draw(_this19._lastPercent); // Draw it only when it's in the viewport
 
-              if (_this20.isInViewport) {
+              if (_this19.isInViewport) {
                 // Draw it at the latest position when I am in.
-                if (_this20.options.animation && _this20.options.animationDuration > 0) {
-                  _this20.animate(_this20._lastPercent, _this20.options.percent);
+                if (_this19.options.animation && _this19.options.animationDuration > 0) {
+                  _this19.animate(_this19._lastPercent, _this19.options.percent);
                 } else {
-                  _this20.draw(_this20.options.percent);
+                  _this19.draw(_this19.options.percent);
                 }
 
-                _this20._lastPercent = _this20.options.percent;
+                _this19._lastPercent = _this19.options.percent;
               }
             } else {
-              if (_this20.options.animation && _this20.options.animationDuration > 0) {
-                _this20.animate(_this20._lastPercent, _this20.options.percent);
+              if (_this19.options.animation && _this19.options.animationDuration > 0) {
+                _this19.animate(_this19._lastPercent, _this19.options.percent);
               } else {
-                _this20.draw(_this20.options.percent);
+                _this19.draw(_this19.options.percent);
               }
 
-              _this20._lastPercent = _this20.options.percent;
+              _this19._lastPercent = _this19.options.percent;
             }
           };
 
@@ -4268,14 +4250,14 @@
 
           this.draw = function (percent) {
             // make percent reasonable
-            percent = percent === undefined ? _this20.options.percent : Math.abs(percent); // circle percent shouldn't be greater than 100%.
+            percent = percent === undefined ? _this19.options.percent : Math.abs(percent); // circle percent shouldn't be greater than 100%.
 
             var circlePercent = percent > 100 ? 100 : percent; // determine box size
 
-            var boxSize = _this20.options.radius * 2 + _this20.options.outerStrokeWidth * 2;
+            var boxSize = _this19.options.radius * 2 + _this19.options.outerStrokeWidth * 2;
 
-            if (_this20.options.showBackground) {
-              boxSize += _this20.options.backgroundStrokeWidth * 2 + _this20.max(0, _this20.options.backgroundPadding * 2);
+            if (_this19.options.showBackground) {
+              boxSize += _this19.options.backgroundStrokeWidth * 2 + _this19.max(0, _this19.options.backgroundPadding * 2);
             } // the centre of the circle
 
 
@@ -4286,29 +4268,29 @@
 
             var startPoint = {
               x: centre.x,
-              y: centre.y - _this20.options.radius
+              y: centre.y - _this19.options.radius
             }; // get the end point of the arc
 
-            var endPoint = _this20.polarToCartesian(centre.x, centre.y, _this20.options.radius, 360 * (_this20.options.clockwise ? circlePercent : 100 - circlePercent) / 100); // ####################
+            var endPoint = _this19.polarToCartesian(centre.x, centre.y, _this19.options.radius, 360 * (_this19.options.clockwise ? circlePercent : 100 - circlePercent) / 100); // ####################
             // We'll get an end point with the same [x, y] as the start point when percent is 100%, so move x a little bit.
 
 
             if (circlePercent === 100) {
-              endPoint.x = endPoint.x + (_this20.options.clockwise ? -0.01 : +0.01);
+              endPoint.x = endPoint.x + (_this19.options.clockwise ? -0.01 : +0.01);
             } // largeArcFlag and sweepFlag
 
 
             var largeArcFlag, sweepFlag;
 
             if (circlePercent > 50) {
-              var _ref = _this20.options.clockwise ? [1, 1] : [1, 0];
+              var _ref = _this19.options.clockwise ? [1, 1] : [1, 0];
 
               var _ref2 = _slicedToArray(_ref, 2);
 
               largeArcFlag = _ref2[0];
               sweepFlag = _ref2[1];
             } else {
-              var _ref3 = _this20.options.clockwise ? [0, 1] : [0, 0];
+              var _ref3 = _this19.options.clockwise ? [0, 1] : [0, 0];
 
               var _ref4 = _slicedToArray(_ref3, 2);
 
@@ -4317,23 +4299,23 @@
             } // percent may not equal the actual percent
 
 
-            var titlePercent = _this20.options.animateTitle ? percent : _this20.options.percent;
-            var titleTextPercent = titlePercent > _this20.options.maxPercent ? "".concat(_this20.options.maxPercent.toFixed(_this20.options.toFixed), "+") : titlePercent.toFixed(_this20.options.toFixed);
-            var subtitlePercent = _this20.options.animateSubtitle ? percent : _this20.options.percent; // get title object
+            var titlePercent = _this19.options.animateTitle ? percent : _this19.options.percent;
+            var titleTextPercent = titlePercent > _this19.options.maxPercent ? "".concat(_this19.options.maxPercent.toFixed(_this19.options.toFixed), "+") : titlePercent.toFixed(_this19.options.toFixed);
+            var subtitlePercent = _this19.options.animateSubtitle ? percent : _this19.options.percent; // get title object
 
             var title = {
               x: centre.x,
               y: centre.y,
               textAnchor: 'middle',
-              color: _this20.options.titleColor,
-              fontSize: _this20.options.titleFontSize,
-              fontWeight: _this20.options.titleFontWeight,
+              color: _this19.options.titleColor,
+              fontSize: _this19.options.titleFontSize,
+              fontWeight: _this19.options.titleFontWeight,
               texts: [],
               tspans: []
             }; // from v0.9.9, both title and titleFormat(...) may be an array of string.
 
-            if (_this20.options.titleFormat !== undefined && _this20.options.titleFormat.constructor.name === 'Function') {
-              var formatted = _this20.options.titleFormat(titlePercent);
+            if (_this19.options.titleFormat !== undefined && _this19.options.titleFormat.constructor.name === 'Function') {
+              var formatted = _this19.options.titleFormat(titlePercent);
 
               if (formatted instanceof Array) {
                 title.texts = _toConsumableArray(formatted);
@@ -4341,13 +4323,13 @@
                 title.texts.push(formatted.toString());
               }
             } else {
-              if (_this20.options.title === 'auto') {
+              if (_this19.options.title === 'auto') {
                 title.texts.push(titleTextPercent);
               } else {
-                if (_this20.options.title instanceof Array) {
-                  title.texts = _toConsumableArray(_this20.options.title);
+                if (_this19.options.title instanceof Array) {
+                  title.texts = _toConsumableArray(_this19.options.title);
                 } else {
-                  title.texts.push(_this20.options.title.toString());
+                  title.texts.push(_this19.options.title.toString());
                 }
               }
             } // get subtitle object
@@ -4357,15 +4339,15 @@
               x: centre.x,
               y: centre.y,
               textAnchor: 'middle',
-              color: _this20.options.subtitleColor,
-              fontSize: _this20.options.subtitleFontSize,
-              fontWeight: _this20.options.subtitleFontWeight,
+              color: _this19.options.subtitleColor,
+              fontSize: _this19.options.subtitleFontSize,
+              fontWeight: _this19.options.subtitleFontWeight,
               texts: [],
               tspans: []
             }; // from v0.9.9, both subtitle and subtitleFormat(...) may be an array of string.
 
-            if (_this20.options.subtitleFormat !== undefined && _this20.options.subtitleFormat.constructor.name === 'Function') {
-              var _formatted = _this20.options.subtitleFormat(subtitlePercent);
+            if (_this19.options.subtitleFormat !== undefined && _this19.options.subtitleFormat.constructor.name === 'Function') {
+              var _formatted = _this19.options.subtitleFormat(subtitlePercent);
 
               if (_formatted instanceof Array) {
                 subtitle.texts = _toConsumableArray(_formatted);
@@ -4373,27 +4355,27 @@
                 subtitle.texts.push(_formatted.toString());
               }
             } else {
-              if (_this20.options.subtitle instanceof Array) {
-                subtitle.texts = _toConsumableArray(_this20.options.subtitle);
+              if (_this19.options.subtitle instanceof Array) {
+                subtitle.texts = _toConsumableArray(_this19.options.subtitle);
               } else {
-                subtitle.texts.push(_this20.options.subtitle.toString());
+                subtitle.texts.push(_this19.options.subtitle.toString());
               }
             } // get units object
 
 
             var units = {
-              text: "".concat(_this20.options.units),
-              fontSize: _this20.options.unitsFontSize,
-              fontWeight: _this20.options.unitsFontWeight,
-              color: _this20.options.unitsColor
+              text: "".concat(_this19.options.units),
+              fontSize: _this19.options.unitsFontSize,
+              fontWeight: _this19.options.unitsFontWeight,
+              color: _this19.options.unitsColor
             }; // get total count of text lines to be shown
 
             var rowCount = 0,
                 rowNum = 1;
-            _this20.options.showTitle && (rowCount += title.texts.length);
-            _this20.options.showSubtitle && (rowCount += subtitle.texts.length); // calc dy for each tspan for title
+            _this19.options.showTitle && (rowCount += title.texts.length);
+            _this19.options.showSubtitle && (rowCount += subtitle.texts.length); // calc dy for each tspan for title
 
-            if (_this20.options.showTitle) {
+            if (_this19.options.showTitle) {
               var _iterator = _createForOfIteratorHelper(title.texts),
                   _step;
 
@@ -4402,7 +4384,7 @@
                   var span = _step.value;
                   title.tspans.push({
                     span: span,
-                    dy: _this20.getRelativeY(rowNum, rowCount)
+                    dy: _this19.getRelativeY(rowNum, rowCount)
                   });
                   rowNum++;
                 }
@@ -4414,7 +4396,7 @@
             } // calc dy for each tspan for subtitle
 
 
-            if (_this20.options.showSubtitle) {
+            if (_this19.options.showSubtitle) {
               var _iterator2 = _createForOfIteratorHelper(subtitle.texts),
                   _step2;
 
@@ -4423,7 +4405,7 @@
                   var _span = _step2.value;
                   subtitle.tspans.push({
                     span: _span,
-                    dy: _this20.getRelativeY(rowNum, rowCount)
+                    dy: _this19.getRelativeY(rowNum, rowCount)
                   });
                   rowNum++;
                 }
@@ -4435,60 +4417,60 @@
             } // create ID for gradient element
 
 
-            if (null === _this20._gradientUUID) {
-              _this20._gradientUUID = _this20.uuid();
+            if (null === _this19._gradientUUID) {
+              _this19._gradientUUID = _this19.uuid();
             } // Bring it all together
 
 
-            _this20.svg = {
+            _this19.svg = {
               viewBox: "0 0 ".concat(boxSize, " ").concat(boxSize),
               // Set both width and height to '100%' if it's responsive
-              width: _this20.options.responsive ? '100%' : boxSize,
-              height: _this20.options.responsive ? '100%' : boxSize,
+              width: _this19.options.responsive ? '100%' : boxSize,
+              height: _this19.options.responsive ? '100%' : boxSize,
               backgroundCircle: {
                 cx: centre.x,
                 cy: centre.y,
-                r: _this20.options.radius + _this20.options.outerStrokeWidth / 2 + _this20.options.backgroundPadding,
-                fill: _this20.options.backgroundColor,
-                fillOpacity: _this20.options.backgroundOpacity,
-                stroke: _this20.options.backgroundStroke,
-                strokeWidth: _this20.options.backgroundStrokeWidth
+                r: _this19.options.radius + _this19.options.outerStrokeWidth / 2 + _this19.options.backgroundPadding,
+                fill: _this19.options.backgroundColor,
+                fillOpacity: _this19.options.backgroundOpacity,
+                stroke: _this19.options.backgroundStroke,
+                strokeWidth: _this19.options.backgroundStrokeWidth
               },
               path: {
                 // A rx ry x-axis-rotation large-arc-flag sweep-flag x y (https://developer.mozilla.org/en/docs/Web/SVG/Tutorial/Paths#Arcs)
-                d: "M ".concat(startPoint.x, " ").concat(startPoint.y, "\n        A ").concat(_this20.options.radius, " ").concat(_this20.options.radius, " 0 ").concat(largeArcFlag, " ").concat(sweepFlag, " ").concat(endPoint.x, " ").concat(endPoint.y),
-                stroke: _this20.options.outerStrokeColor,
-                strokeWidth: _this20.options.outerStrokeWidth,
-                strokeLinecap: _this20.options.outerStrokeLinecap,
+                d: "M ".concat(startPoint.x, " ").concat(startPoint.y, "\n        A ").concat(_this19.options.radius, " ").concat(_this19.options.radius, " 0 ").concat(largeArcFlag, " ").concat(sweepFlag, " ").concat(endPoint.x, " ").concat(endPoint.y),
+                stroke: _this19.options.outerStrokeColor,
+                strokeWidth: _this19.options.outerStrokeWidth,
+                strokeLinecap: _this19.options.outerStrokeLinecap,
                 fill: 'none'
               },
               circle: {
                 cx: centre.x,
                 cy: centre.y,
-                r: _this20.options.radius - _this20.options.space - _this20.options.outerStrokeWidth / 2 - _this20.options.innerStrokeWidth / 2,
+                r: _this19.options.radius - _this19.options.space - _this19.options.outerStrokeWidth / 2 - _this19.options.innerStrokeWidth / 2,
                 fill: 'none',
-                stroke: _this20.options.innerStrokeColor,
-                strokeWidth: _this20.options.innerStrokeWidth
+                stroke: _this19.options.innerStrokeColor,
+                strokeWidth: _this19.options.innerStrokeWidth
               },
               title: title,
               units: units,
               subtitle: subtitle,
               image: {
-                x: centre.x - _this20.options.imageWidth / 2,
-                y: centre.y - _this20.options.imageHeight / 2,
-                src: _this20.options.imageSrc,
-                width: _this20.options.imageWidth,
-                height: _this20.options.imageHeight
+                x: centre.x - _this19.options.imageWidth / 2,
+                y: centre.y - _this19.options.imageHeight / 2,
+                src: _this19.options.imageSrc,
+                width: _this19.options.imageWidth,
+                height: _this19.options.imageHeight
               },
               outerLinearGradient: {
-                id: 'outer-linear-' + _this20._gradientUUID,
-                colorStop1: _this20.options.outerStrokeColor,
-                colorStop2: _this20.options.outerStrokeGradientStopColor === 'transparent' ? '#FFF' : _this20.options.outerStrokeGradientStopColor
+                id: 'outer-linear-' + _this19._gradientUUID,
+                colorStop1: _this19.options.outerStrokeColor,
+                colorStop2: _this19.options.outerStrokeGradientStopColor === 'transparent' ? '#FFF' : _this19.options.outerStrokeGradientStopColor
               },
               radialGradient: {
-                id: 'radial-' + _this20._gradientUUID,
-                colorStop1: _this20.options.backgroundColor,
-                colorStop2: _this20.options.backgroundGradientStopColor === 'transparent' ? '#FFF' : _this20.options.backgroundGradientStopColor
+                id: 'radial-' + _this19._gradientUUID,
+                colorStop1: _this19.options.backgroundColor,
+                colorStop2: _this19.options.backgroundGradientStopColor === 'transparent' ? '#FFF' : _this19.options.backgroundGradientStopColor
               }
             };
           };
@@ -4496,15 +4478,15 @@
           this.getAnimationParameters = function (previousPercent, currentPercent) {
             var MIN_INTERVAL = 10;
             var times, step, interval;
-            var fromPercent = _this20.options.startFromZero ? 0 : previousPercent < 0 ? 0 : previousPercent;
-            var toPercent = currentPercent < 0 ? 0 : _this20.min(currentPercent, _this20.options.maxPercent);
+            var fromPercent = _this19.options.startFromZero ? 0 : previousPercent < 0 ? 0 : previousPercent;
+            var toPercent = currentPercent < 0 ? 0 : _this19.min(currentPercent, _this19.options.maxPercent);
             var delta = Math.abs(Math.round(toPercent - fromPercent));
 
             if (delta >= 100) {
               // we will finish animation in 100 times
               times = 100;
 
-              if (!_this20.options.animateTitle && !_this20.options.animateSubtitle) {
+              if (!_this19.options.animateTitle && !_this19.options.animateSubtitle) {
                 step = 1;
               } else {
                 // show title or subtitle animation even if the arc is full, we also need to finish it in 100 times.
@@ -4517,13 +4499,13 @@
             } // Get the interval of timer
 
 
-            interval = Math.round(_this20.options.animationDuration / times); // Readjust all values if the interval of timer is extremely small.
+            interval = Math.round(_this19.options.animationDuration / times); // Readjust all values if the interval of timer is extremely small.
 
             if (interval < MIN_INTERVAL) {
               interval = MIN_INTERVAL;
-              times = _this20.options.animationDuration / interval;
+              times = _this19.options.animationDuration / interval;
 
-              if (!_this20.options.animateTitle && !_this20.options.animateSubtitle && delta > 100) {
+              if (!_this19.options.animateTitle && !_this19.options.animateSubtitle && delta > 100) {
                 step = Math.round(100 / times);
               } else {
                 step = Math.round(delta / times);
@@ -4543,87 +4525,87 @@
           };
 
           this.animate = function (previousPercent, currentPercent) {
-            if (_this20._timerSubscription && !_this20._timerSubscription.closed) {
-              _this20._timerSubscription.unsubscribe();
+            if (_this19._timerSubscription && !_this19._timerSubscription.closed) {
+              _this19._timerSubscription.unsubscribe();
             }
 
-            var fromPercent = _this20.options.startFromZero ? 0 : previousPercent;
+            var fromPercent = _this19.options.startFromZero ? 0 : previousPercent;
             var toPercent = currentPercent;
 
-            var _this20$getAnimationP = _this20.getAnimationParameters(fromPercent, toPercent),
-                step = _this20$getAnimationP.step,
-                interval = _this20$getAnimationP.interval;
+            var _this19$getAnimationP = _this19.getAnimationParameters(fromPercent, toPercent),
+                step = _this19$getAnimationP.step,
+                interval = _this19$getAnimationP.interval;
 
             var count = fromPercent;
 
             if (fromPercent < toPercent) {
-              _this20._timerSubscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["timer"])(0, interval).subscribe(function () {
+              _this19._timerSubscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["timer"])(0, interval).subscribe(function () {
                 count += step;
 
                 if (count <= toPercent) {
-                  if (!_this20.options.animateTitle && !_this20.options.animateSubtitle && count >= 100) {
-                    _this20.draw(toPercent);
+                  if (!_this19.options.animateTitle && !_this19.options.animateSubtitle && count >= 100) {
+                    _this19.draw(toPercent);
 
-                    _this20._timerSubscription.unsubscribe();
+                    _this19._timerSubscription.unsubscribe();
                   } else {
-                    _this20.draw(count);
+                    _this19.draw(count);
                   }
                 } else {
-                  _this20.draw(toPercent);
+                  _this19.draw(toPercent);
 
-                  _this20._timerSubscription.unsubscribe();
+                  _this19._timerSubscription.unsubscribe();
                 }
               });
             } else {
-              _this20._timerSubscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["timer"])(0, interval).subscribe(function () {
+              _this19._timerSubscription = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["timer"])(0, interval).subscribe(function () {
                 count -= step;
 
                 if (count >= toPercent) {
-                  if (!_this20.options.animateTitle && !_this20.options.animateSubtitle && toPercent >= 100) {
-                    _this20.draw(toPercent);
+                  if (!_this19.options.animateTitle && !_this19.options.animateSubtitle && toPercent >= 100) {
+                    _this19.draw(toPercent);
 
-                    _this20._timerSubscription.unsubscribe();
+                    _this19._timerSubscription.unsubscribe();
                   } else {
-                    _this20.draw(count);
+                    _this19.draw(count);
                   }
                 } else {
-                  _this20.draw(toPercent);
+                  _this19.draw(toPercent);
 
-                  _this20._timerSubscription.unsubscribe();
+                  _this19._timerSubscription.unsubscribe();
                 }
               });
             }
           };
 
           this.emitClickEvent = function (event) {
-            if (_this20.options.renderOnClick) {
-              _this20.animate(0, _this20.options.percent);
+            if (_this19.options.renderOnClick) {
+              _this19.animate(0, _this19.options.percent);
             }
 
-            _this20.onClick.emit(event);
+            _this19.onClick.emit(event);
           };
 
           this.applyOptions = function () {
             // the options of <circle-progress> may change already
-            for (var _i2 = 0, _Object$keys = Object.keys(_this20.options); _i2 < _Object$keys.length; _i2++) {
+            for (var _i2 = 0, _Object$keys = Object.keys(_this19.options); _i2 < _Object$keys.length; _i2++) {
               var name = _Object$keys[_i2];
 
-              if (_this20.hasOwnProperty(name) && _this20[name] !== undefined) {
-                _this20.options[name] = _this20[name];
-              } else if (_this20.templateOptions && _this20.templateOptions[name] !== undefined) {
-                _this20.options[name] = _this20.templateOptions[name];
+              if (_this19.hasOwnProperty(name) && _this19[name] !== undefined) {
+                _this19.options[name] = _this19[name];
+              } else if (_this19.templateOptions && _this19.templateOptions[name] !== undefined) {
+                _this19.options[name] = _this19.templateOptions[name];
               }
             } // make sure key options valid
 
 
-            _this20.options.radius = Math.abs(+_this20.options.radius);
-            _this20.options.space = +_this20.options.space;
-            _this20.options.percent = +_this20.options.percent > 0 ? +_this20.options.percent : 0;
-            _this20.options.maxPercent = Math.abs(+_this20.options.maxPercent);
-            _this20.options.animationDuration = Math.abs(_this20.options.animationDuration);
-            _this20.options.outerStrokeWidth = Math.abs(+_this20.options.outerStrokeWidth);
-            _this20.options.innerStrokeWidth = Math.abs(+_this20.options.innerStrokeWidth);
-            _this20.options.backgroundPadding = +_this20.options.backgroundPadding;
+            _this19.options.radius = Math.abs(+_this19.options.radius);
+            _this19.options.space = +_this19.options.space;
+            _this19.options.percent = +_this19.options.percent > 0 ? +_this19.options.percent : 0;
+            _this19.options.maxPercent = Math.abs(+_this19.options.maxPercent);
+            _this19.options.animationDuration = Math.abs(_this19.options.animationDuration);
+            _this19.options.outerStrokeWidth = Math.abs(+_this19.options.outerStrokeWidth);
+            _this19.options.innerStrokeWidth = Math.abs(+_this19.options.innerStrokeWidth);
+            _this19.options.backgroundPadding = +_this19.options.backgroundPadding;
           };
 
           this.getRelativeY = function (rowNum, rowCount) {
@@ -4663,56 +4645,56 @@
           };
 
           this.checkViewport = function () {
-            _this20.findSvgElement();
+            _this19.findSvgElement();
 
-            var previousValue = _this20.isInViewport;
-            _this20.isInViewport = _this20.isElementInViewport(_this20.svgElement);
+            var previousValue = _this19.isInViewport;
+            _this19.isInViewport = _this19.isElementInViewport(_this19.svgElement);
 
-            if (previousValue !== _this20.isInViewport) {
-              _this20.onViewportChanged.emit({
+            if (previousValue !== _this19.isInViewport) {
+              _this19.onViewportChanged.emit({
                 oldValue: previousValue,
-                newValue: _this20.isInViewport
+                newValue: _this19.isInViewport
               });
             }
           };
 
           this.onScroll = function (event) {
-            _this20.checkViewport();
+            _this19.checkViewport();
           };
 
           this.loadEventsForLazyMode = function () {
-            if (_this20.options.lazy) {
-              _this20.document.addEventListener('scroll', _this20.onScroll, true);
+            if (_this19.options.lazy) {
+              _this19.document.addEventListener('scroll', _this19.onScroll, true);
 
-              _this20.window.addEventListener('resize', _this20.onScroll, true);
+              _this19.window.addEventListener('resize', _this19.onScroll, true);
 
-              if (_this20._viewportChangedSubscriber === null) {
-                _this20._viewportChangedSubscriber = _this20.onViewportChanged.subscribe(function (_ref5) {
+              if (_this19._viewportChangedSubscriber === null) {
+                _this19._viewportChangedSubscriber = _this19.onViewportChanged.subscribe(function (_ref5) {
                   var oldValue = _ref5.oldValue,
                       newValue = _ref5.newValue;
-                  newValue ? _this20.render() : null;
+                  newValue ? _this19.render() : null;
                 });
               } // svgElement must be created in DOM before being checked.
               // Is there a better way to check the existence of svgElemnt?
 
 
               var _timer = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["timer"])(0, 50).subscribe(function () {
-                _this20.svgElement === null ? _this20.checkViewport() : _timer.unsubscribe();
+                _this19.svgElement === null ? _this19.checkViewport() : _timer.unsubscribe();
               });
             }
           };
 
           this.unloadEventsForLazyMode = function () {
             // Remove event listeners
-            _this20.document.removeEventListener('scroll', _this20.onScroll, true);
+            _this19.document.removeEventListener('scroll', _this19.onScroll, true);
 
-            _this20.window.removeEventListener('resize', _this20.onScroll, true); // Unsubscribe onViewportChanged
+            _this19.window.removeEventListener('resize', _this19.onScroll, true); // Unsubscribe onViewportChanged
 
 
-            if (_this20._viewportChangedSubscriber !== null) {
-              _this20._viewportChangedSubscriber.unsubscribe();
+            if (_this19._viewportChangedSubscriber !== null) {
+              _this19._viewportChangedSubscriber.unsubscribe();
 
-              _this20._viewportChangedSubscriber = null;
+              _this19._viewportChangedSubscriber = null;
             }
           };
 
@@ -5343,7 +5325,7 @@
 
       var HomeComponent = /*#__PURE__*/function () {
         function HomeComponent(breakpointObserver, linkService, userService, snackbar) {
-          var _this21 = this;
+          var _this20 = this;
 
           _classCallCheck(this, HomeComponent);
 
@@ -5354,7 +5336,7 @@
           this.url = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].url;
           this.linkControl = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]("", [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].pattern(/[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/)]);
           this.userService.user$.subscribe(function (user) {
-            _this21.user = user;
+            _this20.user = user;
           });
           this.isSmallScreen = false;
           this.link = {};
@@ -5376,7 +5358,7 @@
           key: "createLink",
           value: function createLink(captchaResponse) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
-              var _this22 = this;
+              var _this21 = this;
 
               return regeneratorRuntime.wrap(function _callee8$(_context8) {
                 while (1) {
@@ -5462,8 +5444,8 @@
 
                       _context8.next = 23;
                       return this.linkService.createLink(this.link).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) {
-                        _this22.newLink = res.link;
-                        _this22.link = {};
+                        _this21.newLink = res.link;
+                        _this21.link = {};
                       })).toPromise();
 
                     case 23:
@@ -5950,10 +5932,10 @@
         _createClass(ClientHeaderComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this23 = this;
+            var _this22 = this;
 
             this.userService.user$.subscribe(function (user) {
-              _this23.user = user;
+              _this22.user = user;
             });
             this.isSmallScreen = this.breakpointObserver.isMatched("(max-width: 768px)");
           }
@@ -6202,14 +6184,14 @@
 
       var RefComponent = /*#__PURE__*/function () {
         function RefComponent(route, router) {
-          var _this24 = this;
+          var _this23 = this;
 
           _classCallCheck(this, RefComponent);
 
           this.route = route;
           this.router = router;
           this.route.paramMap.subscribe(function (params) {
-            _this24.identifier = params.get("identifier");
+            _this23.identifier = params.get("identifier");
           });
           localStorage.setItem("identifier", this.identifier);
           this.router.navigate(["/"]);

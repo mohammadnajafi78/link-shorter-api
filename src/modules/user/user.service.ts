@@ -300,10 +300,8 @@ export class UserService {
       const user = new this.userModel(newUser);
 
       await user.save();
-      const payload = { _id: user._id };
-      const token = jwt.sign(payload, TOKEN_SECRET_KEY);
 
-      return { token, status: true };
+      return { status: true };
     } catch (error) {
       throw new HttpException(error, HttpStatus.BAD_REQUEST);
     }

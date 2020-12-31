@@ -87,15 +87,15 @@
     /***/
     function _(module, exports, __webpack_require__) {
       __webpack_require__(
-      /*! D:\projects\url-client\node_modules\@angular\material\prebuilt-themes\indigo-pink.css */
+      /*! D:\projects\link-shorter\url-client\node_modules\@angular\material\prebuilt-themes\indigo-pink.css */
       "8jWO");
 
       __webpack_require__(
-      /*! D:\projects\url-client\node_modules\bootstrap\dist\css\bootstrap-grid.min.css */
+      /*! D:\projects\link-shorter\url-client\node_modules\bootstrap\dist\css\bootstrap-grid.min.css */
       "L4hS");
 
       module.exports = __webpack_require__(
-      /*! D:\projects\url-client\src\styles.scss */
+      /*! D:\projects\link-shorter\url-client\src\styles.scss */
       "+EN/");
       /***/
     },

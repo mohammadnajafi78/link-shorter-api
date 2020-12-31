@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\projects\url-client\src\main.ts */"zUnb");
+module.exports = __webpack_require__(/*! D:\projects\link-shorter\url-client\src\main.ts */"zUnb");
 
 
 /***/ }),
@@ -28,7 +28,9 @@ __webpack_require__.r(__webpack_exports__);
 const environment = {
     production: false,
     base: "/",
-    url: "https://1xad.net",
+    // url: "https://1xad.net",
+    // url: "http://localhost:3000",
+    url: "https://my-link-shorter.herokuapp.com/",
 };
 /*
  * For easier debugging in development mode, you can import the following file

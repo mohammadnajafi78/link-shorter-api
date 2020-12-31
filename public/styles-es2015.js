@@ -58,9 +58,9 @@ ___CSS_LOADER_EXPORT___.push([module.i, "/* You can add global styles to this fi
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\projects\url-client\node_modules\@angular\material\prebuilt-themes\indigo-pink.css */"8jWO");
-__webpack_require__(/*! D:\projects\url-client\node_modules\bootstrap\dist\css\bootstrap-grid.min.css */"L4hS");
-module.exports = __webpack_require__(/*! D:\projects\url-client\src\styles.scss */"+EN/");
+__webpack_require__(/*! D:\projects\link-shorter\url-client\node_modules\@angular\material\prebuilt-themes\indigo-pink.css */"8jWO");
+__webpack_require__(/*! D:\projects\link-shorter\url-client\node_modules\bootstrap\dist\css\bootstrap-grid.min.css */"L4hS");
+module.exports = __webpack_require__(/*! D:\projects\link-shorter\url-client\src\styles.scss */"+EN/");
 
 
 /***/ }),

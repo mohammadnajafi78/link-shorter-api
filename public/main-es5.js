@@ -50,7 +50,7 @@
         base: "/",
         // url: "https://1xad.net",
         // url: "http://localhost:3000",
-        url: "https://my-link-shorter.herokuapp.com/"
+        url: "https://my-link-shorter.herokuapp.com"
       };
       /*
        * For easier debugging in development mode, you can import the following file

@@ -11,7 +11,6 @@
   },
   "scripts": {
     "prebuild": "rimraf dist",
-    "postinstall": "yarn run prestart:prod",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "prestart": "yarn build",

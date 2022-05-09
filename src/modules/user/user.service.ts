@@ -21,7 +21,6 @@ export class UserService {
     @InjectModel(Visit)
     private readonly visitModel: ReturnModelType<typeof Visit>,
   ) {}
-
   async createUniqueString() {
     const identifierCode = randomstring.generate({
       length: 5,

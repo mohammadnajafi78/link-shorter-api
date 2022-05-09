@@ -4,7 +4,6 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import * as express from 'express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import * as helmet from 'helmet';
 
 const swaggerCustomCss = `
 .swagger-ui .topbar .download-url-wrapper {
@@ -68,6 +67,7 @@ async function bootstrap() {
   });
   // app.use(helmet());
   app.enableCors();
+  app.useStaticAssets(join(__dirname, '..', 'public'));
   app.enable('trust proxy');
 
   const options = new DocumentBuilder()
@@ -96,10 +96,10 @@ async function bootstrap() {
     },
   });
 
-  app.use(express.static(join(__dirname, '..', 'public')));
-  app.use(/^(?!\/?api).+$/g, (req, res) => {
-    res.sendFile(join(__dirname, '..', '/public/index.html'));
-  });
+  // app.use(express.static(join(__dirname, '..', 'public')));
+  // app.use(/^(?!\/?api).+$/g, (req, res) => {
+  //   res.sendFile(join(__dirname, '..', '/public/index.html'));
+  // });
 
   await app.listen(process.env.PORT || 3000);
 }
